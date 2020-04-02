@@ -39,7 +39,7 @@ public class ServerCommunication {
     {
         if(!is_Inserted)
         {
-            App.Abrupted();
+            GUI.Abrupted();
         }
         return;
     }
