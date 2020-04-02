@@ -5,7 +5,7 @@ public class ServerCommunication {
     private static String pin_Code = "1234";
     private static boolean is_Inserted;
     private static boolean is_Blocked = false;
-    private static double balance;
+    private static double balance = 200;
 
     public static String getPincode()
     {
@@ -41,5 +41,9 @@ public class ServerCommunication {
             App.Abrupted();
         }
         return;
+    }
+
+    public static String getBalance() {
+        return"$: "+Double.toString(balance);
     }
 }

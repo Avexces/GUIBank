@@ -29,6 +29,8 @@ import java.lang.reflect.Method;
     {
         start();
     }
+
+    /*Welkom menu*/
     public static void start()
     {
         /*Setup of Empty Frame & Panel*/
@@ -79,6 +81,7 @@ import java.lang.reflect.Method;
 
     }
 
+    /*Login menu*/
     private static void login_Panel()
     {
         login_Panel.removeAll();
@@ -170,6 +173,14 @@ import java.lang.reflect.Method;
         });
         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
         main_Panel.add(button);
+
+        JLabel balance_Label = new JLabel(ServerCommunication.getBalance());
+        balance_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+90,300,25);
+        balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+        balance_Label.setForeground(Color.lightGray);
+        balance_Label.setBackground(Color.darkGray.darker());
+        main_Panel.add(balance_Label);
+        frame.setVisible(true);
 
         frame.setVisible(true);
     }

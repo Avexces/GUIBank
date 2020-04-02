@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3164e77-2e3f-4014-afac-525f262c08da" name="Default Changelist" comment="" />
+    <list default="true" id="e3164e77-2e3f-4014-afac-525f262c08da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +19,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1Zw1XIGaJmojgTeglhfoZ7d64ZT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +31,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -52,6 +62,7 @@
       <workItem from="1585771815343" duration="942000" />
       <workItem from="1585772787598" duration="3445000" />
       <workItem from="1585816544593" duration="1410000" />
+      <workItem from="1585836874154" duration="3645000" />
     </task>
     <servers />
   </component>
@@ -83,42 +94,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585754763857" />
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1585775195179">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1585844890517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585775195179" />
-    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1585775195179">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585844890517" />
+    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1585844890517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585775195179" />
-    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1585775195179">
+    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585844890517" />
+    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1585844890517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585775195179" />
-    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1585775195179">
+    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585844890517" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1585844890517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585775195179" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1585773731769">
+    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585844890517" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1585837447294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585773731769" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1585773731769">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585837447294" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1585837447294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585773731769" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1585773731769">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585837447294" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1585837447294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585773731769" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1585773731769">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585837447294" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1585837447294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585773731769" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585816542908">
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585837447294" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585836881468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585816542908" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585836881468" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1585754726105">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -129,7 +140,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>144</line>
+          <line>147</line>
           <properties class="GUI.Bank.App">
             <option name="EMULATED" value="true" />
           </properties>
@@ -137,7 +148,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>114</line>
+          <line>117</line>
           <properties>
             <option name="EMULATED" value="true" />
           </properties>
@@ -145,17 +156,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>179</line>
+          <line>190</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>200</line>
+          <line>211</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>145</line>
+          <line>148</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -165,12 +176,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>60</line>
+          <line>62</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>32</line>
+          <line>34</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -180,12 +191,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>64</line>
+          <line>66</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/App.java</url>
-          <line>178</line>
+          <line>189</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
