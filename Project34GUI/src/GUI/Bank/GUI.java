@@ -15,10 +15,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Method;
 
- public class App {
+ public class GUI {
     private static JPanel start_Panel = new JPanel();
     private static JPanel login_Panel = new JPanel();
     private static JPanel main_Panel = new JPanel();
+    private static JPanel transaction_Panel = new JPanel();
     private static JFrame frame = new JFrame();
     private static JButton button;
     private static JTextField user_Text;
@@ -159,7 +160,10 @@ import java.lang.reflect.Method;
                login_Panel();
             }
         });
-        button.setBounds((frame.getWidth()/2)-40,80,80,25);
+        button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+        button.setBackground(Color.magenta.darker().darker().darker().darker());
+        button.setForeground(Color.lightGray);
+        button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
         main_Panel.add(button);
 
         button = new JButton(new AbstractAction("Abrupt") {
@@ -174,8 +178,32 @@ import java.lang.reflect.Method;
         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
         main_Panel.add(button);
 
+        JLabel balancetxt_Label = new JLabel(" Balance: ");
+        balancetxt_Label.setOpaque(true);
+        balancetxt_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+        balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+        balancetxt_Label.setForeground(Color.lightGray);
+        balancetxt_Label.setBackground(Color.magenta.darker().darker().darker());
+        main_Panel.add(balancetxt_Label);
+
+        button = new JButton(new AbstractAction("FinishTransaction") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Button Clicked, RETREAT!!");
+
+                Switch(main_Panel, transaction_Panel);
+                transaction_Panel();
+            }
+        });
+        button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+        button.setBackground(Color.magenta.darker().darker().darker().darker());
+        button.setForeground(Color.lightGray);
+        button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
+        main_Panel.add(button);
+
         JLabel balance_Label = new JLabel(ServerCommunication.getBalance());
-        balance_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+90,300,25);
+        balance_Label.setOpaque(true);
+        balance_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+50,300,50);
         balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
         balance_Label.setForeground(Color.lightGray);
         balance_Label.setBackground(Color.darkGray.darker());
@@ -184,6 +212,49 @@ import java.lang.reflect.Method;
 
         frame.setVisible(true);
     }
+
+     private static void transaction_Panel()
+     {
+         transaction_Panel.setLayout(null);
+         transaction_Panel.setBackground(Color.darkGray);
+         if(ServerCommunication.is_Succes)
+         {
+             JLabel transaction_Label = new JLabel(" Transaction succesful!");
+             transaction_Label.setOpaque(true);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
+             transaction_Label.setForeground(Color.green);
+             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Panel.add(transaction_Label);
+         }
+         else
+         {
+             JLabel transaction_Label = new JLabel(" Transaction failed!");
+             transaction_Label.setOpaque(true);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
+             transaction_Label.setForeground(Color.red);
+             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Panel.add(transaction_Label);
+         }
+         button = new JButton(new AbstractAction("Back") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+
+                 Switch(transaction_Panel, main_Panel);
+                 main_Panel();
+             }
+         });
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.lightGray);
+         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
+         transaction_Panel.add(button);
+
+
+         frame.setVisible(true);
+     }
 
     /*Usable Methods*/
     protected static void Switch(JPanel from, JPanel to)
@@ -230,4 +301,6 @@ import java.lang.reflect.Method;
         }
         return;
     }
+
+
 }

@@ -6,6 +6,7 @@ public class ServerCommunication {
     private static boolean is_Inserted;
     private static boolean is_Blocked = false;
     private static double balance = 200;
+    public static boolean is_Succes = true;
 
     public static String getPincode()
     {
@@ -44,6 +45,11 @@ public class ServerCommunication {
     }
 
     public static String getBalance() {
-        return"$: "+Double.toString(balance);
+        return" $: "+Double.toString(balance);
+    }
+
+    public static boolean TransactionStatus()
+    {
+        return is_Succes;
     }
 }
