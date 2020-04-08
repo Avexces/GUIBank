@@ -6,7 +6,8 @@ public class ServerCommunication {
     private static boolean is_Inserted;
     private static boolean is_Blocked = false;
     private static double balance = 200;
-    public static boolean is_Succes = true;
+    public static boolean is_Succes = false;
+    public static double withdrawal_Amount = 0;
 
     public static String getPincode()
     {
@@ -24,7 +25,7 @@ public class ServerCommunication {
         bool();
         return;
     }
-    public static void setTrue()
+    public static void seatTrue()
     {
         is_Inserted = true;
         bool();
@@ -51,5 +52,29 @@ public class ServerCommunication {
     public static boolean TransactionStatus()
     {
         return is_Succes;
+    }
+
+    public static void Withdraw(double i) {
+        i = withdrawal_Amount;
+        if(balance < withdrawal_Amount)
+        {
+            //returns there is not enough money and nothing went off your account
+            is_Succes = false;
+            return;
+        }
+        else if(balance >= withdrawal_Amount)
+        {
+            //returns there is enough money and says you can withdraw it form your account
+            is_Succes = true;
+            return;
+        }
+        else
+        {
+            //returns something went wrong and nothing went off your account
+            is_Succes = false;
+            return;
+        }
+
+
     }
 }
