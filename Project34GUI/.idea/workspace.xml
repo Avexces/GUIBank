@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3164e77-2e3f-4014-afac-525f262c08da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/ServerCommunication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/ServerCommunication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +64,7 @@
       <workItem from="1586169881535" duration="671000" />
       <workItem from="1586256996874" duration="7401000" />
       <workItem from="1586291787273" duration="1818000" />
-      <workItem from="1586333194652" duration="1484000" />
+      <workItem from="1586333194652" duration="1642000" />
     </task>
     <servers />
   </component>
@@ -107,22 +96,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585754763857" />
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1586274623801">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1586335249762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586274623801" />
-    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1586274623801">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
+    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1586335249762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586274623801" />
-    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1586274623801">
+    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
+    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1586335249762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586274623801" />
-    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1586274623801">
+    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1586335249762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586274623801" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1585861936716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -333,7 +333,7 @@ import java.lang.reflect.Method;
      }
     private static void Login(String user, String password)
     {
-        if(user.equals("User") && password.equals("1234") && !ServerCommunication.getBlocked())
+        if(user == ServerCommunication.get_user_ID() && password == ServerCommunication.getPincode() && !ServerCommunication.getBlocked())
         {
             message_Label.setForeground(Color.GREEN);
             message_Label.setText("Login succesful!");
@@ -341,7 +341,7 @@ import java.lang.reflect.Method;
             Switch(login_Panel, main_Panel);
 
         }
-        else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
+        else if(user != ServerCommunication.get_user_ID() || password != ServerCommunication.getPincode() && !ServerCommunication.getBlocked())
         {
             message_Label.setForeground(Color.RED.darker().darker());
             message_Label.setText("Login Failed please try again!");
