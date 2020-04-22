@@ -62,8 +62,9 @@ import java.lang.reflect.Method;
             public void actionPerformed(ActionEvent e) {
                 Switch(start_Panel, login_Panel);
                 login_Panel();
-            }
+                }
         });
+
         button.setBounds(frame.getWidth()/2,80,80,25);
         start_Panel.add(button);
 
@@ -333,24 +334,29 @@ import java.lang.reflect.Method;
      }
     private static void Login(String user, String password)
     {
-        if(user == ServerCommunication.get_user_ID() && password == ServerCommunication.getPincode() && !ServerCommunication.getBlocked())
-        {
+        boolean nietwaar = false;
+       // if ((user != ServerCommunication.get_user_ID()) || (password = true)/*ServerCommunication.getPincode() */ || ServerCommunication.getBlocked()) {
+        if (ServerCommunication.get_user_ID() != nietwaar || ServerCommunication.getBlocked() != nietwaar || password == true) {
+            {
+                message_Label.setForeground(Color.RED);
+                message_Label.setText("Account locked please go to your bank!");
+            }
+        }
+        else if (ServerCommunication.getBlocked()) {
+            message_Label.setForeground(Color.RED.darker().darker());
+            message_Label.setText("Login Failed please try again!");
+        }
+
+         else if (ServerCommunication.get_user_ID() != nietwaar && ServerCommunication.getBlocked()==nietwaar && password != nietwaar ){
             message_Label.setForeground(Color.GREEN);
             message_Label.setText("Login succesful!");
             main_Panel();
             Switch(login_Panel, main_Panel);
 
         }
-        else if(user != ServerCommunication.get_user_ID() || password != ServerCommunication.getPincode() && !ServerCommunication.getBlocked())
-        {
-            message_Label.setForeground(Color.RED.darker().darker());
-            message_Label.setText("Login Failed please try again!");
-        }
-        else if(ServerCommunication.getBlocked())
-        {
-            message_Label.setForeground(Color.RED);
-            message_Label.setText("Account locked please go to your bank!");
-        }
+        // else if(ServerCommunication.getBlocked() )
+
+
         return;
     }
 }
