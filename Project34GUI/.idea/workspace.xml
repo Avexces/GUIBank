@@ -3,6 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="e3164e77-2e3f-4014-afac-525f262c08da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +77,8 @@
       <workItem from="1586256996874" duration="7401000" />
       <workItem from="1586291787273" duration="1818000" />
       <workItem from="1586333194652" duration="1642000" />
+      <workItem from="1587548084620" duration="3700000" />
+      <workItem from="1587721923488" duration="616000" />
     </task>
     <servers />
   </component>
@@ -96,22 +110,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585754763857" />
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1586335249762">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1587550588080">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
-    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1586335249762">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1587550588080" />
+    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1587550588079">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
-    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1586335249762">
+    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1587550588079" />
+    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1587550588079">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
-    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1586335249762">
+    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1587550588079" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1587550588079">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586335249762" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1587550588079" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1585861936716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -128,10 +142,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585861936716" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1586293732250">
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587721966715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1586293732250" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1587721966715" />
     <state x="342" y="141" key="new project wizard" timestamp="1586295416232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -145,22 +159,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>150</line>
-          <properties class="GUI.Bank.GUI">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>120</line>
-          <properties>
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
           <line>33</line>
           <properties class="GUI.Bank.ServerCommunication" method="getBlocked">
@@ -169,34 +167,9 @@
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>320</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>335</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
           <line>37</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
@@ -206,11 +179,6 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
@@ -226,11 +194,6 @@
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
           <line>28</line>
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>334</line>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
