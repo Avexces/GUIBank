@@ -233,16 +233,16 @@
          balancetxt_Label.setOpaque(true);
          balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
          balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         balancetxt_Label.setForeground(Color.lightGray);
-         balancetxt_Label.setBackground(Color.magenta.darker().darker().darker());
+         balancetxt_Label.setForeground(new Color (192,27,28));
+         balancetxt_Label.setBackground(new Color (241,227,12));
          main_Panel.add(balancetxt_Label);
 
          JLabel Withdrawaltxt_Label = new JLabel(" Quick withdraw: ");
          Withdrawaltxt_Label.setOpaque(true);
          Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(Color.lightGray);
-         Withdrawaltxt_Label.setBackground(Color.magenta.darker().darker().darker());
+         Withdrawaltxt_Label.setForeground(new Color (192,27,28));
+         Withdrawaltxt_Label.setBackground(new Color(241,227,12));
          main_Panel.add(Withdrawaltxt_Label);
 
          //Withdraw 50
@@ -260,7 +260,7 @@
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         withdrawbutton.setBackground(new Color(241,227,12));
          withdrawbutton.setForeground(new Color (192,27,28));
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 50,300,50);
          main_Panel.add(withdrawbutton);
@@ -319,12 +319,6 @@
              }
          });
 */
-
-         withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         withdrawbutton.setForeground(Color.lightGray);
-         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
-         main_Panel.add(withdrawbutton);
 
 
          button = new JButton(new AbstractAction("FinishTransaction") {
@@ -412,9 +406,9 @@
          customWithdraw_panel.setBackground(Color.white);
 
          // fields
-         int briefje20 = 20;
-         int briefje50 = 50;
-         int briefje100 = 100;
+         int briefje20;
+         int briefje50;
+         int briefje100;
          int aantal;
 
          // knoppen
@@ -480,10 +474,18 @@
      {
          frame.removeAll();
          start();
+         System.out.println("gui is gestopt");
      }
      private static void Login(String user, String password)
      {
+         /*
+         int aantalPogingen = 3;
 
+        public int aantalpogingen(aantalPogingen){
+        return aantalPogingen;
+        }
+
+         */
 
 
          if(user.equals("User") && password.equals("1234") && !ServerCommunication.getBlocked())
@@ -496,8 +498,10 @@
          }
          else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
          {
+             // aantalPogingen--
              message_Label.setForeground(Color.RED.darker().darker());
              message_Label.setText("Login Failed please try again!");
+             // message_label.setText("u heeft nog zoveel pogingen"+aantalPogingen");
          }
          else if(ServerCommunication.getBlocked())
          {
