@@ -23,13 +23,21 @@
      private static JPanel login_Panel = new JPanel();
      private static JPanel main_Panel = new JPanel();
      private static JPanel transaction_Panel = new JPanel();
-     private static JPanel customWithdraw_panel = new JPanel();
+     private static JPanel customWithdraw_Panel = new JPanel();
+
      private static JFrame frame = new JFrame();
      private static JButton button; // maakt een knop aan
      private static JButton withdrawbutton;
+     private static JButton homebutton;
+     private static JButton customWithdrawbutton;
+     private static JButton finnishtansaction;
+
      private static JTextField user_Text; // maakt een tekstvlak aan
      private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
      private static JLabel message_Label; //
+     private static JTextField Amount_Text;
+
+
 
      public class Slankbank extends JFrame {// foto van logo
          private ImageIcon image;
@@ -93,6 +101,7 @@
 
          button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,200,85);
          button.setForeground(new Color(192,27,28));
+         button.setOpaque(true);
 
          start_Panel.add(button);
 
@@ -129,26 +138,39 @@
 
 
          /*UserName Label*/
-         JLabel label = new JLabel("Gebruikersnaam");
-         label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,140,25);
+         JLabel label = new JLabel("Username");
+         label.setBounds(frame.getWidth()/2 - 200,frame.getHeight()/2,200,25);
          label.setForeground(new Color (192,27,28));
+         label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
          login_Panel.add(label);
 
          //UserName veld
          user_Text = new JTextField();
-         user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,140 ,25);
+         user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,200 ,30);
+         user_Text.setFont(new Font(" Arial", Font.PLAIN,18));
          login_Panel.add(user_Text);
 
          //Pincode text
-         JLabel pin_Label = new JLabel("Wachtwoord");
-         pin_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2+30,140,25);
+         JLabel pin_Label = new JLabel("Password");
+         pin_Label.setBounds(frame.getWidth()/2 -200,frame.getHeight()/2+30,200,25);
          pin_Label.setForeground(new Color (192,27,28));
+         pin_Label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
          login_Panel.add(pin_Label);
 
          /*Adds an pin field to the LoginPanel*/
          pin_Field = new JPasswordField();
-         pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,140 ,25);
+         pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,200 ,30);
+         pin_Field.setFont(new Font("Arial",Font.PLAIN,18));
          login_Panel.add(pin_Field);
+
+         /*Message Label*/
+         message_Label = new JLabel("");
+         message_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+250,300,25);
+         message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         message_Label.setForeground(new Color(191,26,28));
+         login_Panel.add(message_Label);
+         frame.setVisible(true);
+
 
          /*Login button*/
          button = new JButton(/*"Login"*/ new AbstractAction("Login") {
@@ -161,7 +183,7 @@
                  Login(user,password);
              }
          });
-         button.setBounds(frame.getWidth()/2,frame.getHeight()/2+60,80,25);
+         button.setBounds(frame.getWidth()/2-75,frame.getHeight()/2+100,250,45);
          login_Panel.add(button);
 
          /*Exit button*/
@@ -171,27 +193,18 @@
                  System.exit(0);
              }
          });
-         button.setBounds(frame.getWidth()/2 - 100 ,frame.getHeight()/2+60,80,25);
+         button.setBounds(frame.getWidth()/2 + 200 ,frame.getHeight()/2+100,100,45);
          login_Panel.add(button);
-
-
-         /*Message Label*/
-         message_Label = new JLabel("");
-         message_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+90,300,25);
-         message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         login_Panel.add(message_Label);
-         frame.setVisible(true);
-
          /* terug knop */
+
          button = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent actionEvent) {
-                start();
+                 start();
              }
          });
-         button.setBounds(frame.getWidth()/2+100,frame.getHeight()/2+60,80,25);
+         button.setBounds(frame.getWidth()/2-200,frame.getHeight()/2+100,100,45);
          login_Panel.add(button);
-
 
 
      }
@@ -217,7 +230,7 @@
          button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
          main_Panel.add(button);
 
-         button = new JButton(new AbstractAction("Abrupt") {
+         button = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
@@ -226,23 +239,26 @@
                  login_Panel();
              }
          });
-         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.black.darker().darker().darker().darker());
+         button.setBounds(frame.getWidth()-520,frame.getHeight()-60,100,50);
          main_Panel.add(button);
+
 
          JLabel balancetxt_Label = new JLabel(" Balance: ");
          balancetxt_Label.setOpaque(true);
          balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
          balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         balancetxt_Label.setForeground(Color.lightGray);
-         balancetxt_Label.setBackground(Color.magenta.darker().darker().darker());
+         balancetxt_Label.setForeground(new Color (192,27,28));
+         balancetxt_Label.setBackground(new Color (241,227,12));
          main_Panel.add(balancetxt_Label);
 
          JLabel Withdrawaltxt_Label = new JLabel(" Quick withdraw: ");
          Withdrawaltxt_Label.setOpaque(true);
          Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(Color.lightGray);
-         Withdrawaltxt_Label.setBackground(Color.magenta.darker().darker().darker());
+         Withdrawaltxt_Label.setForeground(new Color (192,27,28));
+         Withdrawaltxt_Label.setBackground(new Color(241,227,12));
          main_Panel.add(Withdrawaltxt_Label);
 
          //Withdraw 50
@@ -260,7 +276,7 @@
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         withdrawbutton.setBackground(new Color(241,227,12));
          withdrawbutton.setForeground(new Color (192,27,28));
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 50,300,50);
          main_Panel.add(withdrawbutton);
@@ -305,26 +321,22 @@
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
          main_Panel.add(withdrawbutton);
 
-     /*   withdrawbutton = new JButton(new AbstractAction(" Custom ") {
+        // custom geld
+         customWithdrawbutton = new JButton(new AbstractAction(" Custom ") {
              @Override
              public void actionPerformed (ActionEvent e ){
                  System.out.println("Doorverwijzing naar de cutom note pagina");
-               //  Switch(customWithdraw_panel);
-                 try {
-                     //customWithdraw_panel();
-                 }
-                 catch (InterruptedException ex){
+                 Switch( main_Panel,customWithdraw_Panel);
+                 customWithdraw_panel();
 
                  }
-             }
          });
-*/
+         customWithdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         customWithdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         customWithdrawbutton.setForeground(new Color (192,27,28));
+         customWithdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 +200,300,50);
+         main_Panel.add(customWithdrawbutton);
 
-         withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         withdrawbutton.setForeground(Color.lightGray);
-         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
-         main_Panel.add(withdrawbutton);
 
 
          button = new JButton(new AbstractAction("FinishTransaction") {
@@ -342,7 +354,7 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
          main_Panel.add(button);
 
@@ -367,25 +379,37 @@
          {
              JLabel transaction_Label = new JLabel(" Transaction succesful!");
              transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,325,50);
              transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(Color.green);
-             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Label.setForeground(new Color(19,84,39));
+             transaction_Label.setBackground(new Color (195,195,195));
              transaction_Panel.add(transaction_Label);
+
          }
          else
          {
              JLabel transaction_Label = new JLabel(" Transaction failed!");
              transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,325,50);
              transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(Color.red);
-             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Label.setForeground(new Color (192,27,29));
+             transaction_Label.setBackground(new Color(195,195,195));
              transaction_Panel.add(transaction_Label);
          }
 
+         homebutton = new JButton(new AbstractAction("Home") {
+             @Override
+             public void actionPerformed(ActionEvent actionEvent) {
+                 start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2-50,frame.getHeight()/2 +50,100,50);
+         transaction_Panel.add(homebutton);
 
-         button = new JButton(new AbstractAction("Back") {
+        // terug naar de transactie
+         button = new JButton(new AbstractAction("back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -396,8 +420,8 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.white);
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2+50,frame.getHeight()/2 +50,100,50);
          transaction_Panel.add(button);
 
 
@@ -405,64 +429,105 @@
 
      }
 
-     /*private static void customWithdraw_panel() {
-         customWithdraw_panel.removeAll();
-         customWithdraw_panel.setSize(frame.getSize());
-         customWithdraw_panel.setLayout(null);
-         customWithdraw_panel.setBackground(Color.white);
 
-         // fields
-         int briefje20 = 20;
-         int briefje50 = 50;
-         int briefje100 = 100;
-         int aantal;
+     private static void customWithdraw_panel() {
+         customWithdraw_Panel.removeAll();
+         customWithdraw_Panel.setSize(frame.getSize());
+         customWithdraw_Panel.setLayout(null);
+         customWithdraw_Panel.setBackground(Color.white);
 
          // knoppen
-         button = new JButton(new AbstractAction("homepagina") {
+         homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent actionEvent) {
                  start();
              }
          });
-         button = new JButton(new AbstractAction("back") {
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         homebutton.setForeground(Color.black);
+         homebutton.setBounds(frame.getWidth()/2+320,frame.getHeight()/2+455,100,50);
+
+         customWithdraw_Panel.add(homebutton);
+
+         button = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent actionEvent) {
-                 Switch(transaction_Panel);
+                 System.out.println("Button geklikt ");
+                 Switch(customWithdraw_Panel,main_Panel);
+                 main_Panel();
              }
          });
-         button = new JButton(new AbstractAction("order") {
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2+720,frame.getHeight()/2+455,100,50);
+         customWithdraw_Panel.add(button);
+
+         finnishtansaction = new JButton(new AbstractAction("FinishTransaction") {
              @Override
-             public void actionPerformed(ActionEvent actionEvent) {
-                 ServerCommunication.Withdraw(moneynote);
-                 Switch(customWithdraw_panel, transaction_Panel);
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+                 Switch(customWithdraw_Panel, main_Panel);
+                 main_Panel();
+             }
+         });
+
+         finnishtansaction.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         finnishtansaction.setBackground(Color.magenta.darker().darker().darker().darker());
+         finnishtansaction.setForeground(Color.black);
+         finnishtansaction.setBounds(frame.getWidth()/2+420,frame.getHeight()/2+455,300,50);
+         customWithdraw_Panel.add(finnishtansaction);
+
+
+
+         // balance op de pagina
+         JLabel balancetxt_Label = new JLabel(" Balance: ");
+         balancetxt_Label.setOpaque(true);
+         balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
+         balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         balancetxt_Label.setForeground(new Color (192,27,28));
+         balancetxt_Label.setBackground(new Color (241,227,12));
+         customWithdraw_Panel.add(balancetxt_Label);
+
+
+        // zorgt voor het kunnen invullen en versturen van bedragen
+         JLabel label = new JLabel("Enter your amount");
+         label.setBounds(frame.getWidth()/2-50,frame.getHeight()/2+50,400,50);
+         label.setForeground(new Color (192,27,28));
+         label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
+         customWithdraw_Panel.add(label);
+
+
+         Amount_Text = new JTextField();
+         Amount_Text.setBounds(frame.getWidth()/2-50,frame.getHeight()/2+100/*20*/,200 ,30);
+         Amount_Text.setFont(new Font(" Arial", Font.PLAIN,18));
+         customWithdraw_Panel.add(Amount_Text);
+
+         withdrawbutton = new JButton(new AbstractAction(" Send ") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+                 ServerCommunication.Withdraw(100x);
+                 Switch(customWithdraw_Panel, transaction_Panel);
                  try {
                      transaction_Panel();
                  } catch (InterruptedException ex) {
                      ex.printStackTrace();
                  }
-
              }
          });
-
-
-
-         // hierin invullen welk briefje geld
-         JLabel moneyNote = new JLabel("Money Note");
-         moneyNote.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2+30,80,25);
-         moneyNote.setForeground(Color.lightGray);
-         login_Panel.add(moneyNote);
-
-
-
-        // private void moneyNoteTrue(moneyNote) {
-
-
-        // }
-
+         withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         withdrawbutton.setForeground(new Color (192,27,28));
+         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
+         customWithdraw_Panel.add(withdrawbutton);
 
      }
 
-      */
+
+
+
 
 
      /*Usable Methods*/
@@ -480,10 +545,18 @@
      {
          frame.removeAll();
          start();
+         System.out.println("gui is gestopt");
      }
      private static void Login(String user, String password)
      {
+         /*
+         int aantalPogingen = 3;
 
+        public int aantalpogingen(aantalPogingen){
+        return aantalPogingen;
+        }
+
+         */
 
 
          if(user.equals("User") && password.equals("1234") && !ServerCommunication.getBlocked())
@@ -496,8 +569,10 @@
          }
          else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
          {
+             // aantalPogingen--
              message_Label.setForeground(Color.RED.darker().darker());
              message_Label.setText("Login Failed please try again!");
+             // message_label.setText("u heeft nog zoveel pogingen"+aantalPogingen");
          }
          else if(ServerCommunication.getBlocked())
          {
