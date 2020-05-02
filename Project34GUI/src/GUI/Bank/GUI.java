@@ -367,7 +367,6 @@
          main_Panel.add(balance_Label);
          frame.setVisible(true);
 
-         frame.setVisible(true);
      }
 
 
@@ -490,11 +489,29 @@
          balancetxt_Label.setBackground(new Color (241,227,12));
          customWithdraw_Panel.add(balancetxt_Label);
 
+         JLabel balance_Label = new JLabel(ServerCommunication.getBalance());
+         balance_Label.setOpaque(true);
+         balance_Label.setBounds(frame.getWidth()/2 -100 ,frame.getHeight()/2 -50,300,50);
+         balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         balance_Label.setForeground(Color.lightGray);
+         balance_Label.setBackground(Color.darkGray.darker());
+         customWithdraw_Panel.add(balance_Label);
+         frame.setVisible(true);
+
+         JLabel Withdrawaltxt_Label = new JLabel(" Custom withdraw ");
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color (192,27,28));
+         Withdrawaltxt_Label.setBackground(new Color(241,227,12));
+         customWithdraw_Panel.add(Withdrawaltxt_Label);
+
+
 
         // zorgt voor het kunnen invullen en versturen van bedragen
-         JLabel label = new JLabel("Enter your amount");
+         JLabel label = new JLabel("Enter your amount:");
          label.setBounds(frame.getWidth()/2-50,frame.getHeight()/2+50,400,50);
-         label.setForeground(new Color (192,27,28));
+         label.setForeground(Color.black);
          label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
          customWithdraw_Panel.add(label);
 
@@ -508,7 +525,7 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-                 ServerCommunication.Withdraw(100x);
+                 ServerCommunication.Withdraw(100);
                  Switch(customWithdraw_Panel, transaction_Panel);
                  try {
                      transaction_Panel();
