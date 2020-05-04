@@ -17,6 +17,7 @@
  import java.awt.Font; /* library met font */
  import javax.swing.ImageIcon;
  import java.awt.color.*;
+ import java.awt.event.ActionListener;
 
  public class GUI {
      private static JPanel start_Panel = new JPanel(); // maakt een "pagina " aan
@@ -24,18 +25,26 @@
      private static JPanel main_Panel = new JPanel();
      private static JPanel transaction_Panel = new JPanel();
      private static JPanel customWithdraw_Panel = new JPanel();
-
+     private static JPanel customNote_Panel = new JPanel();
+     private static JPanel thankyou_Panel = new JPanel();
      private static JFrame frame = new JFrame();
+
      private static JButton button; // maakt een knop aan
      private static JButton withdrawbutton;
      private static JButton homebutton;
      private static JButton customWithdrawbutton;
      private static JButton finnishtansaction;
+     private static JButton loginbutton;
+     private static JButton backbutton;
+
 
      private static JTextField user_Text; // maakt een tekstvlak aan
      private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
      private static JLabel message_Label; //
      private static JTextField Amount_Text;
+
+     // geld briefjes
+
 
 
 
@@ -102,7 +111,6 @@
          button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,200,85);
          button.setForeground(new Color(192,27,28));
          button.setOpaque(true);
-
          start_Panel.add(button);
 
          button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
@@ -129,8 +137,6 @@
      /*Login menu*/
      private static void login_Panel()
      {
-
-
          login_Panel.removeAll();
          login_Panel.setSize(frame.getSize());
          login_Panel.setLayout(null);
@@ -197,14 +203,14 @@
          login_Panel.add(button);
          /* terug knop */
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent actionEvent) {
                  start();
              }
          });
-         button.setBounds(frame.getWidth()/2-200,frame.getHeight()/2+100,100,45);
-         login_Panel.add(button);
+         backbutton.setBounds(frame.getWidth()/2-200,frame.getHeight()/2+100,100,45);
+         login_Panel.add(backbutton);
 
 
      }
@@ -216,33 +222,63 @@
          main_Panel.setLayout(null);
          main_Panel.setBackground(Color.white);
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-
                  Switch(main_Panel, login_Panel);
                  login_Panel();
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
-         main_Panel.add(button);
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         main_Panel.add(backbutton);
 
-         button = new JButton(new AbstractAction("Home") {
+
+         homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
+                start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+200,frame.getHeight()-60,100,50);
+         main_Panel.add(homebutton);
 
-                 ServerCommunication.setFalse();
+         loginbutton = new JButton(new AbstractAction("login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (main_Panel,login_Panel);
                  login_Panel();
              }
          });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
+         main_Panel.add(loginbutton);
+
+         button = new JButton(new AbstractAction("FinishTransaction") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+
+                 Switch(main_Panel, transaction_Panel);
+                 try {
+                     transaction_Panel();
+                 } catch (InterruptedException ex) {
+                     ex.printStackTrace();
+                 }
+             }
+         });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.black.darker().darker().darker().darker());
-         button.setBounds(frame.getWidth()-520,frame.getHeight()-60,100,50);
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
          main_Panel.add(button);
+
 
 
          JLabel balancetxt_Label = new JLabel(" Balance: ");
@@ -267,12 +303,12 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
                  ServerCommunication.Withdraw(50);
-                 Switch(main_Panel, transaction_Panel);
-                 try {
-                     transaction_Panel();
-                 } catch (InterruptedException ex) {
-                     ex.printStackTrace();
-                 }
+                 Switch(main_Panel, customNote_Panel);
+                 //try {
+                     customNote_Panel();
+                // } catch (InterruptedException ex) {
+                  //   ex.printStackTrace();
+            //     }
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -281,24 +317,43 @@
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 50,300,50);
          main_Panel.add(withdrawbutton);
 
+         withdrawbutton = new JButton(new AbstractAction(" $70 ") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+                 ServerCommunication.Withdraw(50);
+                 Switch(main_Panel, customNote_Panel);
+                 //try {
+                 customNote_Panel();
+                 // } catch (InterruptedException ex) {
+                 //   ex.printStackTrace();
+                 //     }
+             }
+         });
+         withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         withdrawbutton.setBackground(new Color(241,227,12));
+         withdrawbutton.setForeground(new Color (192,27,28));
+         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 100,300,50);
+         main_Panel.add(withdrawbutton);
+
          //Withdraw 100
          withdrawbutton = new JButton(new AbstractAction(" $100 ") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
                  ServerCommunication.Withdraw(100);
-                 Switch(main_Panel, transaction_Panel);
-                 try {
-                     transaction_Panel();
-                 } catch (InterruptedException ex) {
-                     ex.printStackTrace();
-                 }
+                 Switch(main_Panel, customNote_Panel);
+              //   try {
+                     customNote_Panel();
+             //    } catch (InterruptedException ex) {
+             //        ex.printStackTrace();
+             //    }
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
          withdrawbutton.setForeground(new Color (192,27,28));
-         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 100,300,50);
+         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
          main_Panel.add(withdrawbutton);
 
          //Withdraw 150
@@ -307,18 +362,18 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
                  ServerCommunication.Withdraw(150);
-                 Switch(main_Panel, transaction_Panel);
-                 try {
-                     transaction_Panel();
-                 } catch (InterruptedException ex) {
-                     ex.printStackTrace();
-                 }
+                 Switch(main_Panel, customNote_Panel);
+              //   try {
+                     customNote_Panel();
+              //   } catch (InterruptedException ex) {
+             //        ex.printStackTrace();
+            //     }
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          withdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
          withdrawbutton.setForeground(new Color (192,27,28));
-         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
+         withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 200,300,50);
          main_Panel.add(withdrawbutton);
 
         // custom geld
@@ -334,36 +389,16 @@
          customWithdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          customWithdrawbutton.setBackground(Color.magenta.darker().darker().darker().darker());
          customWithdrawbutton.setForeground(new Color (192,27,28));
-         customWithdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 +200,300,50);
+         customWithdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 +250,300,50);
          main_Panel.add(customWithdrawbutton);
 
-
-
-         button = new JButton(new AbstractAction("FinishTransaction") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.out.println("Button Clicked, RETREAT!!");
-
-                 Switch(main_Panel, transaction_Panel);
-                 try {
-                     transaction_Panel();
-                 } catch (InterruptedException ex) {
-                     ex.printStackTrace();
-                 }
-             }
-         });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
-         main_Panel.add(button);
 
          JLabel balance_Label = new JLabel(ServerCommunication.getBalance());
          balance_Label.setOpaque(true);
          balance_Label.setBounds(frame.getWidth()/2 -100 ,frame.getHeight()/2 -50,300,50);
          balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          balance_Label.setForeground(Color.lightGray);
-         balance_Label.setBackground(Color.darkGray.darker());
+         balance_Label.setBackground(Color.darkGray);
          main_Panel.add(balance_Label);
          frame.setVisible(true);
 
@@ -383,7 +418,6 @@
              transaction_Label.setForeground(new Color(19,84,39));
              transaction_Label.setBackground(new Color (195,195,195));
              transaction_Panel.add(transaction_Label);
-
          }
          else
          {
@@ -396,39 +430,65 @@
              transaction_Panel.add(transaction_Label);
          }
 
+         backbutton = new JButton(new AbstractAction("Back") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+                 Switch(transaction_Panel, main_Panel);
+                 main_Panel();
+             }
+         });
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         transaction_Panel.add(backbutton);
+
+
          homebutton = new JButton(new AbstractAction("Home") {
              @Override
-             public void actionPerformed(ActionEvent actionEvent) {
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, chipRemoved");
                  start();
              }
          });
          homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         homebutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         homebutton.setBounds(frame.getWidth()/2-50,frame.getHeight()/2 +50,100,50);
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+200,frame.getHeight()-60,100,50);
          transaction_Panel.add(homebutton);
 
-        // terug naar de transactie
-         button = new JButton(new AbstractAction("back") {
+         loginbutton = new JButton(new AbstractAction("login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (transaction_Panel,login_Panel);
+                 login_Panel();
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
+         transaction_Panel.add(loginbutton);
+
+         button = new JButton(new AbstractAction("FinishTransaction") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
 
-                 Switch(transaction_Panel, main_Panel);
-                 main_Panel();
+                 Switch(transaction_Panel, transaction_Panel);
+                 try {
+                     transaction_Panel();
+                 } catch (InterruptedException ex) {
+                     ex.printStackTrace();
+                 }
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+50,frame.getHeight()/2 +50,100,50);
+         button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
          transaction_Panel.add(button);
-
-
-         frame.setVisible(true);
-
      }
 
-
+        // nieuwe pagina
      private static void customWithdraw_panel() {
          customWithdraw_Panel.removeAll();
          customWithdraw_Panel.setSize(frame.getSize());
@@ -436,34 +496,7 @@
          customWithdraw_Panel.setBackground(Color.white);
 
          // knoppen
-         homebutton = new JButton(new AbstractAction("Home") {
-             @Override
-             public void actionPerformed(ActionEvent actionEvent) {
-                 start();
-             }
-         });
-         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         homebutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         homebutton.setForeground(Color.black);
-         homebutton.setBounds(frame.getWidth()/2+320,frame.getHeight()/2+455,100,50);
-
-         customWithdraw_Panel.add(homebutton);
-
-         button = new JButton(new AbstractAction("Back") {
-             @Override
-             public void actionPerformed(ActionEvent actionEvent) {
-                 System.out.println("Button geklikt ");
-                 Switch(customWithdraw_Panel,main_Panel);
-                 main_Panel();
-             }
-         });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+720,frame.getHeight()/2+455,100,50);
-         customWithdraw_Panel.add(button);
-
-         finnishtansaction = new JButton(new AbstractAction("FinishTransaction") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -471,12 +504,54 @@
                  main_Panel();
              }
          });
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         customWithdraw_Panel.add(backbutton);
 
-         finnishtansaction.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         finnishtansaction.setBackground(Color.magenta.darker().darker().darker().darker());
-         finnishtansaction.setForeground(Color.black);
-         finnishtansaction.setBounds(frame.getWidth()/2+420,frame.getHeight()/2+455,300,50);
-         customWithdraw_Panel.add(finnishtansaction);
+
+         homebutton = new JButton(new AbstractAction("Home") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, chipRemoved");
+                 start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+200,frame.getHeight()-60,100,50);
+         customWithdraw_Panel.add(homebutton);
+
+         loginbutton = new JButton(new AbstractAction("login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (customWithdraw_Panel,login_Panel);
+                 login_Panel();
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
+         customWithdraw_Panel.add(loginbutton);
+
+         button = new JButton(new AbstractAction("FinishTransaction") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+
+                 Switch(main_Panel, transaction_Panel);
+                 try {
+                     transaction_Panel();
+                 } catch (InterruptedException ex) {
+                     ex.printStackTrace();
+                 }
+             }
+         });
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
+         customWithdraw_Panel.add(button);
 
 
 
@@ -494,7 +569,7 @@
          balance_Label.setBounds(frame.getWidth()/2 -100 ,frame.getHeight()/2 -50,300,50);
          balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          balance_Label.setForeground(Color.lightGray);
-         balance_Label.setBackground(Color.darkGray.darker());
+         balance_Label.setBackground(Color.darkGray);
          customWithdraw_Panel.add(balance_Label);
          frame.setVisible(true);
 
@@ -526,12 +601,8 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
                  ServerCommunication.Withdraw(100);
-                 Switch(customWithdraw_Panel, transaction_Panel);
-                 try {
-                     transaction_Panel();
-                 } catch (InterruptedException ex) {
-                     ex.printStackTrace();
-                 }
+                 Switch(customWithdraw_Panel, customNote_Panel);
+                     customNote_Panel();
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -542,8 +613,86 @@
 
      }
 
+        private static void customNote_Panel () {
+            customNote_Panel.removeAll();
+            customNote_Panel.setSize(frame.getSize());
+            customNote_Panel.setLayout(null);
+            customNote_Panel.setBackground(Color.white);
+
+            backbutton = new JButton(new AbstractAction("Back") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Button Clicked, RETREAT!!");
+                    Switch(customWithdraw_Panel, main_Panel);
+                    main_Panel();
+                }
+            });
+            backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+            backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+            backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+            customNote_Panel.add(backbutton);
 
 
+            homebutton = new JButton(new AbstractAction("Home") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Button Clicked, chipRemoved");
+                    start();
+                }
+            });
+            homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+            homebutton.setBackground(Color.black.darker().darker().darker().darker());
+            homebutton.setBounds(frame.getWidth()/2+200,frame.getHeight()-60,100,50);
+            customNote_Panel.add(homebutton);
+
+            loginbutton = new JButton(new AbstractAction("login") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Switch (customNote_Panel,login_Panel);
+                    login_Panel();
+                }
+            });
+            loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+            loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+            loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
+            customNote_Panel.add(loginbutton);
+
+            button = new JButton(new AbstractAction("FinishTransaction") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Button Clicked, RETREAT!!");
+
+                    Switch(customNote_Panel, transaction_Panel);
+                    try {
+                        transaction_Panel();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+            button.setBackground(Color.magenta.darker().darker().darker().darker());
+            button.setForeground(Color.black);
+            button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
+            customNote_Panel.add(button);
+
+            // button voor aantal briefjes
+            
+
+
+
+
+
+        }
+
+     /*   private static void thankyou_Panel(){
+            while ( === true ){
+
+            }
+
+        }
+
+*/
 
 
 
