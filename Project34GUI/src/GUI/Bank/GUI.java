@@ -18,6 +18,7 @@
  import javax.swing.ImageIcon;
  import java.awt.color.*;
  import java.awt.event.ActionListener;
+ import java.sql.SQLOutput;
 
  public class GUI {
      private static JPanel start_Panel = new JPanel(); // maakt een "pagina " aan
@@ -26,7 +27,6 @@
      private static JPanel transaction_Panel = new JPanel();
      private static JPanel customWithdraw_Panel = new JPanel();
      private static JPanel customNote_Panel = new JPanel();
-     private static JPanel thankyou_Panel = new JPanel();
      private static JFrame frame = new JFrame();
 
      private static JButton button; // maakt een knop aan
@@ -41,9 +41,13 @@
      private static JTextField user_Text; // maakt een tekstvlak aan
      private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
      private static JLabel message_Label; //
+     private static JLabel thankYou_Label;
      private static JTextField Amount_Text;
 
      // geld briefjes
+     private static JButton briefje20;
+     private static JButton briefje50;
+     private static JButton briefje100;
 
 
 
@@ -109,6 +113,7 @@
          });
 
          button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,200,85);
+        // button.setBackground(Color.black.darker().darker());
          button.setForeground(new Color(192,27,28));
          button.setOpaque(true);
          start_Panel.add(button);
@@ -126,7 +131,7 @@
          message_Label.setBounds(10,110,80 ,25);
          login_Panel.add(message_Label);
          frame.setVisible(true);
-         //main_Panel();
+         main_Panel();
 
          // logo dat op de homepagina staat
         // Slankbank logo = new Slankbank();
@@ -297,6 +302,7 @@
          Withdrawaltxt_Label.setBackground(new Color(241,227,12));
          main_Panel.add(Withdrawaltxt_Label);
 
+
          //Withdraw 50
          withdrawbutton = new JButton(new AbstractAction(" $50 ") {
              @Override
@@ -429,6 +435,22 @@
              transaction_Label.setBackground(new Color(195,195,195));
              transaction_Panel.add(transaction_Label);
          }
+         JLabel thankYou_Label = new JLabel("Thank you for choosing Slankbank");
+         thankYou_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
+         thankYou_Label.setBounds(frame.getWidth()/2-150,frame.getHeight()/2+100,475,50);
+         thankYou_Label.setOpaque(true);
+         transaction_Panel.add(thankYou_Label);
+
+         button = new JButton(new AbstractAction("Done") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 start();
+             }
+         });
+         button.setOpaque(true);
+         button.setBounds(frame.getWidth()/2+10,frame.getHeight()/2+200,150,75);
+         thankYou_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
+         transaction_Panel.add(button);
 
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
@@ -468,7 +490,7 @@
          loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
          transaction_Panel.add(loginbutton);
 
-         button = new JButton(new AbstractAction("FinishTransaction") {
+         finnishtansaction = new JButton(new AbstractAction("FinishTransaction") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -481,11 +503,11 @@
                  }
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
-         transaction_Panel.add(button);
+         finnishtansaction.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         finnishtansaction.setBackground(Color.magenta.darker().darker().darker().darker());
+         finnishtansaction.setForeground(Color.black);
+         finnishtansaction.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
+         transaction_Panel.add(finnishtansaction);
      }
 
         // nieuwe pagina
@@ -494,6 +516,8 @@
          customWithdraw_Panel.setSize(frame.getSize());
          customWithdraw_Panel.setLayout(null);
          customWithdraw_Panel.setBackground(Color.white);
+
+         int waarde;
 
          // knoppen
          backbutton = new JButton(new AbstractAction("Back") {
@@ -611,6 +635,7 @@
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
          customWithdraw_Panel.add(withdrawbutton);
 
+
      }
 
         private static void customNote_Panel () {
@@ -623,7 +648,7 @@
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Button Clicked, RETREAT!!");
-                    Switch(customWithdraw_Panel, main_Panel);
+                    Switch(customNote_Panel, main_Panel);
                     main_Panel();
                 }
             });
@@ -657,7 +682,7 @@
             loginbutton.setBounds(frame.getWidth()/2+300,frame.getHeight() - 60,100,50);
             customNote_Panel.add(loginbutton);
 
-            button = new JButton(new AbstractAction("FinishTransaction") {
+            finnishtansaction = new JButton(new AbstractAction("FinishTransaction") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Button Clicked, RETREAT!!");
@@ -670,30 +695,66 @@
                     }
                 }
             });
-            button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-            button.setBackground(Color.magenta.darker().darker().darker().darker());
-            button.setForeground(Color.black);
-            button.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
+            finnishtansaction.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+            finnishtansaction.setBackground(Color.magenta.darker().darker().darker().darker());
+            finnishtansaction.setForeground(Color.black);
+            finnishtansaction.setBounds(frame.getWidth()/2+400,frame.getHeight() - 60,300,50);
+            customNote_Panel.add(finnishtansaction);
+
+            button = new JButton(new AbstractAction("Send") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("doorgeleid naar de volgende pagina met de transactie");
+                    Switch(customNote_Panel,transaction_Panel);
+                    try {
+                        transaction_Panel();
+                    }
+                    catch (InterruptedException ex){
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            button.setBounds(frame.getWidth()/2,frame.getHeight()/2+50,100,50);
+            button.setForeground(new Color(191,26,28));
+            button.setBackground(Color.black.darker().darker().darker().darker());
             customNote_Panel.add(button);
 
             // button voor aantal briefjes
-            
+
+            briefje20 = new JButton(new AbstractAction("Note 20$") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            briefje20.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,100,50);
+            briefje20.setForeground(new Color(191,26,28));
+            customNote_Panel.add(briefje20);
 
 
+            briefje50 = new JButton(new AbstractAction("Note 50$") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            briefje50.setBounds(frame.getWidth()/2,frame.getHeight()/2,100,50);
+            briefje50.setForeground(new Color(191,26,28));
+            customNote_Panel.add(briefje50);
+
+            briefje100 = new JButton(new AbstractAction("Note 100$") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            briefje100.setBounds(frame.getWidth()/2+100,frame.getHeight()/2,100,50);
+            briefje100.setForeground(new Color(191,26,28));
+            customNote_Panel.add(briefje100);
 
 
 
         }
-
-     /*   private static void thankyou_Panel(){
-            while ( === true ){
-
-            }
-
-        }
-
-*/
-
 
 
      /*Usable Methods*/
