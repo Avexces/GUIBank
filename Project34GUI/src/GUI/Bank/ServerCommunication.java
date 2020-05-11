@@ -59,7 +59,7 @@ public class ServerCommunication {
     {
         if(!is_Inserted)
         {
-            BANK.GUI.Abrupted();
+            GUI.Abrupted();
         }
         return;
     }
