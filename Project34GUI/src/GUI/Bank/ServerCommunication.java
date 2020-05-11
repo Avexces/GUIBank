@@ -1,4 +1,4 @@
-package GUI.Bank;
+package Bank;
 
 public class ServerCommunication {
     private static String user_ID = "User";
@@ -76,5 +76,25 @@ public class ServerCommunication {
         }
 
 
+    }
+
+    public static void get10(int amount)
+    {
+        withdrawal_Amount += 10 * amount;
+
+        //TODO laat de arduino $10 biljetten uitspugen
+    }
+
+    public static void get20(int amount)
+    {
+        withdrawal_Amount += 20 * amount;
+
+        //TODO laat de arduino $20 biljetten uitspugen
+    }
+    public static void get50(int amount)
+    {
+        withdrawal_Amount += 20 * amount;
+
+        //TODO laat de arduino $50 biljetten uitspugen
     }
 }

@@ -6,7 +6,7 @@
   *
   *
   */
- package GUI.Bank;
+ package Bank;
 
 /* libraries toevoegen */
 
