@@ -1,4 +1,7 @@
-package GUI.Bank;
+package Bank;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class ServerCommunication {
     private static String user_ID = "User";
@@ -8,6 +11,22 @@ public class ServerCommunication {
     private static double balance = 200;
     public static boolean is_Succes = false;
     public static double withdrawal_Amount = 0;
+    public static int briefjes50 = 0;
+    public static int briefjes100 = 0;
+    public static int briefjes20 = 0;
+
+    public static void main(String[] argv) throws Exception {
+        String driverName = "org.gjt.mm.mysql.Driver";
+        Class.forName(driverName);
+
+        String serverName = "145.24.222.157";
+        String mydatabase = "mydatabase";
+        String url = "jdbc:mysql :// " + serverName + "/" + mydatabase;
+
+        String username = "ubuntu-0985583";
+        String password = "7n95W2";
+        Connection connection = DriverManager.getConnection(url, username, password);
+    }
 
     public static String getPincode()
     {
@@ -40,7 +59,7 @@ public class ServerCommunication {
     {
         if(!is_Inserted)
         {
-            GUI.Abrupted();
+            BANK.GUI.Abrupted();
         }
         return;
     }
@@ -76,5 +95,37 @@ public class ServerCommunication {
         }
 
 
+    }
+
+    public static int setBriefjes20(int i)
+    {
+        int aantal = 0;
+
+        briefjes20 += i;
+        aantal = briefjes20;
+
+        return aantal;
+    }
+
+    public static int setBriefjes50(int i)
+    {
+        int aantal = 0;
+
+        briefjes50 += i;
+
+        aantal = briefjes50;
+
+        return aantal;
+    }
+
+    public static int setBriefjes100(int i)
+    {
+        int aantal = 0;
+
+        briefjes100 += i;
+
+        aantal = briefjes100;
+
+        return aantal;
     }
 }

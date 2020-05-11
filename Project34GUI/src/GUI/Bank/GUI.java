@@ -6,9 +6,11 @@
   *
   *
   */
- package GUI.Bank;
+ package Bank;
 
 /* libraries toevoegen */
+
+ import Bank.ServerCommunication;
 
  import javax.imageio.ImageIO;
  import javax.swing.*;
@@ -724,7 +726,7 @@
             briefje20 = new JButton(new AbstractAction("Note 20$") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                        ServerCommunication.setBriefjes20(1);
                 }
             });
             briefje20.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,100,50);
@@ -735,7 +737,7 @@
             briefje50 = new JButton(new AbstractAction("Note 50$") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    ServerCommunication.setBriefjes50(1);
                 }
             });
             briefje50.setBounds(frame.getWidth()/2,frame.getHeight()/2,100,50);
@@ -745,7 +747,7 @@
             briefje100 = new JButton(new AbstractAction("Note 100$") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    ServerCommunication.setBriefjes20(1);
                 }
             });
             briefje100.setBounds(frame.getWidth()/2+100,frame.getHeight()/2,100,50);
@@ -768,7 +770,7 @@
 
          return;
      }
-     protected static void Abrupted()
+     public static void Abrupted()
      {
          frame.removeAll();
          start();
