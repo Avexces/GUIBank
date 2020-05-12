@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3164e77-2e3f-4014-afac-525f262c08da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <workItem from="1586333194652" duration="1642000" />
       <workItem from="1587548084620" duration="3700000" />
       <workItem from="1587721923488" duration="616000" />
-      <workItem from="1589219538350" duration="2564000" />
+      <workItem from="1589219538350" duration="5256000" />
     </task>
     <servers />
   </component>
@@ -99,22 +99,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1585754763857" />
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1589219824709">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom" timestamp="1589287050491">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589219824709" />
-    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1589219824709">
+    <state width="1877" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589287050491" />
+    <state width="1877" height="164" key="GridCell.Tab.0.center" timestamp="1589287050491">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589219824709" />
-    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1589219824708">
+    <state width="1877" height="164" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589287050491" />
+    <state width="1877" height="164" key="GridCell.Tab.0.left" timestamp="1589287050491">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589219824708" />
-    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1589219824709">
+    <state width="1877" height="164" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589287050491" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right" timestamp="1589287050491">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589219824709" />
+    <state width="1877" height="164" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.4.1920.1040@0.0.1920.1040" timestamp="1589287050491" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1585861936716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -155,14 +155,6 @@
           </properties>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>225</line>
-          <properties class="BANK.GUI" method="main_Panel">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
           <line>56</line>
@@ -174,18 +166,14 @@
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
           <line>71</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/Bank/GUI.java</url>
-          <line>226</line>
-          <option name="timeStamp" value="36" />
+          <url>file://$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -46,13 +46,12 @@
      private static JLabel thankYou_Label;
      private static JTextField Amount_Text;
 
-     // geld briefjes
+     /* geld briefjes
      private static JButton briefje20;
      private static JButton briefje50;
-     private static JButton briefje100;
-
-
-
+     private static JButton briefjes100;
+     private static JButton increaseButton;
+     private static JButton decreaseButton;*/
 
      public class Slankbank extends JFrame {// foto van logo
          private ImageIcon image;
@@ -412,8 +411,6 @@
 
      }
 
-
-
      private static void transaction_Panel() throws InterruptedException {
          transaction_Panel.setLayout(null);
          transaction_Panel.setBackground(Color.white);
@@ -599,13 +596,7 @@
          customWithdraw_Panel.add(balance_Label);
          frame.setVisible(true);
 
-         JLabel Withdrawaltxt_Label = new JLabel(" Custom withdraw ");
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color (192,27,28));
-         Withdrawaltxt_Label.setBackground(new Color(241,227,12));
-         customWithdraw_Panel.add(Withdrawaltxt_Label);
+
 
 
 
@@ -723,7 +714,7 @@
 
             // button voor aantal briefjes
 
-            briefje20 = new JButton(new AbstractAction("Note 20$") {
+         /*   briefje20 = new JButton(new AbstractAction("Note 20$") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         ServerCommunication.setBriefjes20(1);
@@ -744,17 +735,26 @@
             briefje50.setForeground(new Color(191,26,28));
             customNote_Panel.add(briefje50);
 
-            briefje100 = new JButton(new AbstractAction("Note 100$") {
+            briefjes100 = new JButton(new AbstractAction("Note 100$") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ServerCommunication.setBriefjes20(1);
+                    ServerCommunication.setBriefjes100(1);
                 }
             });
-            briefje100.setBounds(frame.getWidth()/2+100,frame.getHeight()/2,100,50);
-            briefje100.setForeground(new Color(191,26,28));
-            customNote_Panel.add(briefje100);
+            briefjes100.setBounds(frame.getWidth()/2+100,frame.getHeight()/2,100,50);
+            briefjes100.setForeground(new Color(191,26,28));
+            customNote_Panel.add(briefjes100);
 
 
+            increaseButton = new JButton(new AbstractAction("increase") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ServerCommunication.setBriefjes100(1);
+                }
+            });
+            increaseButton.setBounds(frame.getWidth()/2+350,frame.getHeight()/2,500,500);
+            increaseButton.setForeground(new Color(191,26,28));
+            customNote_Panel.add(increaseButton); */
 
         }
 
