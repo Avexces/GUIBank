@@ -356,9 +356,9 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-
-                 Switch(select_Panel, main_Panel);
                  main_Panel();
+                 Switch(select_Panel, main_Panel);
+
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -445,13 +445,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
-
-                     Switch(main_Panel, transaction_Panel);
                      try {
                          transaction_Panel(70,1,2,0);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(main_Panel, transaction_Panel);
+
                  }
              });
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -511,12 +511,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(100,5,0,0);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -555,12 +556,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(100,0,2,0);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -599,12 +601,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(100,0,0,1);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -617,13 +620,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
-
-                     Switch(main_Panel, transaction_Panel);
                      try {
                          transaction_Panel(100,0,0,1);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(main_Panel, transaction_Panel);
+
                  }
              });
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -685,12 +688,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(150,0,3,0);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -729,12 +733,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(150,5,2,0);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -774,12 +779,13 @@
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Bedrag optie gekozen");
                     // ServerCommunication.Withdraw(50);
-                     Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(150,0,1,1);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(select_Panel, transaction_Panel);
+
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -788,19 +794,19 @@
              withdrawbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 150,300,50);
              select_Panel.add(withdrawbutton);
 
-             button = new JButton(new AbstractAction("FinishTransaction") {
+             /*button = new JButton(new AbstractAction("FinishTransaction") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
-
-                     Switch(main_Panel, transaction_Panel);
                      try {
                          transaction_Panel(150,0,1,1);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(main_Panel, transaction_Panel);
+
                  }
-             });
+             });*/
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              button.setBackground(Color.magenta.darker().darker().darker().darker());
              button.setForeground(Color.lightGray);
@@ -826,9 +832,9 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-
-                 Switch(select_CPanel, main_Panel);
                  main_Panel();
+                 Switch(select_CPanel, main_Panel);
+
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -840,9 +846,9 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
-
-                 ServerCommunication.setFalse();
                  login_Panel();
+                 ServerCommunication.setFalse();
+
              }
          });
          button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
@@ -850,7 +856,7 @@
 
          //Selecteer veste bedragen
              //TODO weergeef 50 en 20 briefjes
-             JLabel balancetxt_Label = new JLabel(" Gekozen bedrag: 70 euro");
+             JLabel balancetxt_Label = new JLabel("totaal Bedrag: " +amount);
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -881,14 +887,6 @@
          Withdrawalatxt_Label.setForeground(new Color (192,27,28));
          Withdrawalatxt_Label.setBackground(new Color(241,227,12));
          select_CPanel.add(Withdrawalatxt_Label);
-
-         JLabel briefjeamount_Label = new JLabel(String.valueOf(amount));
-         briefjeamount_Label.setOpaque(true);
-         briefjeamount_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 300,300,50);
-         briefjeamount_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         briefjeamount_Label.setForeground(new Color (192,27,28));
-         briefjeamount_Label.setBackground(new Color(241,227,12));
-         select_CPanel.add(briefjeamount_Label);
 
          button = new JButton(new AbstractAction("Increase") {
              @Override
@@ -1019,13 +1017,13 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
-
-                     Switch(main_Panel, transaction_Panel);
                      try {
                          transaction_Panel(amount,tempAmountBriefjes20,tempAmountBriefjes50,tempAmountBriefjes100);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
+                     Switch(main_Panel, transaction_Panel);
+
                  }
              });
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1069,7 +1067,7 @@
                  System.out.println("Button Clicked, RETREAT!!");
                  main_Panel();
                  Switch(transaction_Panel, main_Panel);
-                 
+
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
