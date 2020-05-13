@@ -1,32 +1,16 @@
 package Bank;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 public class ServerCommunication {
     private static String user_ID = "User";
     private static String pin_Code = "1234";
     private static boolean is_Inserted;
     private static boolean is_Blocked = false;
-    private static double balance = 200;
+    private static double balance = 20000;
     public static boolean is_Succes = false;
     public static double withdrawal_Amount = 0;
-    public static int briefjes50 = 0;
-    public static int briefjes100 = 0;
-    public static int briefjes20 = 0;
 
-    public static void main(String[] argv) throws Exception {
-        String driverName = "org.gjt.mm.mysql.Driver";
-        Class.forName(driverName);
-
-        String serverName = "145.24.222.157";
-        String mydatabase = "mydatabase";
-        String url = "jdbc:mysql :// " + serverName + "/" + mydatabase;
-
-        String username = "ubuntu-0985583";
-        String password = "7n95W2";
-        Connection connection = DriverManager.getConnection(url, username, password);
-    }
+    public static int amount10 = 10;
+    public static int amount50 = 50;
 
     public static String getPincode()
     {
@@ -73,17 +57,21 @@ public class ServerCommunication {
         return is_Succes;
     }
 
-    public static void Withdraw(double i) {
-        i = withdrawal_Amount;
-        if(balance < withdrawal_Amount)
+    public static void Withdraw(int i, int b10, int b50) {
+        i = (int) i;
+        if(balance < i)
         {
             //returns there is not enough money and nothing went off your account
             is_Succes = false;
             return;
         }
-        else if(balance >= withdrawal_Amount)
+        else if(balance >= i)
         {
             //returns there is enough money and says you can withdraw it form your account
+            getBriefje10(b10);
+            getBriefje50(b50);
+            balance -= i;
+            System.out.println(balance);
             is_Succes = true;
             return;
         }
@@ -97,35 +85,22 @@ public class ServerCommunication {
 
     }
 
-    public static int setBriefjes20(int i)
+    private static void getBriefje10(int a)
     {
-        int aantal = 0;
-
-        briefjes20 += i;
-        aantal = briefjes20;
-
-        return aantal;
+        System.out.println("Spuig uit da geld");
+        amount10 -= a;
     }
 
-    public static int setBriefjes50(int i)
+    private static  void getBriefje50(int a)
     {
-        int aantal = 0;
-
-        briefjes50 += i;
-
-        aantal = briefjes50;
-
-        return aantal;
+        System.out.println("Spuig uit da geld");
+        amount50 -= a;
     }
 
-    public static int setBriefjes100(int i)
-    {
-        int aantal = 0;
 
-        briefjes100 += i;
 
-        aantal = briefjes100;
 
-        return aantal;
+    public static int getBalanceInt() {
+        return (int) balance;
     }
 }
