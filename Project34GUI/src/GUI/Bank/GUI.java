@@ -27,16 +27,23 @@
      private static JPanel select_CPanel = new JPanel();
      private static JPanel transaction_Panel = new JPanel();
      private static JPanel customWithdraw_panel = new JPanel();
+
      private static JFrame frame = new JFrame();
-     private static JButton button; // maakt een knop aan
-     private static JButton withdrawbutton;
+
      private static JTextField user_Text; // maakt een tekstvlak aan
      private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
      private static JLabel message_Label; //
-     private static int tempAmountBriefjes20 =0;
-     private static int tempAmountBriefjes50 = 0;
-     private static int tempAmountBriefjes100 = 0;
+     private static int tempAmountNotes20 =0;
+     private static int tempAmountNotes50 = 0;
+     private static int tempAmountNotes100 = 0;
      private static int amount = 0;
+
+     private static JButton button; // maakt een knop aan
+     private static JButton withdrawbutton;
+     private static JButton homebutton;
+     private static JButton customWithdrawbutton;
+     private static JButton loginbutton;
+     private static JButton backbutton;
 
      public class Slankbank extends JFrame {// foto van logo
          private ImageIcon image;
@@ -81,7 +88,7 @@
          start_Panel.setForeground(Color.black); // voorgrond
 
          // begin menu van de gui vn de bank
-         JLabel Welkomtekst = new JLabel("Welkom bij Slankbank");
+         JLabel Welkomtekst = new JLabel("Welcome to Slankbank");
          Welkomtekst.setBounds(frame.getWidth()/3,frame.getHeight()/2-200,1000,100);
          Welkomtekst.setFont(new Font("TimesRoman", Font.PLAIN, 60));
          Welkomtekst.setForeground(Color.black);
@@ -110,7 +117,7 @@
              }
          });
          button.setBounds(0,0,80,25);
-         login_Panel.add(button);
+         start_Panel.add(button);
 
          message_Label = new JLabel("");
          message_Label.setBounds(10,110,80 ,25);
@@ -118,17 +125,11 @@
          frame.setVisible(true);
          //main_Panel();
 
-         // logo dat op de homepagina staat
-        // Slankbank logo = new Slankbank();
-         //logo.setVisible(true);
-
      }
 
      /*Login menu*/
      private static void login_Panel()
      {
-
-
          login_Panel.removeAll();
          login_Panel.setSize(frame.getSize());
          login_Panel.setLayout(null);
@@ -136,26 +137,31 @@
 
 
          /*UserName Label*/
-         JLabel label = new JLabel("Gebruikersnaam");
-         label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,140,25);
+         JLabel label = new JLabel("Username");
+         label.setBounds(frame.getWidth()/2 - 200,frame.getHeight()/2,200,25);
          label.setForeground(new Color (192,27,28));
+         label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
          login_Panel.add(label);
 
          //UserName veld
          user_Text = new JTextField();
-         user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,140 ,25);
+         user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,200 ,30);
+         user_Text.setFont(new Font(" Arial", Font.PLAIN,18));
          login_Panel.add(user_Text);
 
          //Pincode text
-         JLabel pin_Label = new JLabel("Wachtwoord");
-         pin_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2+30,140,25);
+         JLabel pin_Label = new JLabel("Password");
+         pin_Label.setBounds(frame.getWidth()/2 -200,frame.getHeight()/2+30,200,25);
          pin_Label.setForeground(new Color (192,27,28));
+         pin_Label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
          login_Panel.add(pin_Label);
 
          /*Adds an pin field to the LoginPanel*/
          pin_Field = new JPasswordField();
-         pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,140 ,25);
+         pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,200 ,30);
+         pin_Field.setFont(new Font("Arial",Font.PLAIN,18));
          login_Panel.add(pin_Field);
+
 
          /*Login button*/
          button = new JButton(/*"Login"*/ new AbstractAction("Login") {
@@ -168,7 +174,7 @@
                  Login(user,password);
              }
          });
-         button.setBounds(frame.getWidth()/2,frame.getHeight()/2+60,80,25);
+         button.setBounds(frame.getWidth()/2-75,frame.getHeight()/2+100,250,45);
          login_Panel.add(button);
 
          /*Exit button*/
@@ -178,28 +184,26 @@
                  System.exit(0);
              }
          });
-         button.setBounds(frame.getWidth()/2 - 100 ,frame.getHeight()/2+60,80,25);
+         button.setBounds(frame.getWidth()/2 + 200 ,frame.getHeight()/2+100,100,45);
          login_Panel.add(button);
 
-
-         /*Message Label*/
-         message_Label = new JLabel("");
-         message_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+90,300,25);
-         message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         login_Panel.add(message_Label);
-         frame.setVisible(true);
-
          /* terug knop */
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent actionEvent) {
                 start();
              }
          });
-         button.setBounds(frame.getWidth()/2+100,frame.getHeight()/2+60,80,25);
-         login_Panel.add(button);
+         backbutton.setBounds(frame.getWidth()/2-200,frame.getHeight()/2+100,100,45);
+         login_Panel.add(backbutton);
 
-
+         /*Message Label*/
+         message_Label = new JLabel("");
+         message_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2+250,300,25);
+         message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         message_Label.setForeground(new Color(191,26,28));
+         login_Panel.add(message_Label);
+         frame.setVisible(true);
 
      }
 
@@ -207,34 +211,49 @@
      private static void main_Panel() {
          //main_Panel = new JPanel();
 
+        // select_CPanel.removeAll();
+        // select_Panel.removeAll();
+
          main_Panel.setLayout(null);
          main_Panel.setBackground(Color.white);
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-
                  Switch(main_Panel, login_Panel);
                  login_Panel();
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
-         main_Panel.add(button);
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         main_Panel.add(backbutton);
 
-         button = new JButton(new AbstractAction("Abrupt") {
+         homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
+                 start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         main_Panel.add(homebutton);
 
-                 ServerCommunication.setFalse();
+         loginbutton = new JButton(new AbstractAction("Login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (main_Panel,login_Panel);
                  login_Panel();
              }
          });
-         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
-         main_Panel.add(button);
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         main_Panel.add(loginbutton);
+
 
          JLabel balancetxt_Label = new JLabel(" Balance: ");
          balancetxt_Label.setOpaque(true);
@@ -301,7 +320,7 @@
          withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
          main_Panel.add(withdrawbutton);
 
-         withdrawbutton = new JButton(new AbstractAction(" Aangepast bedrag ") {
+         withdrawbutton = new JButton(new AbstractAction(" Adjusted amount ") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -352,7 +371,7 @@
         select_Panel.setLayout(null);
          select_Panel.setBackground(Color.white);
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -361,28 +380,45 @@
 
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
-         select_Panel.add(button);
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         select_Panel.add(backbutton);
 
-         button = new JButton(new AbstractAction("Abrupt") {
+         homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
+                 start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         select_Panel.add(homebutton);
 
-                 ServerCommunication.setFalse();
+         loginbutton = new JButton(new AbstractAction("Login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (main_Panel,login_Panel);
                  login_Panel();
              }
          });
-         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
-         select_Panel.add(button);
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         select_Panel.add(loginbutton);
+
+
+
+
+
 
          //Selecteer veste bedragen
          if(selectedMoney == 70)
          {
-             //TODO weergeef 50 en 20 briefjes
-             JLabel balancetxt_Label = new JLabel(" Gekozen bedrag: 70 euro");
+             //TODO weergeef 50 en 20 Notes
+             JLabel balancetxt_Label = new JLabel(" Chosen amount: 70 $");
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -390,15 +426,15 @@
              balancetxt_Label.setBackground(new Color (241,227,12));
              select_Panel.add(balancetxt_Label);
 
-             JLabel optiontxt_Label = new JLabel(" Mogelijke biljet opties:");
+             JLabel optiontxt_Label = new JLabel(" Possible note options:");
              optiontxt_Label.setOpaque(true);
              optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
              optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             optiontxt_Label.setForeground(new Color (192,27,28));
-             optiontxt_Label.setBackground(new Color (241,227,12).darker());
+             optiontxt_Label.setForeground(Color.lightGray );
+             optiontxt_Label.setBackground(Color.darkGray.darker());
              select_Panel.add(optiontxt_Label);
 
-             JLabel Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 1");
+             JLabel Withdrawaltxt_Label = new JLabel(" 20$ Note       Number: 1");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -406,27 +442,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             JLabel briefje50_Label = new JLabel(" 50 briefje       Aantal: 1");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             JLabel Note50_Label = new JLabel(" 50$ Note       Number: 1");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             JLabel briefje100_Label = new JLabel(" 100 briefje       Aantal: 0");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             JLabel Note100_Label = new JLabel(" 100$ Note     Number: 0");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 
              //Withdraw 50
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      Switch(select_Panel, transaction_Panel);
                      try {
                          transaction_Panel(70,1,1,0);
@@ -438,35 +474,18 @@
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              withdrawbutton.setBackground(new Color(241,227,12));
              withdrawbutton.setForeground(new Color (192,27,28));
-             withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 150,300,50);
+             withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
 
-             button = new JButton(new AbstractAction("FinishTransaction") {
-                 @Override
-                 public void actionPerformed(ActionEvent e) {
-                     System.out.println("Button Clicked, RETREAT!!");
-                     try {
-                         transaction_Panel(70,1,2,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(main_Panel, transaction_Panel);
-
-                 }
-             });
-             button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             button.setBackground(Color.magenta.darker().darker().darker().darker());
-             button.setForeground(Color.lightGray);
-             button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
-             select_Panel.add(button);
 
 
              frame.setVisible(true);
          }
+         // 100 dollaar pinnen
          else if(selectedMoney == 100)
          {
-             ////TODO weergeef 50 en 20 briefjes
-             JLabel balancetxt_Label = new JLabel(" Gekozen bedrag: 100 euro");
+             ////TODO weergeef 50 en 20 Notes
+             JLabel balancetxt_Label = new JLabel(" Chosen amount: 100 $");
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -474,15 +493,15 @@
              balancetxt_Label.setBackground(new Color (241,227,12));
              select_Panel.add(balancetxt_Label);
 
-             JLabel optiontxt_Label = new JLabel(" Mogelijke biljet opties:");
+             JLabel optiontxt_Label = new JLabel(" Possible note options:");
              optiontxt_Label.setOpaque(true);
              optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
              optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             optiontxt_Label.setForeground(new Color (192,27,28));
-             optiontxt_Label.setBackground(new Color (241,227,12).darker());
+             optiontxt_Label.setForeground(Color.lightGray );
+             optiontxt_Label.setBackground(Color.darkGray.darker());
              select_Panel.add(optiontxt_Label);
              //3
-             JLabel Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 5");
+             JLabel Withdrawaltxt_Label = new JLabel(" 20$ Note        Number: 5");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -490,27 +509,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             JLabel briefje50_Label = new JLabel(" 50 briefje       Aantal: 0");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             JLabel Note50_Label = new JLabel(" 50$ Note        Number: 0");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             JLabel briefje100_Label = new JLabel(" 100 briefje       Aantal: 0");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             JLabel Note100_Label = new JLabel(" 100$ Note      Number: 0");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      try {
                          transaction_Panel(100,5,0,0);
                      } catch (InterruptedException ex) {
@@ -523,11 +542,11 @@
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              withdrawbutton.setBackground(new Color(241,227,12));
              withdrawbutton.setForeground(new Color (192,27,28));
-             withdrawbutton.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 150,300,50);
+             withdrawbutton.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
 
         //2
-             Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 0");
+             Withdrawaltxt_Label = new JLabel(" 20$ Note       Number: 0");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -535,27 +554,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             briefje50_Label = new JLabel(" 50 briefje       Aantal: 2");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             Note50_Label = new JLabel(" 50$ Note       Number: 2");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             briefje100_Label = new JLabel(" 100 briefje       Aantal: 0");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             Note100_Label = new JLabel(" 100$ Note     Number: 0");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      try {
                          transaction_Panel(100,0,2,0);
                      } catch (InterruptedException ex) {
@@ -568,11 +587,11 @@
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              withdrawbutton.setBackground(new Color(241,227,12));
              withdrawbutton.setForeground(new Color (192,27,28));
-             withdrawbutton.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 150,300,50);
+             withdrawbutton.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
 
              //1
-             Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 0");
+             Withdrawaltxt_Label = new JLabel(" 20$ Note       Number: 0");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -580,27 +599,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             briefje50_Label = new JLabel(" 50 briefje       Aantal: 0");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             Note50_Label = new JLabel(" 50$ Note       Number: 0");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             briefje100_Label = new JLabel(" 100 briefje       Aantal: 1");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             Note100_Label = new JLabel(" 100$ Note     Number: 1");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      try {
                          transaction_Panel(100,0,0,1);
                      } catch (InterruptedException ex) {
@@ -613,27 +632,9 @@
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              withdrawbutton.setBackground(new Color(241,227,12));
              withdrawbutton.setForeground(new Color (192,27,28));
-             withdrawbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 150,300,50);
+             withdrawbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
 
-             button = new JButton(new AbstractAction("FinishTransaction") {
-                 @Override
-                 public void actionPerformed(ActionEvent e) {
-                     System.out.println("Button Clicked, RETREAT!!");
-                     try {
-                         transaction_Panel(100,0,0,1);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(main_Panel, transaction_Panel);
-
-                 }
-             });
-             button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             button.setBackground(Color.magenta.darker().darker().darker().darker());
-             button.setForeground(Color.lightGray);
-             button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
-             select_Panel.add(button);
 
 
 
@@ -642,8 +643,8 @@
          }
          else if(selectedMoney == 150)
          {
-             ////TODO weergeef 50 en 20 briefjes
-             JLabel balancetxt_Label = new JLabel(" Gekozen bedrag: 150 euro");
+             ////TODO weergeef 50 en 20 Notes
+             JLabel balancetxt_Label = new JLabel(" Chosen amount: 150$");
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -651,15 +652,15 @@
              balancetxt_Label.setBackground(new Color (241,227,12));
              select_Panel.add(balancetxt_Label);
 
-             JLabel optiontxt_Label = new JLabel(" Mogelijke biljet opties:");
+             JLabel optiontxt_Label = new JLabel(" Possible note options:");
              optiontxt_Label.setOpaque(true);
              optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
              optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             optiontxt_Label.setForeground(new Color (192,27,28));
-             optiontxt_Label.setBackground(new Color (241,227,12).darker());
+             optiontxt_Label.setForeground(Color.lightGray );
+             optiontxt_Label.setBackground(Color.darkGray.darker());
              select_Panel.add(optiontxt_Label);
              //3
-             JLabel Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 0");
+             JLabel Withdrawaltxt_Label = new JLabel(" 20$ Note       Number: 0");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -667,27 +668,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             JLabel briefje50_Label = new JLabel(" 50 briefje       Aantal: 3");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             JLabel Note50_Label = new JLabel(" 50$ Note       Number: 3");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             JLabel briefje100_Label = new JLabel(" 100 briefje       Aantal: 0");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             JLabel Note100_Label = new JLabel(" 100$ Note     Number: 0");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      try {
                          transaction_Panel(150,0,3,0);
                      } catch (InterruptedException ex) {
@@ -704,7 +705,7 @@
              select_Panel.add(withdrawbutton);
 
              //2
-             Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 5");
+             Withdrawaltxt_Label = new JLabel(" 20 Note       Number: 5");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -712,27 +713,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             briefje50_Label = new JLabel(" 50 briefje       Aantal: 2");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             Note50_Label = new JLabel(" 50 Note       Number: 2");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2- 100,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             briefje100_Label = new JLabel(" 100 briefje       Aantal: 0");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             Note100_Label = new JLabel(" 100 Note     Number: 0");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                      try {
                          transaction_Panel(150,5,2,0);
                      } catch (InterruptedException ex) {
@@ -749,7 +750,7 @@
              select_Panel.add(withdrawbutton);
 
              //1
-             Withdrawaltxt_Label = new JLabel(" 20 briefje       Aantal: 0");
+             Withdrawaltxt_Label = new JLabel(" 20 Note       Number: 0");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -757,27 +758,27 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             briefje50_Label = new JLabel(" 50 briefje       Aantal: 1");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje50_Label);
+             Note50_Label = new JLabel(" 50 Note       Number: 1");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2- 400,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note50_Label);
 
-             briefje100_Label = new JLabel(" 100 briefje       Aantal: 1");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_Panel.add(briefje100_Label);
+             Note100_Label = new JLabel(" 100 Note     Number: 1");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_Panel.add(Note100_Label);
 //
 
-             withdrawbutton = new JButton(new AbstractAction(" Kies optie ") {
+             withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
-                     System.out.println("Bedrag optie gekozen");
+                     System.out.println("Amount option chosen");
                     // ServerCommunication.Withdraw(50);
                      try {
                          transaction_Panel(150,0,1,1);
@@ -794,7 +795,7 @@
              withdrawbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 150,300,50);
              select_Panel.add(withdrawbutton);
 
-             /*button = new JButton(new AbstractAction("FinishTransaction") {
+  /*           button = new JButton(new AbstractAction("FinishTransaction") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
@@ -806,16 +807,13 @@
                      Switch(main_Panel, transaction_Panel);
 
                  }
-             });*/
+             });
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              button.setBackground(Color.magenta.darker().darker().darker().darker());
              button.setForeground(Color.lightGray);
-             button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
+             button.setBounds(frame.getWidth()/2-420,frame.getHeight()/2- 60,300,50);
              select_Panel.add(button);
-
-
-
-
+*/
              frame.setVisible(true);
          }
 
@@ -824,11 +822,14 @@
 
      private static void SelectCustom()
      {
+         select_Panel.removeAll();
+         select_CPanel.removeAll();
+         customWithdraw_panel.removeAll();
 
          select_CPanel.setLayout(null);
          select_CPanel.setBackground(Color.white);
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -837,26 +838,43 @@
 
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
-         select_CPanel.add(button);
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         select_CPanel.add(backbutton);
 
-         button = new JButton(new AbstractAction("Abrupt") {
+         homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, chipRemoved");
-                 login_Panel();
-                 ServerCommunication.setFalse();
-
+                 start();
              }
          });
-         button.setBounds((frame.getWidth()/2)+ 40,80,80,25);
-         select_CPanel.add(button);
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         select_CPanel.add(homebutton);
+
+         loginbutton = new JButton(new AbstractAction("login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (select_CPanel,login_Panel);
+                 login_Panel();
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         select_CPanel.add(loginbutton);
+
+
+
 
          //Selecteer veste bedragen
-             //TODO weergeef 50 en 20 briefjes
-             JLabel balancetxt_Label = new JLabel("totaal Bedrag: " +amount);
+             //TODO weergeef 50 en 20 Notes
+
+
+             JLabel balancetxt_Label = new JLabel("Total amount: " +amount);
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -864,15 +882,16 @@
              balancetxt_Label.setBackground(new Color (241,227,12));
              select_CPanel.add(balancetxt_Label);
 
-             JLabel optiontxt_Label = new JLabel(" Mogelijke biljet opties:");
+
+             JLabel optiontxt_Label = new JLabel(" Possible note options:");
              optiontxt_Label.setOpaque(true);
              optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
              optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             optiontxt_Label.setForeground(new Color (192,27,28));
-             optiontxt_Label.setBackground(new Color (241,227,12).darker());
+             optiontxt_Label.setForeground(Color.gray);
+             optiontxt_Label.setBackground(Color.darkGray.darker());
              select_CPanel.add(optiontxt_Label);
 
-             JLabel Withdrawaltxt_Label = new JLabel(" 20 briefje");
+             JLabel Withdrawaltxt_Label = new JLabel(" 20 Note");
              Withdrawaltxt_Label.setOpaque(true);
              Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
              Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -880,7 +899,7 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Withdrawaltxt_Label);
 
-         JLabel Withdrawalatxt_Label = new JLabel("     " + tempAmountBriefjes20);
+         JLabel Withdrawalatxt_Label = new JLabel("     " + tempAmountNotes20);
          Withdrawalatxt_Label.setOpaque(true);
          Withdrawalatxt_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2,300,50);
          Withdrawalatxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -899,7 +918,7 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2,250,50);
          select_CPanel.add(button);
 
@@ -915,25 +934,25 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2,250,50);
          select_CPanel.add(button);
 
-             JLabel briefje50_Label = new JLabel(" 50 briefje ");
-             briefje50_Label.setOpaque(true);
-             briefje50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 50,300,50);
-             briefje50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje50_Label.setForeground(new Color (192,27,28));
-             briefje50_Label.setBackground(new Color(241,227,12));
-             select_CPanel.add(briefje50_Label);
+             JLabel Note50_Label = new JLabel(" 50 Note ");
+             Note50_Label.setOpaque(true);
+             Note50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 50,300,50);
+             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note50_Label.setForeground(new Color (192,27,28));
+             Note50_Label.setBackground(new Color(241,227,12));
+             select_CPanel.add(Note50_Label);
 
-         JLabel briefje50a_Label = new JLabel("     " + tempAmountBriefjes50);
-         briefje50a_Label.setOpaque(true);
-         briefje50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 50,300,50);
-         briefje50a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         briefje50a_Label.setForeground(new Color (192,27,28));
-         briefje50a_Label.setBackground(new Color(241,227,12));
-         select_CPanel.add(briefje50a_Label);
+         JLabel Note50a_Label = new JLabel("     " + tempAmountNotes50);
+         Note50a_Label.setOpaque(true);
+         Note50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 50,300,50);
+         Note50a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note50a_Label.setForeground(new Color (192,27,28));
+         Note50a_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note50a_Label);
 
          button = new JButton(new AbstractAction("Increase") {
              @Override
@@ -946,7 +965,7 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +50,250,50);
          select_CPanel.add(button);
 
@@ -962,26 +981,27 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +50,250,50);
          select_CPanel.add(button);
 
 
-             JLabel briefje100_Label = new JLabel(" 100 briefje");
-             briefje100_Label.setOpaque(true);
-             briefje100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
-             briefje100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             briefje100_Label.setForeground(new Color (192,27,28));
-             briefje100_Label.setBackground(new Color(241,227,12));
-             select_CPanel.add(briefje100_Label);
+             JLabel Note100_Label = new JLabel(" 100 Note");
+             Note100_Label.setOpaque(true);
+             Note100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
+             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             Note100_Label.setForeground(new Color (192,27,28));
+             Note100_Label.setBackground(new Color(241,227,12));
+             select_CPanel.add(Note100_Label);
 
-         JLabel briefje100a_Label = new JLabel("     " + tempAmountBriefjes100);
-         briefje100a_Label.setOpaque(true);
-         briefje100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
-         briefje100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         briefje100a_Label.setForeground(new Color (192,27,28));
-         briefje100a_Label.setBackground(new Color(241,227,12));
-         select_CPanel.add(briefje100a_Label);
+         JLabel Note100a_Label = new JLabel("     " + tempAmountNotes100);
+         Note100a_Label.setOpaque(true);
+         Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
+         Note100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note100a_Label.setForeground(new Color (192,27,28));
+         Note100a_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note100a_Label);
+
          button = new JButton(new AbstractAction("Increase") {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -993,7 +1013,7 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +100,250,50);
          select_CPanel.add(button);
 
@@ -1009,7 +1029,7 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.lightGray);
+         button.setForeground(Color.black);
          button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +100,250,50);
          select_CPanel.add(button);
 
@@ -1018,23 +1038,25 @@
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
                      try {
-                         transaction_Panel(amount,tempAmountBriefjes20,tempAmountBriefjes50,tempAmountBriefjes100);
+                         transaction_Panel(amount,tempAmountNotes20,tempAmountNotes50,tempAmountNotes100);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
-                     Switch(main_Panel, transaction_Panel);
+                     Switch(select_CPanel, transaction_Panel);
 
                  }
              });
              button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              button.setBackground(Color.magenta.darker().darker().darker().darker());
-             button.setForeground(Color.lightGray);
-             button.setBounds(frame.getWidth()-420,frame.getHeight() - 60,300,50);
+             button.setForeground(new Color (192,27,28));
+             button.setBounds(frame.getWidth()/2-100,frame.getHeight() /2+175,300,50);
              select_CPanel.add(button);
 
 
              frame.setVisible(true);
      }
+
+
      private static void transaction_Panel(int a, int b20, int b50, int b100) throws InterruptedException {
          transaction_Panel.setLayout(null);
          transaction_Panel.setBackground(Color.white);
@@ -1043,25 +1065,25 @@
          {
              JLabel transaction_Label = new JLabel(" Transaction succesful!");
              transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,325,50);
              transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(Color.green);
-             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Label.setForeground(new Color(19,84,39));
+             transaction_Label.setBackground(new Color (195,195,195));
              transaction_Panel.add(transaction_Label);
          }
          else
          {
              JLabel transaction_Label = new JLabel(" Transaction failed!");
              transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,300,50);
+             transaction_Label.setBounds(frame.getWidth()/2 - 100,frame.getHeight()/2,325,50);
              transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(Color.red);
-             transaction_Label.setBackground(Color.magenta.darker().darker().darker());
+             transaction_Label.setForeground(new Color (192,27,29));
+             transaction_Label.setBackground(new Color(195,195,195));
              transaction_Panel.add(transaction_Label);
          }
 
 
-         button = new JButton(new AbstractAction("Back") {
+         backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
@@ -1070,11 +1092,34 @@
 
              }
          });
-         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.white);
-         button.setBounds(frame.getWidth()-120,frame.getHeight() - 60,100,50);
-         transaction_Panel.add(button);
+         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         transaction_Panel.add(backbutton);
+
+         homebutton = new JButton(new AbstractAction("Home") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, chipRemoved");
+                 start();
+             }
+         });
+         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         homebutton.setBackground(Color.black.darker().darker().darker().darker());
+         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         transaction_Panel.add(homebutton);
+
+         loginbutton = new JButton(new AbstractAction("Login") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (main_Panel,login_Panel);
+                 login_Panel();
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         transaction_Panel.add(loginbutton);
 
          button = new JButton(new AbstractAction("Print receipt") {
              @Override
@@ -1085,16 +1130,19 @@
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
-         button.setForeground(Color.white);
-         button.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 120,250,50);
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2 -90,frame.getHeight()/2 + 100,300,50);
          transaction_Panel.add(button);
 
+
          message_Label = new JLabel("");
-         message_Label.setBounds(frame.getWidth()/2 - 120,frame.getHeight()/2+90,300,25);
+         message_Label.setBounds(frame.getWidth()/2 ,frame.getHeight()/2+ +175,300,25);
          message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         message_Label.setForeground(Color.BLACK);
          transaction_Panel.add(message_Label);
          frame.setVisible(true);
          frame.setVisible(true);
+
 
      }
 
@@ -1105,10 +1153,10 @@
          customWithdraw_panel.setBackground(Color.white);
 
          // fields
-         int briefje20;
-         int briefje50;
-         int briefje100;
-         int aantal;
+         int Note20;
+         int Note50;
+         int Note100;
+         int Number;
 
          // knoppen
          button = new JButton(new AbstractAction("homepagina") {
@@ -1139,7 +1187,7 @@
 
 
 
-         // hierin invullen welk briefje geld
+         // hierin invullen welk Note geld
          JLabel moneyNote = new JLabel("Money Note");
          moneyNote.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2+30,80,25);
          moneyNote.setForeground(Color.lightGray);
@@ -1179,6 +1227,7 @@
          wait(5000);
          return;
      }
+
      protected static void Abrupted()
      {
          frame.removeAll();
@@ -1189,10 +1238,10 @@
      private static void Login(String user, String password)
      {
          /*
-         int aantalPogingen = 3;
+         int NumberPogingen = 3;
 
-        public int aantalpogingen(aantalPogingen){
-        return aantalPogingen;
+        public int Numberpogingen(NumberPogingen){
+        return NumberPogingen;
         }
 
          */
@@ -1208,10 +1257,11 @@
          }
          else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
          {
-             // aantalPogingen--
+             // NumberPogingen--
              message_Label.setForeground(Color.RED.darker().darker());
+             wait(1000);
              message_Label.setText("Login Failed please try again!");
-             // message_label.setText("u heeft nog zoveel pogingen"+aantalPogingen");
+             // message_label.setText("u heeft nog zoveel pogingen"+NumberPogingen");
          }
          else if(ServerCommunication.getBlocked())
          {
@@ -1224,25 +1274,25 @@
 
      private static void increase(int val)
      {
-         if(val == 20 && tempAmountBriefjes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
+         if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
          {
-             tempAmountBriefjes20++;
+             tempAmountNotes20++;
              amount += 20;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 50 && tempAmountBriefjes50 <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
+         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
          {
-             tempAmountBriefjes50++;
+             tempAmountNotes50++;
              amount += 50;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 100 && tempAmountBriefjes100 <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
+         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
          {
-             tempAmountBriefjes100++;
+             tempAmountNotes100++;
              amount += 100;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
@@ -1254,25 +1304,25 @@
 
      private static void decrease(int val)
      {
-         if(val == 20 && tempAmountBriefjes20 >=  0 && amount - 20 >= 0)
+         if(val == 20 && tempAmountNotes20 >=  0 && amount - 20 >= 0)
          {
-             tempAmountBriefjes20--;
+             tempAmountNotes20--;
              amount -= 20;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 50 && tempAmountBriefjes50 >=  0 && amount - 50 >= 0)
+         else if(val == 50 && tempAmountNotes50 >=  0 && amount - 50 >= 0)
          {
-             tempAmountBriefjes50--;
+             tempAmountNotes50--;
              amount -= 50;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 100 && tempAmountBriefjes100 >=  0 && amount - 100 >= 0)
+         else if(val == 100 && tempAmountNotes100 >=  0 && amount - 100 >= 0)
          {
-             tempAmountBriefjes100--;
+             tempAmountNotes100--;
              amount -= 100;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
