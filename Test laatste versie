@@ -1,0 +1,32 @@
+package Bank;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import static java.sql.DriverManager.getConnection;
+
+public class Test{
+    public static void main(String[] args){
+    connect();
+
+    }
+
+      static void connect(){
+        String url = "jdbc:sqlserver://145.24.222.162:22//web?useSSL=false";
+                //"eqod-log";
+        String User= "admin";
+        String password = "Slankbank2020!";
+
+        Connection dbConnection = null;
+
+        try {
+            //Class.forName("org.postgresql.Driver:Slankbank");
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+            dbConnection = getConnection(url, User, password);
+            System.out.println("connection successful via ip address");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
