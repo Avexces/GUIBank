@@ -48,6 +48,8 @@
      private static JButton loginbutton;
      private static JButton backbutton;
 
+     private static String loginkaart;
+
      public class Slankbank extends JFrame {// foto van logo
          private ImageIcon image;
          private JLabel lbl;
@@ -100,8 +102,8 @@
 
              @Override
              public void actionPerformed(ActionEvent e){
-                     Switch(start_Panel, main_Panel);
-                     main_Panel();
+                     Switch(start_Panel, login_Panel);
+                     login_Panel();
                  }
          });
 
@@ -167,7 +169,9 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  //FIXME password = pin_Field.getPassword();
-
+                 loginkaart = user_Text.getText();
+                 String loginwachtwoord = pin_Field.getText();
+                 loginCommunicatie(loginkaart,loginwachtwoord);
 
              }
          });
@@ -255,7 +259,8 @@
          balancetxt_Label.setBackground(new Color (241,227,12));
          main_Panel.add(balancetxt_Label);
 
-         JLabel balance_Label  = new JLabel(balansCommunicatie());
+
+         JLabel balance_Label  = new JLabel(balansCommunicatie(loginkaart));
          balance_Label.setOpaque(true);
          balance_Label.setBounds(frame.getWidth()/2 -100 ,frame.getHeight()/2 -50,300,50);
          balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -263,6 +268,7 @@
          balance_Label.setBackground(Color.darkGray.darker());
          main_Panel.add(balance_Label);
          frame.setVisible(true);
+         System.out.println(balansCommunicatie(loginkaart));
 
          JLabel Withdrawaltxt_Label = new JLabel(" Quick withdraw: ");
          Withdrawaltxt_Label.setOpaque(true);
@@ -340,7 +346,6 @@
 
          frame.setVisible(true);
      }
-
 
 
      private static void Select_Bills(int selectedMoney)
@@ -864,7 +869,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                 increase(20);
+                 //increase(20);
 
              }
          });
@@ -880,7 +885,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                 decrease(20);
+                 //decrease(20);
 
              }
          });
@@ -911,7 +916,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                 increase(50);
+                // increase(50);
 
              }
          });
@@ -927,7 +932,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                 decrease(50);
+              //   decrease(50);
 
              }
          });
@@ -959,7 +964,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                 increase(100);
+                // increase(100);
 
              }
          });
@@ -975,7 +980,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                 decrease(100);
+               //  decrease(100);
 
              }
          });
@@ -1097,35 +1102,91 @@
 
      }
 
-
      /* communicatie met de server */
-     private static void loginCommunicatie(){
+     private static void loginCommunicatie(String loginkaart,String loginwachtwoord ){
+         System.out.println(loginkaart);
+         System.out.println(loginwachtwoord);
         String pincode ="1234";
         String pasnummer = "US-SLBA-02042001";
+        String response ="";
+        String responsePogingen="";
+        int aantal =0;
 
+         URL pogingen = null;
+         URL verzenden = null;
          URL url = null;
+
          try {
-             url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+*+FROM+Account+WHERE+Pincode+%3D+\""+ pincode + "\"+AND+Kaartnummer+%3D+\"" + pasnummer + "\"");
+             url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+*+FROM+Account+WHERE+Pincode+%3D+\""+ loginwachtwoord + "\"+AND+Kaartnummer+%3D+\"" + loginkaart + "\"");
+             pogingen = new URL ("http://145.24.222.162/db_connection.php?query=SELECT+Pogingen+FROM+Account+WHERE+Kaartnummer+%3D+\""+loginkaart+"\"");
          } catch (MalformedURLException e) {
              e.printStackTrace();
+         }
+
+         try (BufferedReader reader = new BufferedReader(new InputStreamReader(pogingen.openStream(), "UTF-8"))) {
+             for (String line; (line = reader.readLine()) != null; ) {
+                 System.out.println(line);
+                 responsePogingen += line;
+
+             }
+             aantal=Integer.parseInt(responsePogingen);
+
+         }
+         catch (Exception E){
+             System.out.println("exceptie e");
          }
 
          try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
              for (String line; (line = reader.readLine()) != null; ) {
                  System.out.println(line);
+                 response +=line;
              }
          }
          catch (Exception E){
              System.out.println("exceptie e");
          }
-     }
+         if (aantal <3){
+             if (response.equalsIgnoreCase("0 results")){
+                 message_Label.setForeground(Color.red);
+                 message_Label.setText("Login failled!");
+                 System.out.println("login failled");
 
-     private static String balansCommunicatie(){
+             try {
+
+                     new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Account+SET+Pogingen+%3D+" + aantal + "+WHERE+Kaartnummer+%3D+\"" + loginkaart + "\"");
+                 } catch (MalformedURLException e) {
+                     e.printStackTrace();
+                 }
+                    aantal++;
+                 message_Label.setText("You have "+(3-aantal)+" tries left");
+                 System.out.println(aantal);
+
+             }
+             else{
+                 message_Label.setForeground(Color.GREEN);
+                 message_Label.setText("Login succesful!");
+                 System.out.println("login succes");
+                 Switch(login_Panel,main_Panel);
+                 main_Panel();
+             }
+
+
+         }
+         else {
+             message_Label.setText("Login failled!");
+             message_Label.setText("card blocked");
+         }
+
+
+
+         }
+
+     private static String balansCommunicatie(String loginkaart){
          String balans = "";
          String pasnummer = "US-SLBA-02042001";
          URL url = null;
          try {
-             url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+Balans+FROM+Account+WHERE+Kaartnummer+%3D+\"" + pasnummer + "\"");
+             url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+Balans+FROM+Account+WHERE+Kaartnummer+%3D+\"" + loginkaart + "\"");
          } catch (MalformedURLException e) {
              e.printStackTrace();
          }
@@ -1133,8 +1194,7 @@
          try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
              for (String line; (line = reader.readLine()) != null; ) {
                  System.out.println(line);
-                 balans = line;
-
+                 balans += line;
              }
          }
          catch (Exception E){
@@ -1143,6 +1203,7 @@
          return balans;
 
      }
+
      private static String withdraw(){
          String balans = "";
          String pasnummer = "US-SLBA-02042001";
@@ -1196,7 +1257,7 @@
          System.out.println("gui is gestopt");
      }
 
-
+/*
      private static void increase(int val)
      {
          if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
@@ -1257,4 +1318,30 @@
          else{return;}
      }
 
+     /*private static void Login(//Usertext en passsword van gebruiker, String pinl)
+     {
+         if(user.equals("User") && password.equals("1234") && !ServerCommunication.getBlocked())
+         {
+             message_Label.setForeground(Color.GREEN);
+             message_Label.setText("Login succesful!");
+             main_Panel();
+             Switch(login_Panel, main_Panel);
+
+         }
+         else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
+         {
+             // aantalPogingen--
+             message_Label.setForeground(Color.RED.darker().darker());
+             message_Label.setText("Login Failed please try again!");
+             // message_label.setText("u heeft nog zoveel pogingen"+aantalPogingen");
+         }
+         else if(ServerCommunication.getBlocked())
+         {
+             message_Label.setForeground(Color.RED);
+             message_Label.setText("Account locked please go to your bank!");
+         }
+         return;
+     }
+
+      */
  }
