@@ -9,8 +9,6 @@
  package Bank;
 
 /* libraries toevoegen */
-
- import javax.imageio.ImageIO;
  import javax.swing.*;
  import java.awt.*;
  import java.awt.event.ActionEvent;
@@ -22,7 +20,8 @@
  import java.io.*;
 
  public class GUI {
-     private static JPanel start_Panel = new JPanel(); // maakt een "pagina " aan
+     // maakt een "pagina " aan
+     private static JPanel start_Panel = new JPanel();
      private static JPanel login_Panel = new JPanel();
      private static JPanel main_Panel = new JPanel();
      private static JPanel select_Panel = new JPanel();
@@ -36,10 +35,8 @@
      private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
      private static JLabel message_Label; //
      private static JTextField balans;
-     private static int tempAmountNotes20 =0;
-     private static int tempAmountNotes50 = 0;
-     private static int tempAmountNotes100 = 0;
      private static int amount = 0;
+     private static int aantal= 0;
 
      private static JButton button; // maakt een knop aan
      private static JButton withdrawbutton;
@@ -80,7 +77,6 @@
          frame.add(start_Panel);
          start_Panel.revalidate();
          start_Panel.repaint();
-         System.out.println("de main wordt geopend");
          System.out.println(" De GUI is opgestart");
          start_Panel.removeAll();
          start_Panel.setSize(frame.getSize());
@@ -88,29 +84,28 @@
 
          //ln.setVisible(true);
 
-         start_Panel.setBackground(Color.white); // achtergrond
-         start_Panel.setForeground(Color.black); // voorgrond
+             start_Panel.setBackground(Color.white); // achtergrond
+             start_Panel.setForeground(Color.black); // voorgrond
 
-         // begin menu van de gui vn de bank
-         JLabel Welkomtekst = new JLabel("Welcome to Slankbank");
-         Welkomtekst.setBounds(frame.getWidth()/3,frame.getHeight()/2-200,1000,100);
-         Welkomtekst.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-         Welkomtekst.setForeground(Color.black);
-         start_Panel.add(Welkomtekst);
+                  // begin menu van de gui vn de bank
+                 JLabel welkom = new JLabel("Welcome to Slankbank");
+                 welkom.setBounds(frame.getWidth()/2+575,frame.getHeight()/2+300,1000,80);
+                 welkom.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+                 welkom.setForeground(Color.black);
+                 start_Panel.add(welkom);
 
-         button = new JButton(new AbstractAction("Login") {
+                     // ga je naar de login pagina
+                     button = new JButton(new AbstractAction("Login") {
 
-             @Override
-             public void actionPerformed(ActionEvent e){
-                     Switch(start_Panel, login_Panel);
-                     login_Panel();
-                 }
-         });
-
-         button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,200,85);
-         button.setForeground(new Color(192,27,28));
-
-         start_Panel.add(button);
+                         @Override
+                         public void actionPerformed(ActionEvent e){
+                                 Switch(start_Panel, login_Panel);
+                                 login_Panel();
+                             }
+                     });
+                     button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,200,85);
+                     button.setForeground(new Color(192,27,28));
+                     start_Panel.add(button);
 
          button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
              @Override
@@ -120,12 +115,6 @@
          });
          button.setBounds(0,0,80,25);
          start_Panel.add(button);
-
-         message_Label = new JLabel("");
-         message_Label.setBounds(10,110,80 ,25);
-         login_Panel.add(message_Label);
-         frame.setVisible(true);
-         //main_Panel();
 
      }
 
@@ -137,47 +126,47 @@
          login_Panel.setLayout(null);
          login_Panel.setBackground(Color.white);
 
-         /*UserName Label*/
-         JLabel label = new JLabel("Username");
-         label.setBounds(frame.getWidth()/2 - 200,frame.getHeight()/2,200,25);
-         label.setForeground(new Color (192,27,28));
-         label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
-         login_Panel.add(label);
+             /*UserName Label*/
+             JLabel label = new JLabel("Username");
+             label.setBounds(frame.getWidth()/2 - 200,frame.getHeight()/2,200,25);
+             label.setForeground(new Color (192,27,28));
+             label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
+             login_Panel.add(label);
+             //UserName veld
+             user_Text = new JTextField();
+             user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,200 ,30);
+             user_Text.setFont(new Font(" Arial", Font.PLAIN,18));
+             login_Panel.add(user_Text);
 
-         //UserName veld
-         user_Text = new JTextField();
-         user_Text.setBounds(frame.getWidth()/2,frame.getHeight()/2/*20*/,200 ,30);
-         user_Text.setFont(new Font(" Arial", Font.PLAIN,18));
-         login_Panel.add(user_Text);
+             //Pincode text
+             JLabel pin_Label = new JLabel("Password");
+             pin_Label.setBounds(frame.getWidth()/2 -200,frame.getHeight()/2+30,200,25);
+             pin_Label.setForeground(new Color (192,27,28));
+             pin_Label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
+             login_Panel.add(pin_Label);
+             /*Adds an pin field to the LoginPanel*/
+             pin_Field = new JPasswordField();
+             pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,200 ,30);
+             pin_Field.setFont(new Font("Arial",Font.PLAIN,18));
+             login_Panel.add(pin_Field);
 
-         //Pincode text
-         JLabel pin_Label = new JLabel("Password");
-         pin_Label.setBounds(frame.getWidth()/2 -200,frame.getHeight()/2+30,200,25);
-         pin_Label.setForeground(new Color (192,27,28));
-         pin_Label.setFont(new Font("Didact Gothic", Font.PLAIN,22));
-         login_Panel.add(pin_Label);
+             /*Login button*/
+             button = new JButton(/*"Login"*/ new AbstractAction("Login") {
+                 @Override
+                 public void actionPerformed(ActionEvent e) {
+                     //FIXME password = pin_Field.getPassword();
+                     loginkaart = user_Text.getText();
+                     String loginwachtwoord = pin_Field.getText();
+                     // oproepen de functie om te kunnen praten met de database
+                     loginCommunicatie(loginkaart,loginwachtwoord);
 
-         /*Adds an pin field to the LoginPanel*/
-         pin_Field = new JPasswordField();
-         pin_Field.setBounds(frame.getWidth()/2,frame.getHeight()/2+30,200 ,30);
-         pin_Field.setFont(new Font("Arial",Font.PLAIN,18));
-         login_Panel.add(pin_Field);
+                 }
+             });
+             button.setBounds(frame.getWidth()/2-75,frame.getHeight()/2+100,250,45);
+             login_Panel.add(button);
 
 
-         /*Login button*/
-         button = new JButton(/*"Login"*/ new AbstractAction("Login") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 //FIXME password = pin_Field.getPassword();
-                 loginkaart = user_Text.getText();
-                 String loginwachtwoord = pin_Field.getText();
-                 loginCommunicatie(loginkaart,loginwachtwoord);
-
-             }
-         });
-         button.setBounds(frame.getWidth()/2-75,frame.getHeight()/2+100,250,45);
-         login_Panel.add(button);
-
+         /* standaard menu rechtsonder in het scherm */
          /*Exit button*/
          button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
              @Override
@@ -213,6 +202,8 @@
          main_Panel.setLayout(null);
          main_Panel.setBackground(Color.white);
 
+         // menu dat recht onder staat
+         // terugknop
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -226,6 +217,7 @@
          backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
          main_Panel.add(backbutton);
 
+         //home knopw
          homebutton = new JButton(new AbstractAction("Home") {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -238,6 +230,7 @@
          homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
          main_Panel.add(homebutton);
 
+         // login knop ga je terug naar login
          loginbutton = new JButton(new AbstractAction("Login") {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -250,7 +243,7 @@
          loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
          main_Panel.add(loginbutton);
 
-
+        // textfield met het baland
          JLabel balancetxt_Label = new JLabel(" Balance: ");
          balancetxt_Label.setOpaque(true);
          balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
@@ -259,8 +252,8 @@
          balancetxt_Label.setBackground(new Color (241,227,12));
          main_Panel.add(balancetxt_Label);
 
-
-         JLabel balance_Label  = new JLabel(balansCommunicatie(loginkaart));
+        // laat je balans displayen uit de database
+         JLabel balance_Label  = new JLabel("$:  "+balansCommunicatie(loginkaart));
          balance_Label.setOpaque(true);
          balance_Label.setBounds(frame.getWidth()/2 -100 ,frame.getHeight()/2 -50,300,50);
          balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -270,6 +263,7 @@
          frame.setVisible(true);
          System.out.println(balansCommunicatie(loginkaart));
 
+         // bovenste kopje voor het menu
          JLabel Withdrawaltxt_Label = new JLabel(" Quick withdraw: ");
          Withdrawaltxt_Label.setOpaque(true);
          Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
@@ -331,9 +325,9 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-                 SelectCustom();
+                 //SelectCustom();
                  Switch(main_Panel, select_CPanel);
-                 SelectCustom();
+                 //SelectCustom();
 
              }
          });
@@ -347,7 +341,7 @@
          frame.setVisible(true);
      }
 
-
+     //menu om je briefjes te kiezen
      private static void Select_Bills(int selectedMoney)
      {
         select_Panel.setLayout(null);
@@ -441,12 +435,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     Switch(select_Panel, transaction_Panel);
-                     try {
-                         transaction_Panel(70,1,1,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
+                         withdraw(70);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -454,8 +443,6 @@
              withdrawbutton.setForeground(new Color (192,27,28));
              withdrawbutton.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
-
-
 
              frame.setVisible(true);
          }
@@ -508,14 +495,8 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     try {
-                         transaction_Panel(100,5,0,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
-                 }
+                      withdraw(100);
+                    }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              withdrawbutton.setBackground(new Color(241,227,12));
@@ -553,13 +534,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     try {
-                         transaction_Panel(100,0,2,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
+                     withdraw(100);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -598,13 +573,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     try {
-                         transaction_Panel(100,0,0,1);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
+                     withdraw(100);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -612,10 +581,6 @@
              withdrawbutton.setForeground(new Color (192,27,28));
              withdrawbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight()/2 + 175,300,50);
              select_Panel.add(withdrawbutton);
-
-
-
-
 
              frame.setVisible(true);
          }
@@ -667,13 +632,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     try {
-                         transaction_Panel(150,0,3,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
+                     withdraw(150);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -712,13 +671,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     try {
-                         transaction_Panel(150,5,2,0);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
+                     withdraw(150);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -751,20 +704,12 @@
              Note100_Label.setForeground(new Color (192,27,28));
              Note100_Label.setBackground(new Color(241,227,12));
              select_Panel.add(Note100_Label);
-//
 
              withdrawbutton = new JButton(new AbstractAction(" Choose option ") {
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                    // ServerCommunication.Withdraw(50);
-                     try {
-                         transaction_Panel(150,0,1,1);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
-                     Switch(select_Panel, transaction_Panel);
-
+                     withdraw(150);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -780,7 +725,8 @@
          frame.setVisible(true);
      }
 
-     private static void SelectCustom()
+     // kan je een aangepast bedrag kiezen
+     /*private static void SelectCustom()
      {
          select_Panel.removeAll();
          select_CPanel.removeAll();
@@ -1013,6 +959,8 @@
              frame.setVisible(true);
      }
 
+      */
+
 
      private static void transaction_Panel(int a, int b20, int b50, int b100) throws InterruptedException {
          transaction_Panel.setLayout(null);
@@ -1110,12 +1058,12 @@
         String pasnummer = "US-SLBA-02042001";
         String response ="";
         String responsePogingen="";
-        int aantal =0;
 
          URL pogingen = null;
          URL verzenden = null;
          URL url = null;
 
+         String inloggevens = "";
          try {
              url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+*+FROM+Account+WHERE+Pincode+%3D+\""+ loginwachtwoord + "\"+AND+Kaartnummer+%3D+\"" + loginkaart + "\"");
              pogingen = new URL ("http://145.24.222.162/db_connection.php?query=SELECT+Pogingen+FROM+Account+WHERE+Kaartnummer+%3D+\""+loginkaart+"\"");
@@ -1150,17 +1098,26 @@
                  message_Label.setForeground(Color.red);
                  message_Label.setText("Login failled!");
                  System.out.println("login failled");
+                 aantal++;
+                     try {
+                         System.out.println("");
+                         String versturen= "http://145.24.222.162/db_connection.php?query=UPDATE+Account+SET+Pogingen+%3D+"+aantal+"+WHERE+Kaartnummer+%3D+\"" +loginkaart+"\"";
+                             url = new URL(versturen);
+                         System.out.println(versturen);
+                     } catch (MalformedURLException e) {
+                             e.printStackTrace();
+                         }
+                         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                             for (String line; (line = reader.readLine()) != null; ) {
+                                 System.out.println(line);
+                             }
+                         } catch (Exception E){
+                             E.printStackTrace();
+                         }
+                     String resultaatstr = Integer.toString(3-aantal);
 
-             try {
-
-                     new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Account+SET+Pogingen+%3D+" + aantal + "+WHERE+Kaartnummer+%3D+\"" + loginkaart + "\"");
-                 } catch (MalformedURLException e) {
-                     e.printStackTrace();
-                 }
-                    aantal++;
-                 message_Label.setText("You have "+(3-aantal)+" tries left");
-                 System.out.println(aantal);
-
+                 message_Label.setText("You have "+resultaatstr+" tries left");
+                // System.out.println(aantal);
              }
              else{
                  message_Label.setForeground(Color.GREEN);
@@ -1168,6 +1125,21 @@
                  System.out.println("login succes");
                  Switch(login_Panel,main_Panel);
                  main_Panel();
+                 try {
+                     System.out.println("");
+                     String versturen= "http://145.24.222.162/db_connection.php?query=UPDATE+Account+SET+Pogingen+%3D+"+0+"+WHERE+Kaartnummer+%3D+\"" +loginkaart+"\"";
+                     url = new URL(versturen);
+                     System.out.println(versturen);
+                 } catch (MalformedURLException e) {
+                     e.printStackTrace();
+                 }
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                     for (String line; (line = reader.readLine()) != null; ) {
+                         System.out.println(line);
+                     }
+                 } catch (Exception E){
+                     E.printStackTrace();
+                 }
              }
 
 
@@ -1181,7 +1153,7 @@
 
          }
 
-     private static String balansCommunicatie(String loginkaart){
+     private static int balansCommunicatie(String loginkaart){
          String balans = "";
          String pasnummer = "US-SLBA-02042001";
          URL url = null;
@@ -1197,34 +1169,66 @@
                  balans += line;
              }
          }
+
          catch (Exception E){
              System.out.println("exceptie e");
          }
-         return balans;
+
+         return Integer.parseInt(balans);
 
      }
 
-     private static String withdraw(){
-         String balans = "";
-         String pasnummer = "US-SLBA-02042001";
-         URL url = null;
-         try {
-             url = new URL("http://145.24.222.162/db_connection.php?query=SELECT+Balans+FROM+Account+WHERE+Kaartnummer+%3D+\"" + pasnummer + "\"");
-         } catch (MalformedURLException e) {
-             e.printStackTrace();
-         }
+     private static void withdraw(int bedrag){
+         int balans = balansCommunicatie(loginkaart);
+         URL briefje20 = null;
+         URL briefje50 = null;
+         URL briefje100 = null;
 
-         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-             for (String line; (line = reader.readLine()) != null; ) {
-                 System.out.println(line);
-                 balans = line;
 
+         if (balans >= bedrag ) {
+             try {
+                 briefje20 = new URL("http://145.24.222.162/db_connection.php?query=SELECT+aantal+FROM+%60Biljetten%60+WHERE+soort+%3D+20");
+                 briefje50 = new URL("http://145.24.222.162/db_connection.php?query=SELECT+aantal+FROM+%60Biljetten%60+WHERE+soort+%3D+50");
+                 briefje100 = new URL("http://145.24.222.162/db_connection.php?query=SELECT+aantal+FROM+%60Biljetten%60+WHERE+soort+%3D+100");
+             } catch (MalformedURLException a) {
+                 a.printStackTrace();
              }
+
+             // 20
+             try (BufferedReader reader = new BufferedReader(new InputStreamReader(briefje20.openStream(), "UTF-8"))) {
+                 for (String line; (line = reader.readLine()) != null; ) {
+                     System.out.println(line);
+                 }
+             } catch (Exception E) {
+                 System.out.println("exceptie e");
+             }
+             //50
+             try (BufferedReader reader = new BufferedReader(new InputStreamReader(briefje50.openStream(), "UTF-8"))) {
+                 for (String line; (line = reader.readLine()) != null; ) {
+                     System.out.println(line);
+                 }
+             } catch (Exception E) {
+                 System.out.println("exceptie e");
+             }
+             //100
+             try (BufferedReader reader = new BufferedReader(new InputStreamReader(briefje100.openStream(), "UTF-8"))) {
+                 for (String line; (line = reader.readLine()) != null; ) {
+                     System.out.println(line);
+                 }
+             } catch (Exception E) {
+                 System.out.println("exceptie e");
+             }
+
+
+
          }
-         catch (Exception E){
-             System.out.println("exceptie e");
+         else if (balans <= bedrag){
+              message_Label  = new  JLabel("Your balance is too low");
+              message_Label.setBounds(frame.getWidth()/2,frame.getHeight()/2-900,200,50);
+              message_Label.setForeground(new Color(192,27,28));
+              message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+              select_Panel.add(message_Label);
          }
-         return balans;
 
      }
 
@@ -1257,8 +1261,8 @@
          System.out.println("gui is gestopt");
      }
 
-/*
-     private static void increase(int val)
+
+    /* private static void increase(int val)
      {
          if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
          {
@@ -1317,31 +1321,5 @@
 
          else{return;}
      }
-
-     /*private static void Login(//Usertext en passsword van gebruiker, String pinl)
-     {
-         if(user.equals("User") && password.equals("1234") && !ServerCommunication.getBlocked())
-         {
-             message_Label.setForeground(Color.GREEN);
-             message_Label.setText("Login succesful!");
-             main_Panel();
-             Switch(login_Panel, main_Panel);
-
-         }
-         else if(!user.equals("User") || !password.equals("1234") && !ServerCommunication.getBlocked())
-         {
-             // aantalPogingen--
-             message_Label.setForeground(Color.RED.darker().darker());
-             message_Label.setText("Login Failed please try again!");
-             // message_label.setText("u heeft nog zoveel pogingen"+aantalPogingen");
-         }
-         else if(ServerCommunication.getBlocked())
-         {
-             message_Label.setForeground(Color.RED);
-             message_Label.setText("Account locked please go to your bank!");
-         }
-         return;
-     }
-
-      */
+*/
  }
