@@ -8,7 +8,7 @@
   */
  package Bank;
 
-/* libraries toevoegen */
+ /* libraries toevoegen */
  import javax.swing.*;
  import java.awt.*;
  import java.awt.event.ActionEvent;
@@ -880,6 +880,12 @@
              withdrawbutton.setBounds(frame.getWidth() / 2 + 325, frame.getHeight() / 2 + 200, 250, 50);
              select_Panel.add(withdrawbutton);
 
+             message_Label = new JLabel("");
+             message_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 +400, 300, 25);
+             message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             message_Label.setForeground(new Color(191, 26, 28));
+             select_Panel.add(message_Label);
+             frame.setVisible(true);
 
              frame.setVisible(true);
 
@@ -1332,6 +1338,8 @@
                  String resultaatstr = Integer.toString(3 - aantal);
 
                  message_Label.setText("You have " + resultaatstr + " tries left");
+                 message_Label.setBounds(frame.getWidth()/2-50,frame.getHeight()/2+250,200,50);
+
                  // System.out.println(aantal);
              } else {
                  message_Label.setForeground(Color.GREEN);
@@ -1360,6 +1368,7 @@
          } else {
              message_Label.setText("Login failled!");
              message_Label.setText("card blocked");
+             message_Label.setBounds(frame.getWidth()/2-10,frame.getHeight()/2+250,200,50);
          }
 
 
@@ -1862,20 +1871,14 @@
                      stuurDataBase(saldoDatabalans150);
                  }
              } else {
-                 message_Label.setText("Were out of bill \n Please contact Slankbank");
-                 message_Label.setOpaque(true);
-                 message_Label.setForeground(Color.lightGray);
-                 message_Label.setBounds(frame.getWidth() / 2 - 350, frame.getHeight() / 2 - 350, 100, 80);
-                 select_Panel.add(message_Label);
-                 System.out.println("biljetten op");
+                 message_Label.setText("Were out of bill \n Please contact Slankbank\n your balance is the same\n Please press any of the button at the bottom right");
+
              }
 
          } else if (balans <= bedrag) {
              message_Label.setText("Balance to low ");
-             message_Label.setBounds(frame.getWidth() / 2, frame.getHeight() / 2 , 200, 50);
-             message_Label.setForeground(new Color(192, 27, 28));
-             message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             select_Panel.add(message_Label);
+             message_Label.setForeground(Color.red);
+             message_Label.setBounds(frame.getWidth()/2,frame.getHeight()/2+300,250,100);
          }
 
      }
