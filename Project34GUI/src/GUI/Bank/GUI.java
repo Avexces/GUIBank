@@ -450,7 +450,7 @@
              select_Panel.add(withdrawbutton);
 
              //2de optie
-             JLabel biljet10 = new JLabel(" 10$ Note       Number: 2");
+             JLabel biljet10 = new JLabel(" 10$ Note       Number: 0");
              biljet10.setOpaque(true);
              biljet10.setBounds(frame.getWidth() / 2 + 50, frame.getHeight() / 2, 300, 50);
              biljet10.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -458,7 +458,7 @@
              biljet10.setBackground(new Color(241, 227, 12));
              select_Panel.add(biljet10);
 
-             JLabel biljet20 = new JLabel(" 20$ Note       Number: 0");
+             JLabel biljet20 = new JLabel(" 20$ Note       Number: 1");
              biljet20.setOpaque(true);
              biljet20.setBounds(frame.getWidth() / 2 + 50, frame.getHeight() / 2 + 50, 300, 50);
              biljet20.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -730,7 +730,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     withdraw(100, 3, 2, 1, 0);
+                     withdraw(150, 3, 2, 1, 0);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -756,7 +756,7 @@
              Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
              select_Panel.add(Withdrawaltxt_Label);
 
-             Note50_Label = new JLabel(" 50$ Note       Number: 1");
+             Note50_Label = new JLabel(" 50$ Note       Number: 2");
              Note50_Label.setOpaque(true);
              Note50_Label.setBounds(frame.getWidth() / 2 - 175, frame.getHeight() / 2 + 100, 250, 50);
              Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -777,7 +777,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     withdraw(100, 1, 2, 1, 0);
+                     withdraw(150, 1, 2, 2, 0);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -825,7 +825,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     withdraw(100, 1, 2, 0, 1);
+                     withdraw(150, 1, 2, 0, 1);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -871,7 +871,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Amount option chosen");
-                     withdraw(100, 0, 0, 1, 1);
+                     withdraw(150, 0, 0, 1, 1);
                  }
              });
              withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -890,8 +890,8 @@
      }
 
      // kan je een aangepast bedrag kiezen
-     // *private static void SelectCustom()
-    /* {
+    /* /private static void SelectCustom()
+     {
          select_Panel.removeAll();
          select_CPanel.removeAll();
          customWithdraw_panel.removeAll();
@@ -941,7 +941,7 @@
              //TODO weergeef 50 en 20 Notes
 
 
-             JLabel balancetxt_Label = new JLabel("Total amount: " +amount);
+             JLabel balancetxt_Label = new JLabel("Total amount: " +);
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -966,7 +966,7 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Withdrawaltxt_Label);
 
-         JLabel Withdrawalatxt_Label = new JLabel("     " + tempAmountNotes20);
+         JLabel Withdrawalatxt_Label = new JLabel("     " + );
          Withdrawalatxt_Label.setOpaque(true);
          Withdrawalatxt_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2,300,50);
          Withdrawalatxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -978,8 +978,7 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
-
-                 //increase(20);
+                 increase(20);
 
              }
          });
@@ -995,7 +994,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                 //decrease(20);
+                 decrease(20);
 
              }
          });
@@ -1013,7 +1012,7 @@
              Note50_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Note50_Label);
 
-         JLabel Note50a_Label = new JLabel("     " + tempAmountNotes50);
+         JLabel Note50a_Label = new JLabel("     " + );
          Note50a_Label.setOpaque(true);
          Note50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 50,300,50);
          Note50a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1026,7 +1025,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                // increase(50);
+                 increase(50);
 
              }
          });
@@ -1042,7 +1041,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-              //   decrease(50);
+                decrease(50);
 
              }
          });
@@ -1061,7 +1060,7 @@
              Note100_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Note100_Label);
 
-         JLabel Note100a_Label = new JLabel("     " + tempAmountNotes100);
+         JLabel Note100a_Label = new JLabel("     " + );
          Note100a_Label.setOpaque(true);
          Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
          Note100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1074,7 +1073,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                // increase(100);
+                 increase(100);
 
              }
          });
@@ -1090,7 +1089,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-               //  decrease(100);
+                decrease(100);
 
              }
          });
@@ -1104,11 +1103,7 @@
                  @Override
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
-                     try {
-                         transaction_Panel(amount,tempAmountNotes20,tempAmountNotes50,tempAmountNotes100);
-                     } catch (InterruptedException ex) {
-                         ex.printStackTrace();
-                     }
+
                      Switch(select_CPanel, transaction_Panel);
 
                  }
@@ -1121,9 +1116,69 @@
 
 
              frame.setVisible(true);
+     } */
+     // funcite voor custom pannel
+  /*   private static void increase(int val)
+     {
+         if(val == 20 &&  <= 5 &)
+         {
+
+             amount += 20;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 50 &&  <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
+         {
+
+             amount += 50;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 100 &&  <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
+         {
+
+             amount += 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+
+         else{return;}
+     }
+*/
+   /*  private static void decrease(int val)
+     {
+         if(val == 20 &&  >=  0 && amount - 20 >= 0)
+         {
+
+             amount -= 20;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 50 &&  >=  0 && amount - 50 >= 0)
+         {
+
+             amount -= 50;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 100 &&  >=  0 && amount - 100 >= 0)
+         {
+
+             amount -= 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+
+         else{return;}
      }
 
-      */
+*/
 
 
      private static void transaction_Panel(int a, int b20, int b50, int b100) throws InterruptedException {
@@ -1210,6 +1265,7 @@
          frame.setVisible(true);
 
      }
+
 
      /* communicatie met de server */
      private static void loginCommunicatie(String loginkaart, String loginwachtwoord) {
@@ -1354,7 +1410,7 @@
          String updaten;
 
 
-         if (balans >= bedrag) {
+         if (balans >= bedrag) { // kijken of er genoeg balans is
              System.out.println("uw balans is goed");
              try {
                  briefje10 = new URL("http://145.24.222.162/db_connection.php?query=SELECT+Aantal+FROM+%60Biljetten%60+WHERE+Soort+%3D10");
@@ -1412,93 +1468,419 @@
              int aantalhonderd = Integer.parseInt(aantalbriefjehonderd);
 
              if (bedrag == 70) {
+                 int check = 0;
                  System.out.println("70 geselecteerd");
-                 if (brief10 == 2) {
+                 if (brief10 == 2 && aantaltien - 2 > 0 && aantalvijftig - 1 > 0) {
                      // arduino 2 briefje van 10
                      // arduino 1 briefje van 5
                      System.out.println("we gaan nu verzenden");
-                     aantaltien -=2;
-                     aantalvijftig -=1;
+                     int a = 1;
+                     int tienver = aantaltien - 2;
+                     int vijver = aantalvijftig - a;
+
+                     String nieuwaantal10 = String.valueOf(tienver);
+                     String nieuwaantal50 = String.valueOf(vijver);
+                     check++;
+
                      try {
-                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+aantal+%3D");
-                         geld50 = new URL("");
-                     } catch (MalformedURLException a) {
-                         a.printStackTrace();
+                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
                      }
-                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
                          for (String line; (line = reader.readLine()) != null; ) {
                              System.out.println(line);
                          }
                      } catch (Exception E) {
                          E.printStackTrace();
                      }
-                 } else if (brief20 == 1) {
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
 
+                     }
+
+
+                 } else if (brief20 == 1 && aantaltwintig - 1 > 0 && aantalvijftig - 1 > 0) {
+                     System.out.println("we gaan nu verzenden");
+                     int a = 1;
+                     int twinver = aantaltwintig - a;
+                     int vijver = aantalvijftig - a;
+
+                     String nieuwaantal20 = String.valueOf(twinver);
+                     String nieuwaantal50 = String.valueOf(vijver);
+
+                     try {
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     a++;
                  }
-                 nieuwSaldo = balans - 70;
-                 String saldoDatabalans70 = String.valueOf(nieuwSaldo);
-                 stuurDataBase(saldoDatabalans70);
+                 if (check > 0) {
+                     nieuwSaldo = balans - 70;
+                     String saldoDatabalans70 = String.valueOf(nieuwSaldo);
+                     stuurDataBase(saldoDatabalans70);
+                 }
+
 
              }
+
              if (bedrag == 100) {
+                 int check = 0;
                  System.out.println("100 geselecteerd");
-                 if (brief10 == 1) {
+                 if (brief20 == 5 && aantaltwintig - 5 > 0) {
                      // arduino 2 briefje van 10
                      // arduino 1 briefje van 5
                      System.out.println("we gaan nu verzenden");
+                     int a = 5;
+                     int twinver = aantaltwintig - a;
+
+                     String nieuwaantal20 = String.valueOf(twinver);
+
+                     check++;
+
                      try {
-                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+aantal+%3D");
-                         geld50 = new URL("");
-                     } catch (MalformedURLException a) {
-                         a.printStackTrace();
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
                      }
-                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
                          for (String line; (line = reader.readLine()) != null; ) {
                              System.out.println(line);
                          }
                      } catch (Exception E) {
                          E.printStackTrace();
                      }
-                 } else if (brief20 == 1) {
+                 } else if (brief50 == 2 && aantalvijftig - 2 > 0) {
 
+                     // arduino 2 briefje van 10
+                     // arduino 1 briefje van 5
+                     System.out.println("we gaan nu verzenden");
+                     int a = 2;
+                     int vijfer = aantalvijftig - a;
+                     System.out.println("hoi");
+
+                     String nieuwaantal50 = String.valueOf(vijfer);
+                     check++;
+                     try {
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+
+                 } else if (brief100 == 1 && aantalhonderd - 1 > 0) {
+                     // arduino 2 briefje van 10
+                     // arduino 1 briefje van 5
+                     System.out.println("we gaan nu verzenden");
+                     int a = 1;
+                     int honver = aantalhonderd - a;
+                     check++;
+                     String nieuwaantal100 = String.valueOf(honver);
+
+                     try {
+                         geld100 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal100 + "\"+WHERE+Soort+%3D+100");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld100.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                 } else if (brief10 == 1 && aantaltien - 1 > 0 && aantaltwintig - 5 > 0 && aantalhonderd - 1 > 0) {
+
+                     // arduino 2 briefje van 10
+                     // arduino 1 briefje van 5
+                     System.out.println("we gaan nu verzenden");
+                     int a = 5;
+                     int b = 1;
+                     int tienver = aantaltien - b;
+                     int twinver = aantaltwintig - a;
+                     int honver = aantalhonderd - b;
+
+                     String nieuwaantal10 = String.valueOf(tienver);
+                     String nieuwaantal20 = String.valueOf(twinver);
+                     String nieuwaantal100 = String.valueOf(honver);
+
+                     check++;
+
+                     try {
+                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         geld100 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal100 + "\"+WHERE+Soort+%3D+100");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException j) {
+                         j.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld100.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
                  }
-                 nieuwSaldo = balans - 100;
-                 String saldoDatabalans70 = String.valueOf(nieuwSaldo);
-                 stuurDataBase(saldoDatabalans70);
-
+                 if (check > 0) {
+                     nieuwSaldo = balans - 100;
+                     String saldoDatabalans100 = String.valueOf(nieuwSaldo);
+                     stuurDataBase(saldoDatabalans100);
+                 }
              }
-
              if (bedrag == 150) {
-                 System.out.println("70 geselecteerd");
-                 if (brief10 == 1) {
+                 int check = 0;
+                 // mogelijkheid 1
+                 System.out.println("150 geselecteerd");
+                 if (brief10 == 3 && aantaltien - 3 > 0 && aantaltwintig - 1 > 0 && aantalvijftig - 2 > 0) {
                      // arduino 2 briefje van 10
                      // arduino 1 briefje van 5
-                     System.out.println("we gaan nu verzenden");
+                     int a = 3;
+                     int b = 1;
+                     int c = 2;
+                     int tienver = aantaltien - a;
+                     int twinver = aantaltwintig - b;
+                     int vijfer = aantalvijftig - c;
+
+                     String nieuwaantal10 = String.valueOf(tienver);
+                     String nieuwaantal20 = String.valueOf(twinver);
+                     String nieuwaantal50 = String.valueOf(vijfer);
+                     System.out.println("interger zijn string ");
+
+                     check++;
+
                      try {
-                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+aantal+%3D");
-                         geld50 = new URL("");
-                     } catch (MalformedURLException a) {
-                         a.printStackTrace();
+                         System.out.println("we gaan nu querys versturen");
+                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException p) {
+                         p.printStackTrace();
                      }
-                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
                          for (String line; (line = reader.readLine()) != null; ) {
                              System.out.println(line);
                          }
                      } catch (Exception E) {
                          E.printStackTrace();
                      }
-                 } else if (brief20 == 1) {
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                 }
+                 // mogelijkheid 2
+                 else if (brief50 == 2 && aantaltien - 1 > 0 && aantaltwintig - 2 > 0 && aantalvijftig - 2 > 0) {
+                     // arduino 2 briefje van 10
+                     // arduino 1 briefje van 5
+                     System.out.println("we gaan nu verzenden");
+                     int a = 1;
+                     int b = 2;
+                     int tienver = aantaltien - a;
+                     int twinver = aantaltwintig - b;
+                     int vijver = aantalvijftig - b;
+
+                     String nieuwaantal10 = String.valueOf(tienver);
+                     String nieuwaantal20 = String.valueOf(twinver);
+                     String nieuwaantal50 = String.valueOf(vijver);
+                     check++;
+                     try {
+                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException L) {
+                         L.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                 }
+                 // mogelijkheid 3
+                 else if (brief20 == 2 && aantaltien - 1 > 0 && aantaltwintig - 2 > 0 && aantalhonderd - 1 > 0) {
+                     int a = 1;
+                     int b = 2;
+                     int tiever = aantaltien - a;
+                     int twiever = aantaltwintig - b;
+                     int honver = aantalhonderd - a;
+                     check++;
+                     String nieuwaantal10 = String.valueOf(tiever);
+                     String nieuwaantal20 = String.valueOf(twiever);
+                     String nieuwaantal100 = String.valueOf(honver);
+
+                     try {
+                         geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                         geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                         geld100 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal100 + "\"+WHERE+Soort+%3D+100");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException q) {
+                         q.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld100.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
 
                  }
-                 nieuwSaldo = balans - 150;
-                 String saldoDatabalans70 = String.valueOf(nieuwSaldo);
-                 stuurDataBase(saldoDatabalans70);
+                 // mogelijkheid4
+                 else if (brief100 == 1 && aantalhonderd - 1 > 0 && aantalvijftig - 1 > 0) {
+                     int a = 1;
+                     int hover = aantalhonderd - a;
+                     int vijver = aantalvijftig - a;
 
+                     String nieuwaantal100 = String.valueOf(hover);
+                     String nieuwaantal50 = String.valueOf(vijver);
+                     check++;
+                     try {
+                         geld100 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal100 + "\"+WHERE+Soort+%3D+100");
+                         geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                         System.out.println("1briefje minder");
+
+                     } catch (MalformedURLException b) {
+                         b.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld100.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                         for (String line; (line = reader.readLine()) != null; ) {
+                             System.out.println(line);
+                         }
+                     } catch (Exception E) {
+                         E.printStackTrace();
+                     }
+
+                 }
+                 if (check > 0) {
+                     nieuwSaldo = balans - 150;
+                     String saldoDatabalans150 = String.valueOf(nieuwSaldo);
+                     stuurDataBase(saldoDatabalans150);
+                 }
+             } else {
+                 message_Label.setText("Were out of bill \n Please contact Slankbank");
+                 message_Label.setOpaque(true);
+                 message_Label.setForeground(Color.lightGray);
+                 message_Label.setBounds(frame.getWidth() / 2 - 350, frame.getHeight() / 2 - 350, 100, 80);
+                 select_Panel.add(message_Label);
+                 System.out.println("biljetten op");
              }
 
-
+         } else if (balans <= bedrag) {
+             message_Label.setText("Balance to low ");
+             message_Label.setBounds(frame.getWidth() / 2, frame.getHeight() / 2 , 200, 50);
+             message_Label.setForeground(new Color(192, 27, 28));
+             message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+             select_Panel.add(message_Label);
          }
+
      }
+
+
 
      private static void stuurDataBase(String nieuwsaldo) {
          URL url = null;
@@ -1518,16 +1900,6 @@
          }
      }
 
-
-
-
-       /*  else if (balans <= bedrag){
-              message_Label  = new  JLabel("Your balance is too low");
-              message_Label.setBounds(frame.getWidth()/2,frame.getHeight()/2-900,200,50);
-              message_Label.setForeground(new Color(192,27,28));
-              message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-              select_Panel.add(message_Label);
-              */
 
 
 
@@ -1560,64 +1932,6 @@
      }
 
 
-    /* private static void increase(int val)
-     {
-         if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
-         {
-             tempAmountNotes20++;
-             amount += 20;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
-         {
-             tempAmountNotes50++;
-             amount += 50;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
-         {
-             tempAmountNotes100++;
-             amount += 100;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-
-         else{return;}
-     }
-
-     private static void decrease(int val)
-     {
-         if(val == 20 && tempAmountNotes20 >=  0 && amount - 20 >= 0)
-         {
-             tempAmountNotes20--;
-             amount -= 20;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 50 && tempAmountNotes50 >=  0 && amount - 50 >= 0)
-         {
-             tempAmountNotes50--;
-             amount -= 50;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 100 && tempAmountNotes100 >=  0 && amount - 100 >= 0)
-         {
-             tempAmountNotes100--;
-             amount -= 100;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-
-         else{return;}
-     }
-*/
  }
+
+
