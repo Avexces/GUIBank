@@ -896,8 +896,8 @@
      }
 
      // kan je een aangepast bedrag kiezen
-    /* /private static void SelectCustom()
-     {
+     /*
+     private static void SelectCustom(){
          select_Panel.removeAll();
          select_CPanel.removeAll();
          customWithdraw_panel.removeAll();
@@ -946,8 +946,7 @@
          //Selecteer veste bedragen
              //TODO weergeef 50 en 20 Notes
 
-
-             JLabel balancetxt_Label = new JLabel("Total amount: " +);
+             JLabel balancetxt_Label = new JLabel("Total amount: ");
              balancetxt_Label.setOpaque(true);
              balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
              balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -972,7 +971,7 @@
              Withdrawaltxt_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Withdrawaltxt_Label);
 
-         JLabel Withdrawalatxt_Label = new JLabel("     " + );
+         JLabel Withdrawalatxt_Label = new JLabel("     " + "");
          Withdrawalatxt_Label.setOpaque(true);
          Withdrawalatxt_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2,300,50);
          Withdrawalatxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1018,7 +1017,7 @@
              Note50_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Note50_Label);
 
-         JLabel Note50a_Label = new JLabel("     " + );
+         JLabel Note50a_Label = new JLabel("     " + "");
          Note50a_Label.setOpaque(true);
          Note50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 50,300,50);
          Note50a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1066,7 +1065,7 @@
              Note100_Label.setBackground(new Color(241,227,12));
              select_CPanel.add(Note100_Label);
 
-         JLabel Note100a_Label = new JLabel("     " + );
+         JLabel Note100a_Label = new JLabel("     " + "");
          Note100a_Label.setOpaque(true);
          Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
          Note100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1122,60 +1121,75 @@
 
 
              frame.setVisible(true);
-     } */
-     // funcite voor custom pannel
-  /*   private static void increase(int val)
+     }
+     private static void increase(int val)
      {
-         if(val == 20 &&  <= 5 &)
+         if(val == 20 && aantal <= 5 && amount + 20 <= @GELD_CHECK_FUNCTIE@)
          {
-
+             tempAmountNotes20++;
              amount += 20;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 50 &&  <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
+         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <=  @GELD_CHECK_FUNCTIE@)
          {
-
+             tempAmountNotes50++;
              amount += 50;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 100 &&  <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
+         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <=  @GELD_CHECK_FUNCTIE@)
          {
-
+             tempAmountNotes100++;
              amount += 100;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
+         else if(val == 10 && tempAmountNotes100 <= 5 && amount + 10 <=  @GELD_CHECK_FUNCTIE@)
+         {
+             tempAmountNotes10++;
+             amount += 10;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
 
          else{return;}
      }
-*/
-   /*  private static void decrease(int val)
-     {
-         if(val == 20 &&  >=  0 && amount - 20 >= 0)
-         {
 
+     private static void decrease(int val)
+     {
+         if(val == 20 && tempAmountNotes20 >=  0 && amount - 20 >= 0)
+         {
+             tempAmountNotes20--;
              amount -= 20;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 50 &&  >=  0 && amount - 50 >= 0)
+         else if(val == 50 && tempAmountNotes50 >=  0 && amount - 50 >= 0)
          {
-
+             tempAmountNotes50--;
              amount -= 50;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
          }
-         else if(val == 100 &&  >=  0 && amount - 100 >= 0)
+         else if(val == 100 && tempAmountNotes100 >=  0 && amount - 100 >= 0)
          {
-
+             tempAmountNotes100--;
              amount -= 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 10 && tempAmountNotes100 >=  0 && amount - 10 >= 0)
+         {
+             tempAmountNotes10--;
+             amount -= 10;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
@@ -1183,8 +1197,6 @@
 
          else{return;}
      }
-
-*/
 
 
      private static void transaction_Panel(int a, int b20, int b50, int b100) throws InterruptedException {
@@ -1272,7 +1284,7 @@
 
      }
 
-
+*/
      /* communicatie met de server */
      private static void loginCommunicatie(String loginkaart, String loginwachtwoord) {
          System.out.println(loginkaart);
@@ -1882,8 +1894,6 @@
          }
 
      }
-
-
 
      private static void stuurDataBase(String nieuwsaldo) {
          URL url = null;
