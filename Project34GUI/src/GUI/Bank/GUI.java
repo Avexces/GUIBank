@@ -1606,6 +1606,7 @@
 
 
      //FIXME: change values of custom shizzle
+     //FIXME FUNCTIE TOEVOEGEN
      private static void increase(int val)
      {
          if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= @GELD_CHECK_FUNCTIE@)

@@ -2,89 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c9af909-ed7b-45ee-8cb8-861bb4034466" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Project34GUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project34GUI.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Project34GUI_jar/Project34GUI.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/GUI 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/ServerCommunication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/res/Nederlands.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/res/engels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/res/russisch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Bank/res/slankbank.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$14.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$16.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$17.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$18.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$19.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$20.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$21.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$22.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$23.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$24.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$25.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$26.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$27.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$28.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$29.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$30.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$31.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$32.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$Language.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI$Slankbank.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/ServerCommunication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/res/Nederlands.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/res/engels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/res/russisch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/GUI/Bank/res/slankbank.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/META-INF/Project34GUI.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Nederlands.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/Project34GUI.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/engels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/russisch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/slankbank.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/src/GUI/Bank/res/Nederlands.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/src/GUI/Bank/res/engels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/src/GUI/Bank/res/russisch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project34GUI/src/GUI/Bank/res/slankbank.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Bank/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/ServerCommunication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/res/Nederlands.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/res/engels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/res/russisch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Bank/res/slankbank.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1591894768276</updated>
       <workItem from="1591894788376" duration="1121000" />
-      <workItem from="1591960066619" duration="440000" />
+      <workItem from="1591960066619" duration="584000" />
     </task>
     <servers />
   </component>
