@@ -50,6 +50,10 @@
      private static JButton vijtig;
      private static JButton honderd;
 
+     private int tempAmountNotes100;
+     private int tempAmountNotes50;
+     private int tempAmountNotes20;
+     private int tempAmountNotes10;
      private static String loginkaart;
 
      public class Slankbank extends JFrame {// foto van logo
@@ -890,8 +894,8 @@
      }
 
      // kan je een aangepast bedrag kiezen
-     // *private static void SelectCustom()
-    /* {
+     private static void SelectCustom()
+     {
          select_Panel.removeAll();
          select_CPanel.removeAll();
          customWithdraw_panel.removeAll();
@@ -979,7 +983,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                 //increase(20);
+                 increase(20);
 
              }
          });
@@ -995,7 +999,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                 //decrease(20);
+                 decrease(20);
 
              }
          });
@@ -1074,7 +1078,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                // increase(100);
+                 increase(100);
 
              }
          });
@@ -1089,15 +1093,56 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
+                 decrease(100);
 
-               //  decrease(100);
+             }
+         });
+
+         JLabel Note100_Label = new JLabel(" 10 Note");
+         Note100_Label.setOpaque(true);
+         Note100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 200,300,50);
+         Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note100_Label.setForeground(new Color (192,27,28));
+         Note100_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note100_Label);
+
+         JLabel Note100a_Label = new JLabel("     " + tempAmountNotes10);
+         Note100a_Label.setOpaque(true);
+         Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 200,300,50);
+         Note100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note100a_Label.setForeground(new Color (192,27,28));
+         Note100a_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note100a_Label);
+
+         button = new JButton(new AbstractAction("Increase") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, Increase");
+
+                  increase(10);
 
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +100,250,50);
+         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +200,250,50);
+         select_CPanel.add(button);
+
+
+         button = new JButton(new AbstractAction("Decrease") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, Decrease");
+                 decrease(10);
+
+             }
+         });
+
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +200,250,50);
          select_CPanel.add(button);
 
              button = new JButton(new AbstractAction("FinishTransaction") {
@@ -1105,7 +1150,7 @@
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Button Clicked, RETREAT!!");
                      try {
-                         transaction_Panel(amount,tempAmountNotes20,tempAmountNotes50,tempAmountNotes100);
+                         withdraw(amount,tempAmountNotes10,tempAmountNotes20,tempAmountNotes50,tempAmountNotes100);
                      } catch (InterruptedException ex) {
                          ex.printStackTrace();
                      }
@@ -1560,9 +1605,10 @@
      }
 
 
-    /* private static void increase(int val)
+     //FIXME: change values of custom shizzle
+     private static void increase(int val)
      {
-         if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= ServerCommunication.getBalanceInt())
+         if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= @GELD_CHECK_FUNCTIE@)
          {
              tempAmountNotes20++;
              amount += 20;
@@ -1570,7 +1616,7 @@
              SelectCustom();
              return;
          }
-         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <= ServerCommunication.getBalanceInt())
+         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <=  @GELD_CHECK_FUNCTIE@)
          {
              tempAmountNotes50++;
              amount += 50;
@@ -1578,10 +1624,18 @@
              SelectCustom();
              return;
          }
-         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <= ServerCommunication.getBalanceInt())
+         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <=  @GELD_CHECK_FUNCTIE@)
          {
              tempAmountNotes100++;
              amount += 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 10 && tempAmountNotes100 <= 5 && amount + 10 <=  @GELD_CHECK_FUNCTIE@)
+         {
+             tempAmountNotes10++;
+             amount += 10;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
@@ -1612,6 +1666,14 @@
          {
              tempAmountNotes100--;
              amount -= 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 10 && tempAmountNotes100 >=  0 && amount - 10 >= 0)
+         {
+             tempAmountNotes10--;
+             amount -= 10;
              Switch(select_CPanel,select_CPanel);
              SelectCustom();
              return;
