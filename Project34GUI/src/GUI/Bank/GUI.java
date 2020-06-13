@@ -26,7 +26,7 @@
      private static JPanel main_Panel = new JPanel();
      private static JPanel select_Panel = new JPanel();
      private static JPanel select_CPanel = new JPanel();
-     private static JPanel transaction_Panel = new JPanel();
+     private static JPanel transaction_Panel= new JPanel();
      private static JPanel customWithdraw_panel = new JPanel();
 
      private static JFrame frame = new JFrame();
@@ -45,24 +45,13 @@
      private static JButton customWithdrawbutton;
      private static JButton loginbutton;
      private static JButton backbutton;
-     private static JButton tien;
-     private static JButton twintig;
-     private static JButton vijtig;
-     private static JButton honderd;
 
+     private static int tempAmountNotes100;
+     private static int tempAmountNotes50;
+     private static int tempAmountNotes20;
+     private static int tempAmountNotes10;
      private static String loginkaart;
 
-     public class Slankbank extends JFrame {// foto van logo
-         private ImageIcon image;
-         private JLabel lbl;
-
-         public Slankbank() { // constructur
-             setLayout(new FlowLayout());
-             image = new ImageIcon(getClass().getResource("slankbank.jpg")); // foto van slankbank
-             lbl = new JLabel(image);
-             add(lbl);
-         }
-     }
 
      public static void main(String[] args) {
          start();
@@ -328,6 +317,7 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
                  Switch(main_Panel, select_CPanel);
+                 SelectCustom();
              }
          });
          withdrawbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -896,8 +886,8 @@
      }
 
      // kan je een aangepast bedrag kiezen
-     /*
-     private static void SelectCustom(){
+     private static void SelectCustom()
+     {
          select_Panel.removeAll();
          select_CPanel.removeAll();
          customWithdraw_panel.removeAll();
@@ -944,36 +934,37 @@
          select_CPanel.add(loginbutton);
 
          //Selecteer veste bedragen
-             //TODO weergeef 50 en 20 Notes
-
-             JLabel balancetxt_Label = new JLabel("Total amount: ");
-             balancetxt_Label.setOpaque(true);
-             balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
-             balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             balancetxt_Label.setForeground(new Color (192,27,28));
-             balancetxt_Label.setBackground(new Color (241,227,12));
-             select_CPanel.add(balancetxt_Label);
+         //TODO weergeef 50 en 20 Notes
 
 
-             JLabel optiontxt_Label = new JLabel(" Possible note options:");
-             optiontxt_Label.setOpaque(true);
-             optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
-             optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             optiontxt_Label.setForeground(Color.gray);
-             optiontxt_Label.setBackground(Color.darkGray.darker());
-             select_CPanel.add(optiontxt_Label);
+         JLabel balancetxt_Label = new JLabel("Total amount: " +amount);
+         balancetxt_Label.setOpaque(true);
+         balancetxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 100,300,50);
+         balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         balancetxt_Label.setForeground(new Color (192,27,28));
+         balancetxt_Label.setBackground(new Color (241,227,12));
+         select_CPanel.add(balancetxt_Label);
 
-             JLabel Withdrawaltxt_Label = new JLabel(" 20 Note");
-             Withdrawaltxt_Label.setOpaque(true);
-             Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2,300,50);
-             Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             Withdrawaltxt_Label.setForeground(new Color (192,27,28));
-             Withdrawaltxt_Label.setBackground(new Color(241,227,12));
-             select_CPanel.add(Withdrawaltxt_Label);
 
-         JLabel Withdrawalatxt_Label = new JLabel("     " + "");
+         JLabel optiontxt_Label = new JLabel(" Possible note options:");
+         optiontxt_Label.setOpaque(true);
+         optiontxt_Label.setBounds(frame.getWidth()/2 -100,frame.getHeight()/2 - 50,300,50);
+         optiontxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         optiontxt_Label.setForeground(Color.gray);
+         optiontxt_Label.setBackground(Color.darkGray.darker());
+         select_CPanel.add(optiontxt_Label);
+
+         JLabel Withdrawaltxt_Label = new JLabel(" 20 Note");
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2+50,300,50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color (192,27,28));
+         Withdrawaltxt_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Withdrawaltxt_Label);
+
+         JLabel Withdrawalatxt_Label = new JLabel("     " + tempAmountNotes20);
          Withdrawalatxt_Label.setOpaque(true);
-         Withdrawalatxt_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2,300,50);
+         Withdrawalatxt_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2+50,300,50);
          Withdrawalatxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawalatxt_Label.setForeground(new Color (192,27,28));
          Withdrawalatxt_Label.setBackground(new Color(241,227,12));
@@ -983,6 +974,7 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
+
                  increase(20);
 
              }
@@ -990,7 +982,7 @@
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2,250,50);
+         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2+50,250,50);
          select_CPanel.add(button);
 
 
@@ -1006,20 +998,20 @@
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2,250,50);
+         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2+50,250,50);
          select_CPanel.add(button);
 
-             JLabel Note50_Label = new JLabel(" 50 Note ");
-             Note50_Label.setOpaque(true);
-             Note50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 50,300,50);
-             Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             Note50_Label.setForeground(new Color (192,27,28));
-             Note50_Label.setBackground(new Color(241,227,12));
-             select_CPanel.add(Note50_Label);
+         JLabel Note50_Label = new JLabel(" 50 Note ");
+         Note50_Label.setOpaque(true);
+         Note50_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
+         Note50_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note50_Label.setForeground(new Color (192,27,28));
+         Note50_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note50_Label);
 
-         JLabel Note50a_Label = new JLabel("     " + "");
+         JLabel Note50a_Label = new JLabel("     " + tempAmountNotes50);
          Note50a_Label.setOpaque(true);
-         Note50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 50,300,50);
+         Note50a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
          Note50a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Note50a_Label.setForeground(new Color (192,27,28));
          Note50a_Label.setBackground(new Color(241,227,12));
@@ -1030,14 +1022,14 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Increase");
 
-                 increase(50);
+                  increase(50);
 
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +50,250,50);
+         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +100,250,50);
          select_CPanel.add(button);
 
 
@@ -1046,28 +1038,28 @@
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
 
-                decrease(50);
+                 decrease(50);
 
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +50,250,50);
+         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +100,250,50);
          select_CPanel.add(button);
 
 
-             JLabel Note100_Label = new JLabel(" 100 Note");
-             Note100_Label.setOpaque(true);
-             Note100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 100,300,50);
-             Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             Note100_Label.setForeground(new Color (192,27,28));
-             Note100_Label.setBackground(new Color(241,227,12));
-             select_CPanel.add(Note100_Label);
+         JLabel Note100_Label = new JLabel(" 100 Note");
+         Note100_Label.setOpaque(true);
+         Note100_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 + 150,300,50);
+         Note100_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note100_Label.setForeground(new Color (192,27,28));
+         Note100_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note100_Label);
 
-         JLabel Note100a_Label = new JLabel("     " + "");
+         JLabel Note100a_Label = new JLabel("     " + tempAmountNotes100);
          Note100a_Label.setOpaque(true);
-         Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 100,300,50);
+         Note100a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 + 150,300,50);
          Note100a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Note100a_Label.setForeground(new Color (192,27,28));
          Note100a_Label.setBackground(new Color(241,227,12));
@@ -1085,7 +1077,7 @@
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +100,250,50);
+         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2 +150,250,50);
          select_CPanel.add(button);
 
 
@@ -1093,133 +1085,116 @@
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, Decrease");
-
-                decrease(100);
+                 decrease(100);
 
              }
          });
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          button.setForeground(Color.black);
-         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 +100,250,50);
+         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2+150 ,250,50);
          select_CPanel.add(button);
 
-             button = new JButton(new AbstractAction("FinishTransaction") {
-                 @Override
-                 public void actionPerformed(ActionEvent e) {
-                     System.out.println("Button Clicked, RETREAT!!");
+         JLabel Note10_Label = new JLabel(" 10 Note");
+         Note10_Label.setOpaque(true);
+         Note10_Label.setBounds(frame.getWidth()/2-100,frame.getHeight()/2 ,300,50);
+         Note10_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note10_Label.setForeground(new Color (192,27,28));
+         Note10_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note10_Label);
 
-                     Switch(select_CPanel, transaction_Panel);
+         JLabel Note10a_Label = new JLabel("     " + tempAmountNotes10);
+         Note10a_Label.setOpaque(true);
+         Note10a_Label.setBounds(frame.getWidth()/2+500,frame.getHeight()/2 ,300,50);
+         Note10a_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Note10a_Label.setForeground(new Color (192,27,28));
+         Note10a_Label.setBackground(new Color(241,227,12));
+         select_CPanel.add(Note10a_Label);
 
-                 }
-             });
-             button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-             button.setBackground(Color.magenta.darker().darker().darker().darker());
-             button.setForeground(new Color (192,27,28));
-             button.setBounds(frame.getWidth()/2-100,frame.getHeight() /2+175,300,50);
-             select_CPanel.add(button);
+         button = new JButton(new AbstractAction("Increase") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, Increase");
+
+                 increase(10);
+
+             }
+         });
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2+200,frame.getHeight()/2,250,50);
+         select_CPanel.add(button);
 
 
-             frame.setVisible(true);
-     }
-     private static void increase(int val)
-     {
-         if(val == 20 && aantal <= 5 && amount + 20 <= @GELD_CHECK_FUNCTIE@)
-         {
-             tempAmountNotes20++;
-             amount += 20;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <=  @GELD_CHECK_FUNCTIE@)
-         {
-             tempAmountNotes50++;
-             amount += 50;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <=  @GELD_CHECK_FUNCTIE@)
-         {
-             tempAmountNotes100++;
-             amount += 100;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 10 && tempAmountNotes100 <= 5 && amount + 10 <=  @GELD_CHECK_FUNCTIE@)
-         {
-             tempAmountNotes10++;
-             amount += 10;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
+         button = new JButton(new AbstractAction("Decrease") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, Decrease");
+                 decrease(10);
 
-         else{return;}
-     }
+             }
+         });
 
-     private static void decrease(int val)
-     {
-         if(val == 20 && tempAmountNotes20 >=  0 && amount - 20 >= 0)
-         {
-             tempAmountNotes20--;
-             amount -= 20;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 50 && tempAmountNotes50 >=  0 && amount - 50 >= 0)
-         {
-             tempAmountNotes50--;
-             amount -= 50;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 100 && tempAmountNotes100 >=  0 && amount - 100 >= 0)
-         {
-             tempAmountNotes100--;
-             amount -= 100;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
-         else if(val == 10 && tempAmountNotes100 >=  0 && amount - 10 >= 0)
-         {
-             tempAmountNotes10--;
-             amount -= 10;
-             Switch(select_CPanel,select_CPanel);
-             SelectCustom();
-             return;
-         }
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(Color.black);
+         button.setBounds(frame.getWidth()/2-350,frame.getHeight()/2 ,250,50);
+         select_CPanel.add(button);
 
-         else{return;}
+         button = new JButton(new AbstractAction("FinishTransaction") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button Clicked, RETREAT!!");
+                 withdraw(amount,tempAmountNotes10,tempAmountNotes20,tempAmountNotes50,tempAmountNotes100);
+
+             }
+         });
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setForeground(new Color (192,27,28));
+         button.setBounds(frame.getWidth()/2-100,frame.getHeight() /2+225,300,50);
+         select_CPanel.add(button);
+
+
+         frame.setVisible(true);
      }
 
+     private static void transaction_Panel(int bedragDb){
 
-     private static void transaction_Panel(int a, int b20, int b50, int b100) throws InterruptedException {
+         select_Panel.removeAll();
+         select_CPanel.removeAll();
+         customWithdraw_panel.removeAll();
+
+         String bedragvoorDB=String.valueOf(bedragDb);
+
+         //versturen van de transactie
+         URL send = null;
+         try {
+             send = new URL("http://145.24.222.162/db_connection.php?query=INSERT+INTO+Transactie+(+Kaartnummer%2C+Bedrag%2C+Tijd%2C+Datum)+VALUES+(+\"" + loginkaart + "\"%2C+\""+ bedragvoorDB+"\"%2C+CURRENT_TIME%2C+CURRENT_DATE)");
+         } catch (MalformedURLException e) {
+             e.printStackTrace();
+         }
+
+         try (BufferedReader reader = new BufferedReader(new InputStreamReader(send.openStream(), "UTF-8"))) {
+             for (String line; (line = reader.readLine()) != null; ) {
+                 System.out.println(line);
+             }
+         } catch (Exception E) {
+             System.out.println("exceptie e");
+         }
+
+
          transaction_Panel.setLayout(null);
          transaction_Panel.setBackground(Color.white);
-         ServerCommunication.Withdraw(a, b20, b50, b100);
-         if (ServerCommunication.is_Succes) {
-             JLabel transaction_Label = new JLabel(" Transaction succesful!");
-             transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 325, 50);
-             transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(new Color(19, 84, 39));
-             transaction_Label.setBackground(new Color(195, 195, 195));
-             transaction_Panel.add(transaction_Label);
-         } else {
-             JLabel transaction_Label = new JLabel(" Transaction failed!");
-             transaction_Label.setOpaque(true);
-             transaction_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 325, 50);
-             transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
-             transaction_Label.setForeground(new Color(192, 27, 29));
-             transaction_Label.setBackground(new Color(195, 195, 195));
-             transaction_Panel.add(transaction_Label);
-         }
+
+         JLabel transaction_Label = new JLabel(" Transaction succesful!");
+         transaction_Label.setOpaque(true);
+         transaction_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 325, 50);
+         transaction_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 28));
+         transaction_Label.setForeground(new Color(19, 84, 39));
+         transaction_Label.setBackground(new Color(195, 195, 195));
+         transaction_Panel.add(transaction_Label);
 
 
          backbutton = new JButton(new AbstractAction("Back") {
@@ -1282,9 +1257,11 @@
          frame.setVisible(true);
          frame.setVisible(true);
 
+
+
+
      }
 
-*/
      /* communicatie met de server */
      private static void loginCommunicatie(String loginkaart, String loginwachtwoord) {
          System.out.println(loginkaart);
@@ -1413,6 +1390,8 @@
          int balans = balansCommunicatie(loginkaart);
          int nieuwSaldo = 0;
 
+         int bedragDB =0;
+
          URL url = null;
          URL briefje10 = null;
          URL briefje20 = null;
@@ -1429,7 +1408,7 @@
          String aantalbriefjevijtig = "";
          String aantalbriefjehonderd = "";
          String updaten;
-
+         System.out.println(amount);
 
          if (balans >= bedrag) { // kijken of er genoeg balans is
              System.out.println("uw balans is goed");
@@ -1559,15 +1538,17 @@
                      } catch (Exception E) {
                          E.printStackTrace();
                      }
-                     a++;
+                     check++;
                  }
                  if (check > 0) {
+                     bedragDB +=70;
                      nieuwSaldo = balans - 70;
                      String saldoDatabalans70 = String.valueOf(nieuwSaldo);
-                     stuurDataBase(saldoDatabalans70);
+                     stuurDataBase(saldoDatabalans70,"nee",bedragDB);
                  }
-
-
+                 else if (check == 0){
+                     message_Label.setText("Were out of bill \n Please contact Slankbank\n your balance is the same\n Please press any of the button at the bottom right");
+                 }
              }
 
              if (bedrag == 100) {
@@ -1697,10 +1678,15 @@
                  }
                  if (check > 0) {
                      nieuwSaldo = balans - 100;
+                     bedragDB +=100;
                      String saldoDatabalans100 = String.valueOf(nieuwSaldo);
-                     stuurDataBase(saldoDatabalans100);
+                     stuurDataBase(saldoDatabalans100,"nee",bedragDB);
+                 }
+                 else{
+                     message_Label.setText("Were out of bill \n Please contact Slankbank\n your balance is the same\n Please press any of the button at the bottom right");
                  }
              }
+
              if (bedrag == 150) {
                  int check = 0;
                  // mogelijkheid 1
@@ -1879,11 +1865,70 @@
                  }
                  if (check > 0) {
                      nieuwSaldo = balans - 150;
+                     bedragDB +=150;
                      String saldoDatabalans150 = String.valueOf(nieuwSaldo);
-                     stuurDataBase(saldoDatabalans150);
+                     stuurDataBase(saldoDatabalans150,"nee",bedragDB);
+                 } else {
+                     message_Label.setText("Were out of bill \n Please contact Slankbank\n your balance is the same\n Please press any of the button at the bottom right");
                  }
-             } else {
-                 message_Label.setText("Were out of bill \n Please contact Slankbank\n your balance is the same\n Please press any of the button at the bottom right");
+             }
+
+             if (bedrag == amount){
+                 int tiever = aantaltien - tempAmountNotes10;
+                 int twiever = aantaltwintig - tempAmountNotes20;
+                 int vijver = aantalvijftig - tempAmountNotes50;
+                 int honver = aantalhonderd - tempAmountNotes100;
+
+                 String nieuwaantal10 = String.valueOf(tiever);
+                 String nieuwaantal20 = String.valueOf(twiever);
+                 String nieuwaantal50 = String.valueOf(vijver);
+                 String nieuwaantal100 = String.valueOf(honver);
+
+                 try {
+                     geld10 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal10 + "\"+WHERE+Soort+%3D+10");
+                     geld20 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal20 + "\"+WHERE+Soort+%3D+20");
+                     geld100 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal100 + "\"+WHERE+Soort+%3D+100");
+                     geld50 = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Biljetten+SET+Aantal+%3D+\"" + nieuwaantal50 + "\"+WHERE+Soort+%3D+50");
+                     System.out.println("briefje minder");
+
+                 } catch (MalformedURLException b) {
+                     b.printStackTrace();
+                 }
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld10.openStream(), "UTF-8"))) {
+                     for (String line; (line = reader.readLine()) != null; ) {
+                         System.out.println(line);
+                     }
+                 } catch (Exception E) {
+                     E.printStackTrace();
+                 }
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld20.openStream(), "UTF-8"))) {
+                     for (String line; (line = reader.readLine()) != null; ) {
+                         System.out.println(line);
+                     }
+                 } catch (Exception E) {
+                     E.printStackTrace();
+                 }
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld50.openStream(), "UTF-8"))) {
+                     for (String line; (line = reader.readLine()) != null; ) {
+                         System.out.println(line);
+                     }
+                 } catch (Exception E) {
+                     E.printStackTrace();
+                 }
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(geld100.openStream(), "UTF-8"))) {
+                     for (String line; (line = reader.readLine()) != null; ) {
+                         System.out.println(line);
+                     }
+                 } catch (Exception E) {
+                     E.printStackTrace();
+                 }
+
+
+                 nieuwSaldo = balans - amount;
+                 bedragDB += amount;
+                 String saldoDatabalansC = String.valueOf(nieuwSaldo);
+                 stuurDataBase(saldoDatabalansC,"ja",bedragDB);
+
 
              }
 
@@ -1895,7 +1940,7 @@
 
      }
 
-     private static void stuurDataBase(String nieuwsaldo) {
+     private static void stuurDataBase(String nieuwsaldo, String welkePaneel, int bedragDB) {
          URL url = null;
          try {
              url = new URL("http://145.24.222.162/db_connection.php?query=UPDATE+Account+SET+Balans+%3D+\"" + nieuwsaldo + "\"WHERE+Kaartnummer+%3D+\"" + loginkaart + "\"");
@@ -1911,8 +1956,14 @@
              E.printStackTrace();
 
          }
+         if (welkePaneel == "ja") {
+             Switch(select_CPanel, transaction_Panel);
+             transaction_Panel(bedragDB);
+         } else {
+             Switch(select_Panel, transaction_Panel);
+             transaction_Panel(bedragDB);
+         }
      }
-
 
 
 
@@ -1944,6 +1995,86 @@
          System.out.println("gui is gestopt");
      }
 
+     private static void increase(int val)
+     {
+         int getServerSaldo = balansCommunicatie(loginkaart);
+         if(val == 20 && tempAmountNotes20 <= 5 && amount + 20 <= getServerSaldo)
+         {
+             tempAmountNotes20++;
+             amount += 20;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 50 && tempAmountNotes50 <= 5 && amount + 50 <=  getServerSaldo)
+         {
+             tempAmountNotes50++;
+             amount += 50;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 100 && tempAmountNotes100 <= 5 && amount + 100 <=  getServerSaldo)
+         {
+             tempAmountNotes100++;
+             amount += 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 10 && tempAmountNotes100 <= 5 && amount + 10 <=  getServerSaldo)
+         {
+             tempAmountNotes10++;
+             amount += 10;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+
+         else{
+             System.out.println("geenbiljetten");
+             return;
+         }
+
+     }
+
+     private static void decrease(int val)
+     {
+         if(val == 20 && tempAmountNotes20 >=  0 && amount - 20 >= 0)
+         {
+             tempAmountNotes20--;
+             amount -= 20;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 50 && tempAmountNotes50 >=  0 && amount - 50 >= 0)
+         {
+             tempAmountNotes50--;
+             amount -= 50;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 100 && tempAmountNotes100 >=  0 && amount - 100 >= 0)
+         {
+             tempAmountNotes100--;
+             amount -= 100;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+         else if(val == 10 && tempAmountNotes100 >=  0 && amount - 10 >= 0)
+         {
+             tempAmountNotes10--;
+             amount -= 10;
+             Switch(select_CPanel,select_CPanel);
+             SelectCustom();
+             return;
+         }
+
+         else{return;}
+     }
 
  }
 

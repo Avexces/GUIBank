@@ -11,7 +11,6 @@
     <content url="jar://$MODULE_DIR$/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20.jar!/" />
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.20" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1" level="project" />
+    <orderEntry type="library" name="jSerialComm" level="project" />
   </component>
 </module>

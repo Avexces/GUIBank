@@ -11,7 +11,7 @@ public class Test {
     protected static void connect() {
         URL url = null;
         try {
-            url = new URL("http://145.24.222.162/db_connection.php?query==UPDATE+%60Account%60+SET+%60Balans%60+%3D+%27100%27+WHERE+%60Account%60.%60Kaartnummer%60+%3D+%27US-SLBA-02042001%27%3B");
+            url = new URL("http://145.24.222.162/db_connection.php?query=SELECT%20*%20FROM%20Account");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
