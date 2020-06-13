@@ -108,6 +108,8 @@
          button.setBounds(0, 0, 80, 25);
          start_Panel.add(button);
 
+
+
      }
 
      /*Login menu*/
