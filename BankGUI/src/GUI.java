@@ -54,7 +54,7 @@
      private static String loginkaart;
      private static String doorStuurbedrag;
      private static int briefjekeuze [][];
-
+    private static double amounts;
 
 
 
@@ -968,12 +968,16 @@
          custom_amount.setOpaque(true);
          select_CPanel.add(custom_amount);
 
+
+
           button = new JButton(new AbstractAction("Select bills") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  doorStuurbedrag = custom_amount.getText();
+                 amounts = Double.parseDouble(custom_amount.getText());
                  Switch(select_CPanel,selectBill_panel);
-                 selectBill_panel(doorStuurbedrag);
+                 selectBill_panel(amounts);
+
              }
          });
          button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2+70,250,25);
@@ -985,14 +989,14 @@
          frame.setVisible(true);
      }
 
-     private static void selectBill_panel(String selecterendBedrag) {
+     private static void selectBill_panel(double selecterendBedrag) {
          selectBill_panel.removeAll();
          selectBill_panel.setSize(frame.getSize());
 
          selectBill_panel.setLayout(null);
          selectBill_panel.setBackground(Color.white);
 
-         int tempBedrag = Integer.parseInt(selecterendBedrag);
+         double tempBedrag = selecterendBedrag;
 
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
@@ -1058,8 +1062,6 @@
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(Withdrawaltxt_Label);
 
-
-
          // kleinste aantal biljetten
          int aantalBriefje10 = opvragenBriefje10();
          int aantalBriefje20 = opvragenBriefje20();
@@ -1094,13 +1096,67 @@
 
          }
 
+          Withdrawaltxt_Label = new JLabel(" Option 1 ");
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 -50, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 -100, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2-150, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2- 200, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         int finalAantalBriefje1 = aantalBriefje10;
+         int finalAantalBriefje2 = aantalBriefje20;
+         int finalAantalBriefje5 = aantalBriefje50;
+         int finalAantalBriefje10 = aantalBriefje100;
+         loginbutton = new JButton(new AbstractAction("Kies optie ") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (selectBill_panel,transaction_Panel);
+                 transaction_Panel((int) amounts);
+                 withdraw((int) amounts,finalAantalBriefje1, finalAantalBriefje2, finalAantalBriefje5, finalAantalBriefje10);
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight() / 2 - 250,300,50);
+         selectBill_panel.add(loginbutton);
          // random
          for (int i = 2; i <4; i++) {
              aantalBriefje10 = opvragenBriefje10();
              aantalBriefje20 = opvragenBriefje20();
              aantalBriefje50 = opvragenBriefje50();
              aantalBriefje100 = opvragenBriefje100();
-             tempBedrag = Integer.parseInt(selecterendBedrag);
+             tempBedrag = amounts;
              while (tempBedrag > 0) {
                  int randomGetal = random(1, 4);
                  if (randomGetal == 1 && aantalBriefje10 > 0 && tempBedrag >= 10) {
@@ -1126,13 +1182,71 @@
              }
              System.out.println(briefjekeuze);
          }
+         Withdrawaltxt_Label = new JLabel(" Option 2 ");
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 -50, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 -100, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2-150, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2- 200, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         finalAantalBriefje1 = aantalBriefje10;
+          finalAantalBriefje2 = aantalBriefje20;
+         finalAantalBriefje5 = aantalBriefje50;
+          finalAantalBriefje10 = aantalBriefje100;
+         int finalAantalBriefje = finalAantalBriefje1;
+         int finalAantalBriefje3 = finalAantalBriefje2;
+         int finalAantalBriefje4 = finalAantalBriefje5;
+         int finalAantalBriefje11 = finalAantalBriefje10;
+         loginbutton = new JButton(new AbstractAction("Kies optie ") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (selectBill_panel,transaction_Panel);
+                 transaction_Panel((int) amounts);
+                 withdraw((int) amounts, finalAantalBriefje, finalAantalBriefje3, finalAantalBriefje4, finalAantalBriefje11);
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2 - 100,frame.getHeight() / 2 - 250,300,50);
+         selectBill_panel.add(loginbutton);
 
          // grootste aantal biljetten
           aantalBriefje10 = opvragenBriefje10();
           aantalBriefje20 = opvragenBriefje20();
           aantalBriefje50 = opvragenBriefje50();
           aantalBriefje100 = opvragenBriefje100();
-          tempBedrag = Integer.parseInt(selecterendBedrag);
+          tempBedrag = amounts;
          while (tempBedrag > 0){
              if (aantalBriefje100 > 0 && tempBedrag >= 100){
                  tempBedrag -=100;
@@ -1161,7 +1275,64 @@
              System.out.println(briefjekeuze);
          }
 
+         Withdrawaltxt_Label = new JLabel(" Option 3 ");
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 -50, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
 
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 -100, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2-150, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
+         Withdrawaltxt_Label.setOpaque(true);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2- 200, 300, 50);
+         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
+         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
+         selectBill_panel.add(Withdrawaltxt_Label);
+
+          finalAantalBriefje1 = aantalBriefje10;
+          finalAantalBriefje2 = aantalBriefje20;
+          finalAantalBriefje5 = aantalBriefje50;
+          finalAantalBriefje10 = aantalBriefje100;
+         int finalAantalBriefje6 = finalAantalBriefje1;
+         int finalAantalBriefje7 = finalAantalBriefje2;
+         int finalAantalBriefje8 = finalAantalBriefje5;
+         int finalAantalBriefje12 = finalAantalBriefje10;
+         loginbutton = new JButton(new AbstractAction("Kies optie ") {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Switch (selectBill_panel,transaction_Panel);
+                 transaction_Panel((int) amounts);
+                 withdraw((int) amounts, finalAantalBriefje6, finalAantalBriefje7, finalAantalBriefje8, finalAantalBriefje12);
+             }
+         });
+         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
+         loginbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight() / 2 - 250,300,50);
+         selectBill_panel.add(loginbutton);
      }
 
       private static int random(int min, int max){
