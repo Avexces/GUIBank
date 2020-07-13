@@ -44,6 +44,9 @@
       <option name="presentableId" value="Default" />
       <updated>1594157906741</updated>
       <workItem from="1594157908158" duration="5953000" />
+      <workItem from="1594239400664" duration="1202000" />
+      <workItem from="1594293491388" duration="595000" />
+      <workItem from="1594631171259" duration="3640000" />
     </task>
     <servers />
   </component>
@@ -59,5 +62,35 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="260" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594158138405" />
+    <state width="1865" height="192" key="GridCell.Tab.0.bottom" timestamp="1594642148341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="192" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594642148341" />
+    <state width="1865" height="192" key="GridCell.Tab.0.center" timestamp="1594642148341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="192" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594642148341" />
+    <state width="1865" height="192" key="GridCell.Tab.0.left" timestamp="1594642148341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="192" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594642148341" />
+    <state width="1865" height="192" key="GridCell.Tab.0.right" timestamp="1594642148341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="192" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594642148341" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>1307</line>
+          <properties class="GUI" method="random">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
