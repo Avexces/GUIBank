@@ -174,7 +174,7 @@
      /*Welkom menu*/
      public static void start() {
          frame = new JFrame(" main");
-         frame.setLayout(new FlowLayout());
+        // frame.setLayout(new FlowLayout());
          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
          frame.setUndecorated(true);
          frame.setVisible(true);
