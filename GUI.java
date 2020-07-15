@@ -20,10 +20,110 @@
  import java.net.URL;
  import java.io.BufferedReader;
  import java.io.*;
+ import java.util.*;
+ import java.util.concurrent.TimeUnit;
+
+ class ScreenElement {
+     public int x, y, w, h, fs, data;
+     public String Value, TriggerButton, EType;
+     public Runnable cb;
+
+     private JButton createButton() {
+         JButton button = new JButton(new AbstractAction(Value) {
+             @Override
+             public void actionPerformed(ActionEvent e) { cb.run(); }
+         });
+
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, fs));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setBounds(x,y,w,h);
+        return button;
+     }
+
+     private JLabel createText() {
+         JLabel label = new JLabel(Value);
+         label.setBounds(x,y,w,h);
+         label.setFont(new Font("TimesRoman", Font.PLAIN, fs));
+         label.setForeground(Color.black);
+         return label;
+     }
+
+     public ScreenElement(int x, int y, int w, int h, int fs, String value, String triggerButton, String Etype, Runnable cb) {
+         this.x = x;
+         this.y = y;
+         this.w = w;
+         this.h = h;
+         this.data = Integer.MAX_VALUE;
+         this.fs = fs;
+         this.Value = value;
+         this.TriggerButton = triggerButton;
+         this.EType = Etype;
+         this.cb = cb;
+     }
+
+     public Component getElementObject() {
+         System.out.println(EType);
+         switch(EType){
+             case "Button":
+                 return createButton();
+             case "Text":
+                 return createText();
+             case "Input":
+                 break;
+         }
+
+         return null; //lmao yeet
+     }
+ }
+
+
+ class Screen {
+    public ArrayList<ScreenElement> elements;
+    public JPanel Panel;
+    public ArrayList<Integer> screenData;
+    public String name;
+
+    public Screen(JPanel panel, String name) {
+         Panel = panel;
+         this.name = name;
+         elements = new ArrayList<ScreenElement>();
+    }
+
+     public void AddElement(ScreenElement element) {
+         elements.add(element);
+     }
+
+     public void Render() {
+        Panel.removeAll();
+         for(ScreenElement e : elements) {
+             Panel.add(e.getElementObject());
+         }
+     }
+
+     //dont worry about this one chief
+     public void getElementData() {
+        for(ScreenElement e : elements) {
+            if(e.data != Integer.MAX_VALUE) {
+                screenData.add(e.data);
+                e.data = Integer.MAX_VALUE;
+            }
+        }
+     }
+
+     public void HandleInput(String input) {
+         for(ScreenElement e : elements) {
+             if(e.TriggerButton == input) {
+                 e.cb.run();
+                 getElementData();
+             }
+         }
+     }
+ }
 
  public class GUI {
      // maakt een "pagina " aan
      private static JPanel start_Panel = new JPanel();
+     private static JPanel login_Panel = new JPanel();
      private static JPanel main_Panel = new JPanel();
      private static JPanel select_Panel = new JPanel();
      private static JPanel select_CPanel = new JPanel();
@@ -35,7 +135,7 @@
 
 
      private static JTextField custom_amount;
-     private static JLabel message_Label; //
+     private static JLabel message_Label;
      private static JTextField balans;
      private static int amount = 0;
      private static int aantal = 0;
@@ -48,11 +148,12 @@
      private static JButton backbutton;
 
      private static String attemptedPass = "";
-     private static String loginkaart = "US-SLBA-02042001";
+     private static String loginkaart;
      private static String doorStuurbedrag;
      private static int briefjekeuze[][];
      private static double amounts;
      private String pincode;
+     private static Screen currentScreen;
 
 
      public static void main(String[] args) {
@@ -61,66 +162,57 @@
          start();
      }
 
-     /*Welkom menu*/
-     public static void start() {
-         /*Setup of Empty Frame & Panel*/
-         frame = new JFrame(" main");
-         /*Makes the frame fullscreen without titlebar*/
-         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-         frame.setUndecorated(true); // zorgt ervoor dat de titelbar weggaat
-         frame.setVisible(true);
-         frame.add(start_Panel);
-         start_Panel.revalidate();
-         start_Panel.repaint();
-         System.out.println(" De GUI is opgestart");
-         start_Panel.removeAll();
-         start_Panel.setSize(frame.getSize());
-         start_Panel.setLayout(null);
-
-         //ln.setVisible(true);
-
-         start_Panel.setBackground(Color.white); // achtergrond
-         start_Panel.setForeground(Color.black); // voorgrond
-         // begin menu van de gui vn de bank
-         rfid2();
-         try {
-             Thread.sleep(80);
-         } catch (Exception e) {
-         }
-         pincode();
-         button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.exit(0);
-             }
-         });
-         button.setBounds(frame.getWidth() - 100, frame.getHeight() - 100, 80, 25);
-         start_Panel.add(button);
-
+     public static void setScreen(Screen screen) {
+//         frame.remove(currentScreen.Panel);
+         currentScreen = screen;
+         currentScreen.Render();
+         frame.add(currentScreen.Panel);
+         currentScreen.Panel.revalidate();
+         currentScreen.Panel.repaint();
      }
 
-     private static void rfid2() {
-         JLabel welkom = new JLabel("Welcome to Slankbank");
-         welkom.setBounds(frame.getWidth() / 2 + 575, frame.getHeight() / 2 + 300, 1000, 80);
-         welkom.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-         welkom.setForeground(Color.black);
-         start_Panel.add(welkom);
+     /*Welkom menu*/
+     public static void start() {
+         frame = new JFrame(" main");
+         frame.setLayout(new FlowLayout());
+         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         frame.setUndecorated(true);
+         frame.setVisible(true);
 
-         JLabel scanPas = new JLabel("please scan your card");
-         scanPas.setBounds(frame.getWidth() / 2 + 800, frame.getHeight() / 2 + 600, 200, 80);
-         scanPas.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-         scanPas.setForeground(Color.black);
-         start_Panel.add(scanPas);
+
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         start_Panel.setBackground(Color.white);
+         /* BEGIN TEMPLATE */
+         Screen homeScreen = new Screen(start_Panel, "start");
+
+         ScreenElement welcomeText = new ScreenElement(centerX,  500, 1000, 80, 60, "Welcome to SlankBank", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement scanText = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "please scan card", "l", "Text",  () -> {
+             return;
+         });
+         ScreenElement exitButton = new ScreenElement(frame.getWidth() - 100, frame.getHeight() - 100, 80, 25, 10, "exit", "A", "Button", () -> {
+             System.exit(0);
+         });
+
+         homeScreen.AddElement(welcomeText);
+         homeScreen.AddElement(scanText);
+         homeScreen.AddElement(exitButton);
+
+         setScreen(homeScreen);
+         /* END TEMPLATE */
+
+         /* zoeken naar een kaar */
+         while (loginkaart == null) {
+             rfid();
+         }
+
+
      }
 
      private static void rfid() {
-
-         JLabel infoText = new JLabel("press # to continue");
-         infoText.setBounds(frame.getWidth() / 2 + 800, frame.getHeight() / 2 + 600, 200, 80);
-         infoText.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-         infoText.setForeground(Color.black);
-         start_Panel.add(infoText);
-         start_Panel.add(infoText);
 
          SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1440");
 
@@ -143,22 +235,39 @@
                  comPort.readBytes(newData, newData.length); //read incoming bytes
                  String serialData = new String(newData); //convert bytes to string
                  loginkaart += serialData;
+
+                 if (loginkaart != null){
+                     Switch(start_Panel,login_Panel);
+                     login_Panel();
+
+                 }
              }
          });
      }
 
+     private static boolean handleScreenResponse(String pressValue) {
+        return true;
+     }
+
+     private static void login_Panel(){
+
+         login_Panel.setBackground(Color.white);
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         /* BEGIN TEMPLETE */
+         ScreenElement pincodeVraag = new ScreenElement(100,  centerY/2, 1000, 80, 60, "Pincode please ", "l", "Text", () -> {
+             return;
+         });
+
+         pincode();
+
+
+     }
+
+
 
      private static void pincode() {
-         start_Panel.removeAll();
-         start_Panel.revalidate();
-
-
-         JLabel infoText = new JLabel("press # to continue and then your pincode");
-         infoText.setBounds(frame.getWidth() / 2 + 800, frame.getHeight() / 2 + 600, 200, 80);
-         infoText.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-         infoText.setForeground(Color.black);
-         start_Panel.add(infoText);
-
 
          final String passUID = "";
          /*
@@ -167,7 +276,7 @@
           *
           * PS: Unix based operating systems use "/dev/ttyUSB"
           */
-         SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1440");
+         SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1420");
 
          //set the baud rate to 9600 (same as the Arduino)
          comPort.setBaudRate(9600);
@@ -187,27 +296,25 @@
                                          byte[] newData = new byte[comPort.bytesAvailable()]; //receive incoming bytes
                                          comPort.readBytes(newData, newData.length); //read incoming bytes
                                          String serialData = new String(newData); //convert bytes to string
-                                         if (attemptedPass.length() == 4) {
-                                             loginCommunicatie("US-SLBA-02042001", "1234");
-                                         } else {
-                                             System.out.println(attemptedPass.length());
-                                             addStar(attemptedPass.length());
-                                             attemptedPass += serialData;
+                                         System.out.println(currentScreen.name);
+                                         if(currentScreen.name == "login_Panel") {
+                                             if (serialData.length() == 4) {
+                                                 loginCommunicatie("US-SLBA-02042001", attemptedPass);
+                                             } else {
+                                                 System.out.println(attemptedPass.length());
+                                                 ScreenElement star = new ScreenElement(0,0,10,10, 10, "*", "l", "Text", () -> { return; }); //finish
+                                                 currentScreen.AddElement(star);
+                                                 currentScreen.Render();
+                                                 currentScreen.Panel.revalidate();
+                                                 currentScreen.Panel.repaint();
+                                                 System.out.println("bung");
+                                                 attemptedPass += serialData;
+                                             }
                                          }
+                                         currentScreen.HandleInput(serialData);
                                      }
                                  }
          );
-     }
-
-     private static void addStar(int idx) {
-         JLabel star = new JLabel("*");
-         star.setBounds(frame.getWidth() / 2 + idx * 60, frame.getHeight() / 2 + 25, 1000, 80);
-         star.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-         star.setForeground(Color.black);
-         start_Panel.add(star);
-         start_Panel.revalidate();
-         start_Panel.repaint();
-
      }
 
 
@@ -216,8 +323,52 @@
          main_Panel.setLayout(null);
          main_Panel.setBackground(Color.white);
 
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         Screen mainScreen = new Screen(main_Panel, "main");
+
+         /* BEGIN TEMPLET */
+         ScreenElement exitButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Back", "1", "button", () -> {
+             start();
+         });
+
+         ScreenElement homeButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Homebutton", "2", "Text", () -> {
+             return;
+         });
+         ScreenElement balans = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "Balance", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement scanText = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "Quick withdraw", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement seventy = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "$70", "A", "button", () -> {
+
+         });
+         ScreenElement hundred = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "100", "B", "button", () -> {
+             start();
+         });
+         ScreenElement hundredfifthy = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "150", "C", "button", () -> {
+             start();
+         });
+         ScreenElement adjustedAmount = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Adjusted amount", "D", "button", () -> {
+             start();
+         });
+
+         JLabel balance_Label = new JLabel("$:  " + balansCommunicatie(loginkaart));
+         balance_Label.setOpaque(true);
+         balance_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 - 50, 300, 50);
+         balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         balance_Label.setForeground(Color.lightGray);
+         balance_Label.setBackground(Color.darkGray.darker());
+         main_Panel.add(balance_Label);
+     }
+
+
+
          // menu dat recht onder staat
          // terugknop
+         /*
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -350,11 +501,25 @@
 
          frame.setVisible(true);
      }
+     */
 
      //menu om je briefjes te kiezen
      private static void Select_Bills(int selectedmoney) {
          select_Panel.setLayout(null);
          select_Panel.setBackground(Color.white);
+
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         ScreenElement exitButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Back", "1", "button", () -> {
+             start();
+         });
+
+         ScreenElement homeButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Homebutton", "2", "Text", () -> {
+             return;
+         });
+
+
 
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
@@ -1336,7 +1501,6 @@
          selectBill_panel.setVisible(true);
      }
 
-
      private static int random(int min, int max){
          int random = (int) ((Math.random() * ((max - min) + 1)) + min);
          return random;
@@ -2183,7 +2347,9 @@
          }
      }
 
+     private static void bonPrinten(){
 
+     }
 
      /*Usable Methods*/
      public static void Switch(JPanel from, JPanel to)
