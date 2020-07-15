@@ -8,19 +8,117 @@
   */
 
  /* libraries toevoegen */
+ import com.fazecast.jSerialComm.SerialPort;
+ import com.fazecast.jSerialComm.SerialPortDataListener;
+ import com.fazecast.jSerialComm.SerialPortEvent;
+
  import javax.swing.*;
  import java.awt.*;
  import java.awt.event.ActionEvent;
  import java.awt.Font; /* library met font */
- import javax.swing.ImageIcon;
  import java.net.MalformedURLException;
  import java.net.URL;
  import java.io.BufferedReader;
  import java.io.*;
- import com.fazecast.jSerialComm.*;
- import org.w3c.dom.ls.LSOutput;
- import javax.swing.*;
+ import java.util.*;
+ import java.util.concurrent.TimeUnit;
 
+ class ScreenElement {
+     public int x, y, w, h, fs, data;
+     public String Value, TriggerButton, EType;
+     public Runnable cb;
+
+     private JButton createButton() {
+         JButton button = new JButton(new AbstractAction(Value) {
+             @Override
+             public void actionPerformed(ActionEvent e) { cb.run(); }
+         });
+
+         button.setFont(new Font("Didact Gothic", Font.PLAIN, fs));
+         button.setBackground(Color.magenta.darker().darker().darker().darker());
+         button.setBounds(x,y,w,h);
+         return button;
+     }
+
+     private JLabel createText() {
+         JLabel label = new JLabel(Value);
+         label.setBounds(x,y,w,h);
+         label.setFont(new Font("TimesRoman", Font.PLAIN, fs));
+         label.setForeground(Color.black);
+         return label;
+     }
+
+     public ScreenElement(int x, int y, int w, int h, int fs, String value, String triggerButton, String Etype, Runnable cb) {
+         this.x = x;
+         this.y = y;
+         this.w = w;
+         this.h = h;
+         this.data = Integer.MAX_VALUE;
+         this.fs = fs;
+         this.Value = value;
+         this.TriggerButton = triggerButton;
+         this.EType = Etype;
+         this.cb = cb;
+     }
+
+     public Component getElementObject() {
+         System.out.println(EType);
+         switch(EType){
+             case "Button":
+                 return createButton();
+             case "Text":
+                 return createText();
+             case "Input":
+                 break;
+         }
+
+         return null; //lmao yeet
+     }
+ }
+
+
+ class Screen {
+     public ArrayList<ScreenElement> elements;
+     public JPanel Panel;
+     public ArrayList<Integer> screenData;
+     public String name;
+
+     public Screen(JPanel panel, String name) {
+         Panel = panel;
+         this.name = name;
+         elements = new ArrayList<ScreenElement>();
+     }
+
+     public void AddElement(ScreenElement element) {
+         elements.add(element);
+     }
+
+     public void Render() {
+         Panel.removeAll();
+         for(ScreenElement e : elements) {
+             Panel.add(e.getElementObject());
+         }
+     }
+
+     //dont worry about this one chief
+     public void getElementData() {
+         for(ScreenElement e : elements) {
+             if(e.data != Integer.MAX_VALUE) {
+                 screenData.add(e.data);
+                 e.data = Integer.MAX_VALUE;
+             }
+         }
+     }
+
+     public void HandleInput(String input) {
+         for(ScreenElement e : elements) {
+             if(e.TriggerButton == input) {
+                 e.cb.run();
+                 getElementData();
+             }
+         }
+     }
+ }
 
  public class GUI {
      // maakt een "pagina " aan
@@ -29,18 +127,15 @@
      private static JPanel main_Panel = new JPanel();
      private static JPanel select_Panel = new JPanel();
      private static JPanel select_CPanel = new JPanel();
-     private static JPanel transaction_Panel= new JPanel();
+     private static JPanel transaction_Panel = new JPanel();
      private static JPanel customWithdraw_panel = new JPanel();
      private static JPanel selectBill_panel = new JPanel();
-     private static JPanel pasword_panel = new JPanel();
-
 
      private static JFrame frame = new JFrame();
 
-     private static JTextField user_Text; // maakt een tekstvlak aan
-     private static JPasswordField pin_Field; // maakt een wachtwoord vlak aan
+
      private static JTextField custom_amount;
-     private static JLabel message_Label; //
+     private static JLabel message_Label;
      private static JTextField balans;
      private static int amount = 0;
      private static int aantal = 0;
@@ -49,15 +144,16 @@
      private static JButton button; // maakt een knop aan
      private static JButton withdrawbutton;
      private static JButton homebutton;
-     private static JButton customWithdrawbutton;
      private static JButton loginbutton;
      private static JButton backbutton;
 
+     private static String attemptedPass = "";
      private static String loginkaart;
      private static String doorStuurbedrag;
-     private static int briefjekeuze [][];
+     private static int briefjekeuze[][];
      private static double amounts;
-
+     private String pincode;
+     private static Screen currentScreen;
 
 
      public static void main(String[] args) {
@@ -66,66 +162,113 @@
          start();
      }
 
+     public static void setScreen(Screen screen) {
+//         frame.remove(currentScreen.Panel);
+         currentScreen = screen;
+         currentScreen.Render();
+         frame.add(currentScreen.Panel);
+         currentScreen.Panel.revalidate();
+         currentScreen.Panel.repaint();
+     }
+
      /*Welkom menu*/
      public static void start() {
-         /*Setup of Empty Frame & Panel*/
          frame = new JFrame(" main");
-         /*Makes the frame fullscreen without titlebar*/
+         // frame.setLayout(new FlowLayout());
          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-         frame.setUndecorated(true); // zorgt ervoor dat de titelbar weggaat
+         frame.setUndecorated(true);
          frame.setVisible(true);
-         login_Panel.remove(login_Panel);
-         frame.add(start_Panel);
-         start_Panel.revalidate();
-         start_Panel.repaint();
-         System.out.println(" De GUI is opgestart");
-         start_Panel.removeAll();
-         start_Panel.setSize(frame.getSize());
-         start_Panel.setLayout(null);
 
-         //ln.setVisible(true);
 
-         start_Panel.setBackground(Color.white); // achtergrond
-         start_Panel.setForeground(Color.black); // voorgrond
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
 
-         // begin menu van de gui vn de bank
-         JLabel welkom = new JLabel("Welcome to Slankbank");
-         welkom.setBounds(frame.getWidth() / 2 + 575, frame.getHeight() / 2 + 300, 1000, 80);
-         welkom.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-         welkom.setForeground(Color.black);
-         start_Panel.add(welkom);
+         start_Panel.setBackground(Color.white);
+         /* BEGIN TEMPLATE */
+         Screen homeScreen = new Screen(start_Panel, "start");
 
-         // ga je naar de login pagina
-         button = new JButton(new AbstractAction("Login") {
+         ScreenElement welcomeText = new ScreenElement(centerX,  500, 1000, 80, 60, "Welcome to SlankBank", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement scanText = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "please scan card", "l", "Text",  () -> {
+             return;
+         });
+         ScreenElement exitButton = new ScreenElement(frame.getWidth() - 100, frame.getHeight() - 100, 80, 25, 10, "exit", "A", "Button", () -> {
+             System.exit(0);
+         });
+
+         homeScreen.AddElement(welcomeText);
+         homeScreen.AddElement(scanText);
+         homeScreen.AddElement(exitButton);
+
+         setScreen(homeScreen);
+         /* END TEMPLATE */
+
+         /* zoeken naar een kaar */
+         while (loginkaart == null) {
+             rfid();
+         }
+
+
+     }
+
+     private static void rfid() {
+
+         SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1440");
+
+         //set the baud rate to 9600 (same as the Arduino)
+         comPort.setBaudRate(9600);
+
+         //open the port
+         comPort.openPort();
+
+         //create a listener and start listening
+         comPort.addDataListener(new SerialPortDataListener() {
+             @Override
+             public int getListeningEvents() {
+                 return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+             }
 
              @Override
-             public void actionPerformed(ActionEvent e) {
-                 Switch(start_Panel, login_Panel);
-                 login_Panel();
-             }
-         });
-         button.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 200, 85);
-         button.setForeground(new Color(192, 27, 28));
-         start_Panel.add(button);
+             public void serialEvent(SerialPortEvent event) {
+                 byte[] newData = new byte[comPort.bytesAvailable()]; //receive incoming bytes
+                 comPort.readBytes(newData, newData.length); //read incoming bytes
+                 String serialData = new String(newData); //convert bytes to string
+                 loginkaart += serialData;
 
-         button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.exit(0);
+                 if (loginkaart != null){
+                     Switch(start_Panel,login_Panel);
+                     login_Panel();
+
+                 }
              }
          });
-         button.setBounds(0, 0, 80, 25);
-         start_Panel.add(button);
+     }
+
+     private static boolean handleScreenResponse(String pressValue) {
+         return true;
+     }
+
+     private static void login_Panel(){
+
+         login_Panel.setBackground(Color.white);
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         /* BEGIN TEMPLETE */
+         ScreenElement pincodeVraag = new ScreenElement(100,  centerY/2, 1000, 80, 60, "Pincode please ", "l", "Text", () -> {
+             return;
+         });
+
+         pincode();
+
 
      }
 
 
-     /*Login menu*/
-     private static void login_Panel() {
-         login_Panel.removeAll();
-         login_Panel.setSize(frame.getSize());
-         login_Panel.setLayout(null);
-         login_Panel.setBackground(Color.white);
+
+     private static void pincode() {
+
          final String passUID = "";
          /*
           * Change "COM4" to your USB port connected to the Arduino
@@ -133,7 +276,7 @@
           *
           * PS: Unix based operating systems use "/dev/ttyUSB"
           */
-         SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1430");
+         SerialPort comPort = SerialPort.getCommPort("/dev/cu.usbserial-1420");
 
          //set the baud rate to 9600 (same as the Arduino)
          comPort.setBaudRate(9600);
@@ -150,90 +293,29 @@
 
                                      @Override
                                      public void serialEvent(SerialPortEvent event) {
-                                         if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
-                                             return; //wait until we receive data
-
                                          byte[] newData = new byte[comPort.bytesAvailable()]; //receive incoming bytes
                                          comPort.readBytes(newData, newData.length); //read incoming bytes
                                          String serialData = new String(newData); //convert bytes to string
-                                         //print string received from the Arduino
-                                         System.out.print(serialData);
-                                         System.out.println("1");
-                                         loginkaart += serialData;
-                                         try {
-                                             wait();
-                                         } catch (InterruptedException e) {
-                                             e.printStackTrace();
+                                         System.out.println(currentScreen.name);
+                                         if(currentScreen.name == "login_Panel") {
+                                             if (serialData.length() == 4) {
+                                                 loginCommunicatie("US-SLBA-02042001", attemptedPass);
+                                             } else {
+                                                 System.out.println(attemptedPass.length());
+                                                 ScreenElement star = new ScreenElement(0,0,10,10, 10, "*", "l", "Text", () -> { return; }); //finish
+                                                 currentScreen.AddElement(star);
+                                                 currentScreen.Render();
+                                                 currentScreen.Panel.revalidate();
+                                                 currentScreen.Panel.repaint();
+                                                 System.out.println("bung");
+                                                 attemptedPass += serialData;
+                                             }
                                          }
+                                         currentScreen.HandleInput(serialData);
                                      }
                                  }
          );
-
-         System.out.println("2");
-         System.out.println(loginkaart);
-
-         //Pincode text
-         JLabel pin_Label = new JLabel("Password");
-         pin_Label.setBounds(frame.getWidth() / 2 - 200, frame.getHeight() / 2 + 30, 200, 25);
-         pin_Label.setForeground(new Color(192, 27, 28));
-         pin_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 22));
-         login_Panel.add(pin_Label);
-
-         /*Adds an pin field to the LoginPanel*/
-         pin_Field = new JPasswordField();
-         pin_Field.setBounds(frame.getWidth() / 2, frame.getHeight() / 2 + 30, 200, 30);
-         pin_Field.setFont(new Font("Arial", Font.PLAIN, 18));
-         login_Panel.add(pin_Field);
-
-         /*Login button*/
-         button = new JButton(/*"Login"*/ new AbstractAction("Login") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 //FIXME password = pin_Field.getPassword();
-                 loginkaart = user_Text.getText();
-                 String loginwachtwoord = pin_Field.getText();
-                 // oproepen de functie om te kunnen praten met de database
-                 loginCommunicatie(loginkaart, loginwachtwoord);
-
-             }
-         });
-         button.setBounds(frame.getWidth() / 2 - 75, frame.getHeight() / 2 + 100, 250, 45);
-         login_Panel.add(button);
-
-
-         /* standaard menu rechtsonder in het scherm */
-         /*Exit button*/
-         button = new JButton(/*"Login"*/ new AbstractAction("Exit") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.exit(0);
-             }
-         });
-         button.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 100, 100, 45);
-         login_Panel.add(button);
-
-         /* terug knop */
-         backbutton = new JButton(new AbstractAction("Back") {
-             @Override
-             public void actionPerformed(ActionEvent actionEvent) {
-                 start();
-             }
-         });
-         backbutton.setBounds(frame.getWidth() / 2 - 200, frame.getHeight() / 2 + 100, 100, 45);
-         login_Panel.add(backbutton);
-
-         /*Message Label*/
-         message_Label = new JLabel("");
-         message_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 250, 300, 25);
-         message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         message_Label.setForeground(new Color(191, 26, 28));
-         login_Panel.add(message_Label);
-         frame.setVisible(true);
-
      }
-
-
-
 
 
      /*Hoofdmenu voor gebruikers*/
@@ -241,14 +323,57 @@
          main_Panel.setLayout(null);
          main_Panel.setBackground(Color.white);
 
-         // menu dat recht onder staat
-         // terugknop
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         Screen mainScreen = new Screen(main_Panel, "main");
+
+         /* BEGIN TEMPLET */
+         ScreenElement exitButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Back", "1", "button", () -> {
+             start();
+         });
+
+         ScreenElement homeButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Homebutton", "2", "Text", () -> {
+             return;
+         });
+         ScreenElement balans = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "Balance", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement scanText = new ScreenElement(centerX + 800, centerY + 600, 200, 80, 20, "Quick withdraw", "l", "Text", () -> {
+             return;
+         });
+         ScreenElement seventy = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "$70", "A", "button", () -> {
+
+         });
+         ScreenElement hundred = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "100", "B", "button", () -> {
+             start();
+         });
+         ScreenElement hundredfifthy = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "150", "C", "button", () -> {
+             start();
+         });
+         ScreenElement adjustedAmount = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Adjusted amount", "D", "button", () -> {
+             start();
+         });
+
+         JLabel balance_Label = new JLabel("$:  " + balansCommunicatie(loginkaart));
+         balance_Label.setOpaque(true);
+         balance_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 - 50, 300, 50);
+         balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
+         balance_Label.setForeground(Color.lightGray);
+         balance_Label.setBackground(Color.darkGray.darker());
+         main_Panel.add(balance_Label);
+     }
+
+
+
+     // menu dat recht onder staat
+     // terugknop
+         /*
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Button Clicked, RETREAT!!");
-                 Switch(main_Panel, login_Panel);
-                 login_Panel();
+                 start();
              }
          });
          backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -273,8 +398,7 @@
          loginbutton = new JButton(new AbstractAction("Login") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch(main_Panel, login_Panel);
-                 login_Panel();
+                 start();
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -377,11 +501,25 @@
 
          frame.setVisible(true);
      }
+     */
 
      //menu om je briefjes te kiezen
      private static void Select_Bills(int selectedmoney) {
          select_Panel.setLayout(null);
          select_Panel.setBackground(Color.white);
+
+         int centerX = frame.getWidth() / 2;
+         int centerY = frame.getHeight() / 2;
+
+         ScreenElement exitButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Back", "1", "button", () -> {
+             start();
+         });
+
+         ScreenElement homeButton = new ScreenElement(centerX - 100, centerY - 400, 1000, 80, 60, "Homebutton", "2", "Text", () -> {
+             return;
+         });
+
+
 
          backbutton = new JButton(new AbstractAction("Back") {
              @Override
@@ -412,8 +550,7 @@
          loginbutton = new JButton(new AbstractAction("Login") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch(main_Panel, login_Panel);
-                 login_Panel();
+                 pincode();
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -921,7 +1058,7 @@
              select_Panel.add(withdrawbutton);
 
              message_Label = new JLabel("");
-             message_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 +400, 300, 25);
+             message_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 400, 300, 25);
              message_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
              message_Label.setForeground(new Color(191, 26, 28));
              select_Panel.add(message_Label);
@@ -955,7 +1092,7 @@
          });
          backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         backbutton.setBounds(frame.getWidth() / 2 + 700, frame.getHeight() - 60, 100, 50);
          select_CPanel.add(backbutton);
 
          homebutton = new JButton(new AbstractAction("Home") {
@@ -967,24 +1104,23 @@
          });
          homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          homebutton.setBackground(Color.black.darker().darker().darker().darker());
-         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         homebutton.setBounds(frame.getWidth() / 2 + 500, frame.getHeight() - 60, 100, 50);
          select_CPanel.add(homebutton);
 
          loginbutton = new JButton(new AbstractAction("login") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch (select_CPanel,login_Panel);
-                 login_Panel();
+                 pincode();
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         loginbutton.setBounds(frame.getWidth() / 2 + 600, frame.getHeight() - 60, 100, 50);
          select_CPanel.add(loginbutton);
 
          //Selecteer een bedrag
          JLabel label = new JLabel("Enter your amount:");
-         label.setBounds(frame.getWidth() / 2-75 , frame.getHeight() / 2-70, 500, 25);
+         label.setBounds(frame.getWidth() / 2 - 75, frame.getHeight() / 2 - 70, 500, 25);
          label.setForeground(new Color(192, 27, 28));
          label.setFont(new Font("Didact Gothic", Font.PLAIN, 22));
          select_CPanel.add(label);
@@ -997,18 +1133,17 @@
          select_CPanel.add(custom_amount);
 
 
-
          button = new JButton(new AbstractAction("Select bills") {
              @Override
              public void actionPerformed(ActionEvent e) {
                  doorStuurbedrag = custom_amount.getText();
                  amounts = Double.parseDouble(custom_amount.getText());
-                 Switch(select_CPanel,selectBill_panel);
+                 Switch(select_CPanel, selectBill_panel);
                  selectBill_panel(amounts);
 
              }
          });
-         button.setBounds(frame.getWidth()/2-100,frame.getHeight()/2+70,250,25);
+         button.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 70, 250, 25);
          button.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          button.setBackground(Color.magenta.darker().darker().darker().darker());
          select_CPanel.add(button);
@@ -1038,7 +1173,7 @@
          });
          backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
+         backbutton.setBounds(frame.getWidth() / 2 + 700, frame.getHeight() - 60, 100, 50);
          selectBill_panel.add(backbutton);
 
          homebutton = new JButton(new AbstractAction("Home") {
@@ -1050,19 +1185,18 @@
          });
          homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          homebutton.setBackground(Color.black.darker().darker().darker().darker());
-         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
+         homebutton.setBounds(frame.getWidth() / 2 + 500, frame.getHeight() - 60, 100, 50);
          selectBill_panel.add(homebutton);
 
          loginbutton = new JButton(new AbstractAction("login") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,login_Panel);
-                 login_Panel();
+                 start();
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
+         loginbutton.setBounds(frame.getWidth() / 2 + 600, frame.getHeight() - 60, 100, 50);
          selectBill_panel.add(loginbutton);
 
          System.out.println(tempBedrag);
@@ -1075,7 +1209,7 @@
          balancetxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(balancetxt_Label);
 
-         JLabel balance_Label = new JLabel("$:  " +tempBedrag);
+         JLabel balance_Label = new JLabel("$:  " + tempBedrag);
          balance_Label.setOpaque(true);
          balance_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 - 50, 300, 50);
          balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1102,29 +1236,25 @@
          int aantalBriefje50 = opvragenBriefje50();
          int aantalBriefje100 = opvragenBriefje100();
 
-         while (tempBedrag > 0){
-             if(aantalBriefje10 > 0 && tempBedrag >= 10){
+         while (tempBedrag > 0) {
+             if (aantalBriefje10 > 0 && tempBedrag >= 10) {
                  tempBedrag -= 10;
 //                 briefjekeuze[1][1] ++;//173
-                 aantalBriefje10 --;
-             }
-             else if(aantalBriefje20 > 0 && tempBedrag >= 20){
-                 tempBedrag -=20;
-                 briefjekeuze[1][2] ++;
-                 aantalBriefje20 --;
-             }
-             else if(aantalBriefje50 > 0 && tempBedrag >= 50){
-                 tempBedrag -=50;
-                 briefjekeuze[1][3] ++;
-                 aantalBriefje50 --;
-             }
-             else if(aantalBriefje100 > 0 && tempBedrag >= 100){
-                 tempBedrag -=100;
-                 briefjekeuze[1][4] ++;
-                 aantalBriefje100 --;
+                 aantalBriefje10--;
+             } else if (aantalBriefje20 > 0 && tempBedrag >= 20) {
+                 tempBedrag -= 20;
+                 briefjekeuze[1][2]++;
+                 aantalBriefje20--;
+             } else if (aantalBriefje50 > 0 && tempBedrag >= 50) {
+                 tempBedrag -= 50;
+                 briefjekeuze[1][3]++;
+                 aantalBriefje50--;
+             } else if (aantalBriefje100 > 0 && tempBedrag >= 100) {
+                 tempBedrag -= 100;
+                 briefjekeuze[1][4]++;
+                 aantalBriefje100--;
                  break;
-             }
-             else {
+             } else {
                  // gebruiker kan niet dit bedrag pinnen
                  System.out.println("zelfmoord plegen");
              }
@@ -1141,7 +1271,7 @@
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 +50, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 + 50, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1149,14 +1279,14 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 +100, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 + 100, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2+150, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 + 150, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1164,35 +1294,35 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2+200, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 + 200, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(Withdrawaltxt_Label);
 
 
-         final  int finalAantalBriefje1 = aantalBriefje10;
-         final   int finalAantalBriefje2 = aantalBriefje20;
+         final int finalAantalBriefje1 = aantalBriefje10;
+         final int finalAantalBriefje2 = aantalBriefje20;
          final int finalAantalBriefje5 = aantalBriefje50;
          final int finalAantalBriefje10 = aantalBriefje100;
          loginbutton = new JButton(new AbstractAction("Kies optie ") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
+                 Switch(selectBill_panel, transaction_Panel);
                  transaction_Panel((int) amounts);
                  withdraw((int) amounts, finalAantalBriefje1, finalAantalBriefje2, finalAantalBriefje5, finalAantalBriefje10);
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight() / 2 + 250,300,50);
+         loginbutton.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 + 250, 300, 50);
          selectBill_panel.add(loginbutton);
 
          System.out.println("Helloow");
          selectBill_panel.setVisible(true);
 
          // random
-         for (int i = 2; i <4; i++) {
+         for (int i = 2; i < 4; i++) {
              aantalBriefje10 = opvragenBriefje10();
              aantalBriefje20 = opvragenBriefje20();
              aantalBriefje50 = opvragenBriefje50();
@@ -1232,7 +1362,7 @@
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 +50, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 50, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1240,14 +1370,14 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 +100, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 100, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2+150, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 150, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1255,7 +1385,7 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2+ 200, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 200, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1269,14 +1399,14 @@
          loginbutton = new JButton(new AbstractAction("Kies optie ") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
+                 Switch(selectBill_panel, transaction_Panel);
                  transaction_Panel((int) amounts);
                  withdraw((int) amounts, finalAantalBriefje, finalAantalBriefje3, finalAantalBriefje4, finalAantalBriefje11);
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 - 100,frame.getHeight() / 2 +250,300,50);
+         loginbutton.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 250, 300, 50);
          selectBill_panel.add(loginbutton);
 
          // grootste aantal biljetten
@@ -1285,29 +1415,24 @@
          aantalBriefje50 = opvragenBriefje50();
          aantalBriefje100 = opvragenBriefje100();
          tempBedrag = amounts;
-         while (tempBedrag > 0){
-             if (aantalBriefje100 > 0 && tempBedrag >= 100){
-                 tempBedrag -=100;
-                 briefjekeuze[1][4] ++;
-                 aantalBriefje100 --;
-             }
-             else if(aantalBriefje50 > 0 && tempBedrag >= 50){
-                 tempBedrag -=50;
-                 briefjekeuze[1][3] ++;
-                 aantalBriefje50 --;
-             }
-             else if(aantalBriefje20 > 0 && tempBedrag >= 20){
-                 tempBedrag -=20;
-                 briefjekeuze[1][2] ++;
-                 aantalBriefje20 --;
-             }
-             else if(aantalBriefje10 > 0 && tempBedrag >= 10){
-                 tempBedrag -=10;
-                 briefjekeuze[1][1] ++;
-                 aantalBriefje10 --;
-             }
-
-             else {
+         while (tempBedrag > 0) {
+             if (aantalBriefje100 > 0 && tempBedrag >= 100) {
+                 tempBedrag -= 100;
+                 briefjekeuze[1][4]++;
+                 aantalBriefje100--;
+             } else if (aantalBriefje50 > 0 && tempBedrag >= 50) {
+                 tempBedrag -= 50;
+                 briefjekeuze[1][3]++;
+                 aantalBriefje50--;
+             } else if (aantalBriefje20 > 0 && tempBedrag >= 20) {
+                 tempBedrag -= 20;
+                 briefjekeuze[1][2]++;
+                 aantalBriefje20--;
+             } else if (aantalBriefje10 > 0 && tempBedrag >= 10) {
+                 tempBedrag -= 10;
+                 briefjekeuze[1][1]++;
+                 aantalBriefje10--;
+             } else {
                  // gebruiker kan niet pinnen
              }
              System.out.println(briefjekeuze);
@@ -1322,7 +1447,7 @@
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 +50, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 50, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1330,14 +1455,14 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 +100, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 100, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
          selectBill_panel.add(Withdrawaltxt_Label);
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2+150, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 150, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1345,7 +1470,7 @@
 
          Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
          Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2+200, 300, 50);
+         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 200, 300, 50);
          Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
          Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
@@ -1359,14 +1484,14 @@
          loginbutton = new JButton(new AbstractAction("Kies optie ") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
+                 Switch(selectBill_panel, transaction_Panel);
                  transaction_Panel((int) amounts);
                  withdraw((int) amounts, finalAantalBriefje6, finalAantalBriefje7, finalAantalBriefje8, finalAantalBriefje12);
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
          loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 + 200,frame.getHeight() / 2 + 250,300,50);
+         loginbutton.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 + 250, 300, 50);
          selectBill_panel.add(loginbutton);
          System.out.println("Helloow");
 
@@ -1374,354 +1499,6 @@
          selectBill_panel.revalidate();
          selectBill_panel.repaint();
          selectBill_panel.setVisible(true);
-         
-         /*selectBill_panel.removeAll();
-         selectBill_panel.setSize(frame.getSize());
-
-         selectBill_panel.setLayout(null);
-         selectBill_panel.setBackground(Color.white);
-
-         double tempBedrag = selecterendBedrag;
-
-         backbutton = new JButton(new AbstractAction("Back") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.out.println("Button Clicked, RETREAT!!");
-                 SelectCustom();
-                 Switch(selectBill_panel, select_CPanel);
-
-             }
-         });
-         backbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         backbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         backbutton.setBounds(frame.getWidth()/2+700,frame.getHeight() - 60,100,50);
-         selectBill_panel.add(backbutton);
-
-         homebutton = new JButton(new AbstractAction("Home") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 System.out.println("Button Clicked, chipRemoved");
-                 start();
-             }
-         });
-         homebutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         homebutton.setBackground(Color.black.darker().darker().darker().darker());
-         homebutton.setBounds(frame.getWidth()/2+500,frame.getHeight()-60,100,50);
-         selectBill_panel.add(homebutton);
-
-         loginbutton = new JButton(new AbstractAction("login") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,login_Panel);
-                 login_Panel();
-             }
-         });
-         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2+600,frame.getHeight() - 60,100,50);
-         selectBill_panel.add(loginbutton);
-
-         System.out.println(tempBedrag);
-
-         JLabel balancetxt_Label = new JLabel(" Chosen amount: ");
-         balancetxt_Label.setOpaque(true);
-         balancetxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 - 100, 300, 50);
-         balancetxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         balancetxt_Label.setForeground(new Color(192, 27, 28));
-         balancetxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(balancetxt_Label);
-
-         JLabel balance_Label = new JLabel("$:  " +tempBedrag);
-         balance_Label.setOpaque(true);
-         balance_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 - 50, 300, 50);
-         balance_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         balance_Label.setForeground(Color.lightGray);
-         balance_Label.setBackground(Color.darkGray.darker());
-         selectBill_panel.add(balance_Label);
-
-         JLabel Withdrawaltxt_Label = new JLabel(" Options: ");
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         // kleinste aantal biljetten
-         int aantalBriefje10 = opvragenBriefje10();
-         int aantalBriefje20 = opvragenBriefje20();
-         int aantalBriefje50 = opvragenBriefje50();
-         int aantalBriefje100 = opvragenBriefje100();
-         while (tempBedrag > 0){
-             if(aantalBriefje10 > 0 && tempBedrag >= 10){
-                 tempBedrag -=10;
-                 briefjekeuze[1][1] ++;
-                 aantalBriefje10 --;
-             }
-             else if(aantalBriefje20 > 0 && tempBedrag >= 20){
-                 tempBedrag -=20;
-                 briefjekeuze[1][2] ++;
-                 aantalBriefje20 --;
-             }
-             else if(aantalBriefje50 > 0 && tempBedrag >= 50){
-                 tempBedrag -=50;
-                 briefjekeuze[1][3] ++;
-                 aantalBriefje50 --;
-             }
-             else if(aantalBriefje100 > 0 && tempBedrag >= 100){
-                 tempBedrag -=100;
-                 briefjekeuze[1][4] ++;
-                 aantalBriefje100 --;
-             }
-             else {
-                 // gebruiker kan niet dit bedrag pinnen
-                 System.out.println("zelfmoord plegen");
-             }
-             System.out.println(briefjekeuze);
-
-         }
-
-         Withdrawaltxt_Label = new JLabel(" Option 1 ");
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 -50, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 -100, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2-150, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2- 200, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         int finalAantalBriefje1 = aantalBriefje10;
-         int finalAantalBriefje2 = aantalBriefje20;
-         int finalAantalBriefje5 = aantalBriefje50;
-         int finalAantalBriefje10 = aantalBriefje100;
-         int finalAantalBriefje13 = finalAantalBriefje10;
-         int finalAantalBriefje9 = finalAantalBriefje5;
-         int finalAantalBriefje14 = finalAantalBriefje2;
-         int finalAantalBriefje15 = finalAantalBriefje1;
-         loginbutton = new JButton(new AbstractAction("Kies optie ") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
-                 transaction_Panel((int) amounts);
-                 withdraw((int) amounts, finalAantalBriefje15, finalAantalBriefje14, finalAantalBriefje9, finalAantalBriefje13);
-             }
-         });
-         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight() / 2 - 250,300,50);
-         selectBill_panel.add(loginbutton);
-         // random
-         for (int i = 2; i <4; i++) {
-             aantalBriefje10 = opvragenBriefje10();
-             aantalBriefje20 = opvragenBriefje20();
-             aantalBriefje50 = opvragenBriefje50();
-             aantalBriefje100 = opvragenBriefje100();
-             tempBedrag = amounts;
-             while (tempBedrag > 0) {
-                 int randomGetal = random(1, 4);
-                 if (randomGetal == 1 && aantalBriefje10 > 0 && tempBedrag >= 10) {
-                     tempBedrag -= 10;
-                     briefjekeuze[2][1]++;
-                     aantalBriefje10--;
-                 } else if (randomGetal == 2 && aantalBriefje20 > 0 && tempBedrag >= 20) {
-                     tempBedrag -= 20;
-                     briefjekeuze[2][2]++;
-                     aantalBriefje20--;
-                 } else if (randomGetal == 3 && aantalBriefje50 > 0 && tempBedrag >= 50) {
-                     tempBedrag -= 50;
-                     briefjekeuze[2][3]++;
-                     aantalBriefje50--;
-                 } else if (randomGetal == 4 && aantalBriefje100 > 0 && tempBedrag >= 100) {
-                     tempBedrag -= 100;
-                     briefjekeuze[2][4]++;
-                     aantalBriefje100--;
-                 } else {
-                     // gebruiker kan niet dit bedrag pinnen
-                     System.out.println("zelfmoord plegen");
-                 }
-             }
-             System.out.println(briefjekeuze);
-         }
-         Withdrawaltxt_Label = new JLabel(" Option 2 ");
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 -50, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 -100, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2-150, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2- 200, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         finalAantalBriefje1 = aantalBriefje10;
-         finalAantalBriefje2 = aantalBriefje20;
-         finalAantalBriefje5 = aantalBriefje50;
-         finalAantalBriefje10 = aantalBriefje100;
-         int finalAantalBriefje = finalAantalBriefje1;
-         int finalAantalBriefje3 = finalAantalBriefje2;
-         int finalAantalBriefje4 = finalAantalBriefje5;
-         int finalAantalBriefje11 = finalAantalBriefje10;
-         loginbutton = new JButton(new AbstractAction("Kies optie ") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
-                 transaction_Panel((int) amounts);
-                 withdraw((int) amounts, finalAantalBriefje, finalAantalBriefje3, finalAantalBriefje4, finalAantalBriefje11);
-             }
-         });
-         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 - 100,frame.getHeight() / 2 - 250,300,50);
-         selectBill_panel.add(loginbutton);
-
-         // grootste aantal biljetten
-         aantalBriefje10 = opvragenBriefje10();
-         aantalBriefje20 = opvragenBriefje20();
-         aantalBriefje50 = opvragenBriefje50();
-         aantalBriefje100 = opvragenBriefje100();
-         tempBedrag = amounts;
-         while (tempBedrag > 0){
-             if (aantalBriefje100 > 0 && tempBedrag >= 100){
-                 tempBedrag -=100;
-                 briefjekeuze[1][4] ++;
-                 aantalBriefje100 --;
-             }
-             else if(aantalBriefje50 > 0 && tempBedrag >= 50){
-                 tempBedrag -=50;
-                 briefjekeuze[1][3] ++;
-                 aantalBriefje50 --;
-             }
-             else if(aantalBriefje20 > 0 && tempBedrag >= 20){
-                 tempBedrag -=20;
-                 briefjekeuze[1][2] ++;
-                 aantalBriefje20 --;
-             }
-             else if(aantalBriefje10 > 0 && tempBedrag >= 10){
-                 tempBedrag -=10;
-                 briefjekeuze[1][1] ++;
-                 aantalBriefje10 --;
-             }
-
-             else {
-                 // gebruiker kan niet pinnen
-             }
-             System.out.println(briefjekeuze);
-         }
-
-         Withdrawaltxt_Label = new JLabel(" Option 3 ");
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje10));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 -50, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje20));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2 -100, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje50));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2-150, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         Withdrawaltxt_Label = new JLabel(String.valueOf(aantalBriefje100));
-         Withdrawaltxt_Label.setOpaque(true);
-         Withdrawaltxt_Label.setBounds(frame.getWidth() / 2 + 200, frame.getHeight() / 2- 200, 300, 50);
-         Withdrawaltxt_Label.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         Withdrawaltxt_Label.setForeground(new Color(192, 27, 28));
-         Withdrawaltxt_Label.setBackground(new Color(241, 227, 12));
-         selectBill_panel.add(Withdrawaltxt_Label);
-
-         finalAantalBriefje1 = aantalBriefje10;
-         finalAantalBriefje2 = aantalBriefje20;
-         finalAantalBriefje5 = aantalBriefje50;
-         finalAantalBriefje10 = aantalBriefje100;
-         int finalAantalBriefje6 = finalAantalBriefje1;
-         int finalAantalBriefje7 = finalAantalBriefje2;
-         int finalAantalBriefje8 = finalAantalBriefje5;
-         int finalAantalBriefje12 = finalAantalBriefje10;
-         loginbutton = new JButton(new AbstractAction("Kies optie ") {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 Switch (selectBill_panel,transaction_Panel);
-                 transaction_Panel((int) amounts);
-                 withdraw((int) amounts, finalAantalBriefje6, finalAantalBriefje7, finalAantalBriefje8, finalAantalBriefje12);
-             }
-         });
-         loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
-         loginbutton.setBackground(Color.magenta.darker().darker().darker().darker());
-         loginbutton.setBounds(frame.getWidth()/2 - 400,frame.getHeight() / 2 - 250,300,50);
-         selectBill_panel.add(loginbutton); */
      }
 
      private static int random(int min, int max){
@@ -1891,8 +1668,8 @@
          loginbutton = new JButton(new AbstractAction("Login") {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Switch(main_Panel, login_Panel);
-                 login_Panel();
+                 Switch(main_Panel, start_Panel);
+                 start();
              }
          });
          loginbutton.setFont(new Font("Didact Gothic", Font.PLAIN, 18));
@@ -1948,13 +1725,14 @@
              e.printStackTrace();
          }
 
+
          try (BufferedReader reader = new BufferedReader(new InputStreamReader(pogingen.openStream(), "UTF-8"))) {
              for (String line; (line = reader.readLine()) != null; ) {
                  System.out.println(line);
                  responsePogingen += line;
 
              }
-             aantal = Integer.parseInt(responsePogingen);
+             aantal = Integer.parseInt(responsePogingen.split(" ")[0]);
 
          } catch (Exception E) {
              System.out.println("exceptie e");
@@ -1968,6 +1746,7 @@
          } catch (Exception E) {
              System.out.println("exceptie e");
          }
+
          if (aantal < 3) {
              if (response.equalsIgnoreCase("0 results")) {
                  message_Label.setForeground(Color.red);
@@ -1996,10 +1775,8 @@
 
                  // System.out.println(aantal);
              } else {
-                 message_Label.setForeground(Color.GREEN);
-                 message_Label.setText("Login succesful!");
                  System.out.println("login succes");
-                 Switch(login_Panel, main_Panel);
+                 Switch(start_Panel, main_Panel);
                  main_Panel();
                  try {
                      System.out.println("");
@@ -2044,9 +1821,7 @@
                  balans += line;
              }
          } catch (Exception E) {
-             System.out.println("exceptie e");
          }
-
          return Integer.parseInt(balans);
 
      }
@@ -2572,7 +2347,9 @@
          }
      }
 
+     private static void bonPrinten(){
 
+     }
 
      /*Usable Methods*/
      public static void Switch(JPanel from, JPanel to)
@@ -2603,9 +2380,5 @@
      }
 
 
-
-
  }
-
-
 

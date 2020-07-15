@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e2d3fef5-caf3-421c-a806-fa719ef0ef2c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +24,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jSerialComm-2.6.2.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
@@ -47,7 +53,7 @@
       <workItem from="1594157908158" duration="5953000" />
       <workItem from="1594239400664" duration="1202000" />
       <workItem from="1594293491388" duration="595000" />
-      <workItem from="1594631171259" duration="6132000" />
+      <workItem from="1594631171259" duration="8708000" />
     </task>
     <servers />
   </component>
@@ -63,37 +69,69 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="260" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594158138405" />
-    <state x="668" y="360" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594643240196">
+    <state x="668" y="360" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594808284697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="360" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1594643240196" />
-    <state width="1865" height="192" key="GridCell.Tab.0.bottom" timestamp="1594644642513">
+    <state x="668" y="360" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1594808284697" />
+    <state x="615" y="200" key="FileChooserDialogImpl" timestamp="1594809463305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="192" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594644642513" />
-    <state width="1865" height="192" key="GridCell.Tab.0.center" timestamp="1594644642513">
+    <state x="615" y="200" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594809463305" />
+    <state width="1865" height="192" key="GridCell.Tab.0.bottom" timestamp="1594808648155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="192" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594644642513" />
-    <state width="1865" height="192" key="GridCell.Tab.0.left" timestamp="1594644642513">
+    <state width="1865" height="192" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594808648155" />
+    <state width="1865" height="192" key="GridCell.Tab.0.center" timestamp="1594808648155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="192" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594644642513" />
-    <state width="1865" height="192" key="GridCell.Tab.0.right" timestamp="1594644642513">
+    <state width="1865" height="192" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594808648155" />
+    <state width="1865" height="192" key="GridCell.Tab.0.left" timestamp="1594808648155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="192" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594644642513" />
+    <state width="1865" height="192" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594808648155" />
+    <state width="1865" height="192" key="GridCell.Tab.0.right" timestamp="1594808648155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="192" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594808648155" />
+    <state x="312" y="0" key="SettingsEditor" timestamp="1594809473997">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="312" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594809473997" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/GUI.java</url>
-          <line>2073</line>
+          <line>1858</line>
           <properties class="GUI">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>1508</line>
+          <properties class="GUI" method="opvragenBriefje10">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>2349</line>
+          <properties class="GUI" method="bonPrinten">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>174</line>
+          <properties class="GUI" method="start">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
